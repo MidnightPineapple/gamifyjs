@@ -1,0 +1,35 @@
+{
+  "name": "gamifyjs",
+  "version": "0.0.1",
+  "description": "A 2D side scroller RPG powered by Phaser3, where the core game mechanic is JavaScript",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "cross-env NODE_ENV=production webpack --mode production",
+    "dev": "cross-env NODE_ENV=development webpack --mode development",
+    "start": "npm run start:dev",
+    "start:dev": "cross-env NODE_ENV=development webpack-dev-server --mode development",
+    "start:prod": "cross-env NODE_ENV=production webpack-dev-server --mode production"
+  },
+  "author": "Samuel Chen",
+  "license": "MIT",
+  "devDependencies": {
+    "@babel/cli": "^7.2.0",
+    "@babel/core": "^7.2.0",
+    "@babel/plugin-proposal-class-properties": "^7.2.0",
+    "@babel/plugin-proposal-object-rest-spread": "^7.2.0",
+    "@babel/preset-env": "^7.2.0",
+    "babel-loader": "^8.0.4",
+    "cross-env": "^5.2.0",
+    "eslint": "^5.9.0",
+    "eslint-config-google": "^0.11.0",
+    "eslint-loader": "^2.1.1",
+    "file-loader": "^2.0.0",
+    "html-webpack-plugin": "^3.2.0",
+    "phaser": "^3.15.1",
+    "source-map-loader": "^0.2.4",
+    "webpack": "^4.26.1",
+    "webpack-cli": "^3.1.2",
+    "webpack-dev-server": "^3.1.10"
+  }
+}
