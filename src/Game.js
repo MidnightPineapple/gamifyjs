@@ -1,10 +1,14 @@
 import Phaser from 'phaser';
-console.log(require("./img.png"))
-console.log(require("./flower.png"))
-
+import * as Scenes from './scenes'
 
 export default class Game extends Phaser.Game {
     constructor(gameConfig) {
         super(gameConfig);
+
+        this.scene.add("boot", Scenes.Boot);
+
+
+
+        this.scene.start('boot')
     }
 }
