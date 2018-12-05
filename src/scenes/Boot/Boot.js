@@ -14,7 +14,7 @@ export default class Boot extends Scene {
     }
 
     create() {
-        
+        this.scene.start(keys.LOAD);
     }
 
 }
