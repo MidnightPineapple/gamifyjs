@@ -1,1 +1,1 @@
-export { default as LoadsAssets } from './LoadsAssets';
+export { default as ImportsAssets } from './ImportsAssets';

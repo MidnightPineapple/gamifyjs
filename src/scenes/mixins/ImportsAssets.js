@@ -9,7 +9,7 @@ function importAll(require) {
 
 }
 
-export default superclass => class LoadsAssets extends superclass {
+export default superclass => class ImportsAssets extends superclass {
     
     importImages(require) {
         const files = importAll(require)

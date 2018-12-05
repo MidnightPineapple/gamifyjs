@@ -1,9 +1,9 @@
 import { compose } from 'ramda';
 import Scene from '../Scene';
 import keys from '../keys';
-import { LoadsAssets } from '../mixins';
+import { ImportsAssets } from '../mixins';
 
-export default class Boot extends compose(LoadsAssets)(Scene) {
+export default class Boot extends compose(ImportsAssets)(Scene) {
 
     constructor(params) {
         super({ ...params, key: keys.BOOT });

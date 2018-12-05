@@ -6,6 +6,7 @@ export const gameConfig = {
     height: 600,
     title: "Gamify JS",
     // url: "http://url.to.my.game",
+    pixelArt: true,
     version: "0.0.1",
     physics: {
         default: 'arcade',
