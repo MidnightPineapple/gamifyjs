@@ -1,19 +1,21 @@
+import { compose } from 'ramda';
 import Scene from '../Scene';
 import keys from '../keys';
+import { LoadsAssets } from '../mixins';
 
-const logo = require("./insta-logo.jpg")
-
-export default class Boot extends Scene {
+export default class Boot extends compose(LoadsAssets)(Scene) {
 
     constructor(params) {
         super({ ...params, key: keys.BOOT });
     }
 
     preload() {
-        this.load.image('logo', logo);
+        this.importImages(
+            require.context("./loader-assets", false, /\.(png|jpe?g)$/)
+        )
     }
 
-    create() {
+    create() { 
         this.scene.start(keys.LOAD);
     }
 

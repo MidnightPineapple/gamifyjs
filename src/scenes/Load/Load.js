@@ -1,17 +1,18 @@
+import { compose } from 'ramda';
+import { LoadsAssets } from '../mixins';
 import Scene from '../Scene';
 import keys from '../keys';
-import { importImages } from './helpers';
 
-export default class Load extends Scene {
+export default class Load extends compose(LoadsAssets)(Scene) {
 
     constructor(params) {
         super({ ...params, key: keys.LOAD });
     }
 
     preload() {
-        
-        importImages.call(this, require.context("./assets/images", false, /\.(png|jpe?g)$/));
-        // JSON Assets 
+        this.importImages(
+            require.context("./assets/images", false, /\.(png|jpe?g)$/)
+        );
 
     }
 
