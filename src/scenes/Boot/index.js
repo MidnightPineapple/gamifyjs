@@ -1,1 +1,1 @@
-export { default as default } from './Boot'
+export { default as default } from './Boot';
