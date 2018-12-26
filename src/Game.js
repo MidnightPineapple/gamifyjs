@@ -7,5 +7,6 @@ export default class Game extends Phaser.Game {
         Object.values(Scenes).forEach( s => this.scene.add("", s))
 
         this.scene.start(Scenes.keys.BOOT);
+
     }
 }

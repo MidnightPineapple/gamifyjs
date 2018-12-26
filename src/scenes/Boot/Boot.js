@@ -5,14 +5,13 @@ import { ImportsAssets } from '../mixins';
 
 export default class Boot extends compose(ImportsAssets)(Scene) {
 
-    constructor(params) {
-        super({ ...params, key: keys.BOOT });
+    loads = {
+        images: require.context("./assets/images", false, /\.(png|jpe?g)$/),
+        fonts: require.context("./assets/fonts", false, /\.(png|xml|fnt)$/)            
     }
 
-    preload() {
-        this.importImages(
-            require.context("./loader-assets", false, /\.(png|jpe?g)$/)
-        )
+    constructor(params) {
+        super({ ...params, key: keys.BOOT });
     }
 
     create() { 

@@ -30,11 +30,12 @@ module.exports = {
                 },
             },
             {
-                test: /\.json$/,
+                type: "javascript/auto", // bypass the default json loader from webpack
+                test: /\.(json|xml|fnt)$/,
                 use: {
                     loader: "file-loader", 
                     options:{
-                        name:"assets/json/[hash].[ext]",
+                        name:"assets/data/[hash].[ext]",
                     }
                 },
             }
@@ -63,6 +64,6 @@ module.exports = {
         overlay: env === "development",
     },
     resolve:{
-        extensions: [ ".js", ".json" ]
+        extensions: [ ".js" ]
     }
 }
