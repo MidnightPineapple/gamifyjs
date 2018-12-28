@@ -22,6 +22,7 @@ export default superclass => class ImportsAssets extends superclass {
         if(this.loads.hasOwnProperty("fonts")) this.importFonts( this.loads['fonts'] )
         if(this.loads.hasOwnProperty("tilemaps")) this.importTilemaps( this.loads['tilemaps'] )
         if(this.loads.hasOwnProperty("tilesets")) this.importTilesets( this.loads['tilesets'] )
+        if(this.loads.hasOwnProperty("spritesheets")) this.importSpritesheets( this.loads['spritesheets'] )
     }
 
     loads = {};
@@ -87,6 +88,27 @@ export default superclass => class ImportsAssets extends superclass {
                 .replace(/\.json$/,"")
                 .replace(/^\.(\\|\/)/,""),
                 files[filename]
+            )
+        }
+    }
+
+    importSpritesheets(require, config) {
+        const files = importAll(require);
+
+        const spritesheetConfig = {
+            frameWidth: 32,
+            frameHeight: 32,
+            spacing: 0, 
+            margin: 0,
+        }
+
+        for( let filename in files ) {
+            this.load.spritesheet(
+                filename
+                .replace(/\.(png|jpe?g)$/,"")
+                .replace(/^\.(\\|\/)/,""),
+                files[filename], 
+                config || spritesheetConfig
             )
         }
     }
