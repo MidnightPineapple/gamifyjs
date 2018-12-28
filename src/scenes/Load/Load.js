@@ -62,7 +62,7 @@ export default class Load extends compose(ImportsAssets)(Scene) {
     update() {
         if(this.loaded === 2) {
             // * Start Menu Scene Here
-            
+            this.scene.start(keys.MENU)
             this.loaded = true; 
         }
     }
