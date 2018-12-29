@@ -17,15 +17,15 @@ export default superclass => class ImportsAssets extends superclass {
 
     preload() {
         if(typeof super.preload === "function") super.preload();
-        if(this.loads.hasOwnProperty("images")) this.importImages( this.loads['images'] )
-        if(this.loads.hasOwnProperty("svgs")) this.importSvgs( this.loads['svgs'] )
-        if(this.loads.hasOwnProperty("fonts")) this.importFonts( this.loads['fonts'] )
-        if(this.loads.hasOwnProperty("tilemaps")) this.importTilemaps( this.loads['tilemaps'] )
-        if(this.loads.hasOwnProperty("tilesets")) this.importTilesets( this.loads['tilesets'] )
-        if(this.loads.hasOwnProperty("spritesheets")) this.importSpritesheets( this.loads['spritesheets'] )
+        if(this.imports.hasOwnProperty("images")) this.importImages( this.imports['images'] )
+        if(this.imports.hasOwnProperty("svgs")) this.importSvgs( this.imports['svgs'] )
+        if(this.imports.hasOwnProperty("fonts")) this.importFonts( this.imports['fonts'] )
+        if(this.imports.hasOwnProperty("tilemaps")) this.importTilemaps( this.imports['tilemaps'] )
+        if(this.imports.hasOwnProperty("tilesets")) this.importTilesets( this.imports['tilesets'] )
+        if(this.imports.hasOwnProperty("spritesheets")) this.importSpritesheets( this.imports['spritesheets'] )
     }
 
-    loads = {};
+    imports = {};
     
     importImages(require) {
         const files = importAll(require)
