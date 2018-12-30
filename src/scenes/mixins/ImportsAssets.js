@@ -11,10 +11,6 @@ function importAll(require) {
 
 export default superclass => class ImportsAssets extends superclass {
 
-    constructor(params) {
-        super(params);
-    }
-
     preload() {
         if(typeof super.preload === "function") super.preload();
         if(this.imports.hasOwnProperty("images")) this.importImages( this.imports['images'] )

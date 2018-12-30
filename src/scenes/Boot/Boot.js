@@ -5,7 +5,7 @@ import { ImportsAssets } from '../mixins';
 
 export default class Boot extends compose(ImportsAssets)(Scene) {
 
-    loads = {
+    imports = {
         images: require.context("./assets/images", false, /\.(png|jpe?g)$/),
         fonts: require.context("./assets/fonts", false, /\.(png|xml|fnt)$/)            
     }

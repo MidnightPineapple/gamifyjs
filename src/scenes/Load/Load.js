@@ -5,7 +5,7 @@ import keys from '../keys';
 
 export default class Load extends compose(ImportsAssets)(Scene) {
 
-    loads = {
+    imports = {
         images: require.context("../../assets/images", false, /\.(png|jpe?g)$/),
         tilemaps: require.context("../../assets/tilemaps", false, /\.json/),
         tilesets: require.context("../../assets/tilesets", false, /\.(png|jpe?g)$/),
