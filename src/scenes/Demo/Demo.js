@@ -1,15 +1,10 @@
 import { compose } from 'ramda'
-import { UsesCustomObjects } from '../mixins'
-import { Player } from '../../objects';
+import { UsesCustomObjects, EmitsEvents } from '../mixins'
 import Scene from "../Scene";
 import keys from '../keys';
+import objs from "./customObjects";
 
-
-const objs = {
-    player: Player
-}
-
-export default class Menu extends compose(UsesCustomObjects(objs))(Scene) {
+export default class Menu extends compose(EmitsEvents,UsesCustomObjects(objs))(Scene) {
 
     constructor(params) {
         super({ ...params, key: keys.DEMO })
@@ -32,13 +27,29 @@ export default class Menu extends compose(UsesCustomObjects(objs))(Scene) {
 
         this.player = this.add.player(spawnPoint.x, spawnPoint.y)
         this.physics.add.collider(this.player, platforms)
+        
+        this.robot = this.add.robot(actionZone.x, actionZone.y)
+        this.physics.add.collider(this.robot, platforms)
+        this.robot.idle()
 
         this.cursors = this.input.keyboard.createCursorKeys();
 
+        this.input.keyboard.on("keydown_A", () => this.robot.move("left"))
+        this.input.keyboard.on("keyup_A", () => this.robot.idle())
+
         // TODO: custom behavior functions
+
+        this.emitCollide([ [this.player, this.robot] ])
+        this.emitOverlapZone(this.player, "hackable-range", this.robot)
+
+        this.player.on(EmitsEvents.events.OVERLAP_ZONE + "_hackable-range", function() {
+            console.log("an object is in hacking range")
+        })
+
     }
 
-    update() {
+    update(...args) {
+        if(typeof super.update === "function") super.update(...args)
         const onGround = this.player.onGround()
 
         // TODO: abstract the cursor & keyboard logic into a mixin
