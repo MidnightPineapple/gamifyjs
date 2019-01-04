@@ -4,7 +4,7 @@ import Scene from "../Scene";
 import keys from '../keys';
 import objs from "./customObjects";
 
-export default class Menu extends compose(EmitsEvents,UsesCustomObjects(objs))(Scene) {
+export default class Demo extends compose(EmitsEvents,UsesCustomObjects(objs))(Scene) {
 
     constructor(params) {
         super({ ...params, key: keys.DEMO })
