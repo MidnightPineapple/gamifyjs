@@ -31,7 +31,8 @@ class PlayerFunction {
             const fun = new Function(...this.parameters, this.lines.toBabel())
             this.funCache = fun
         } catch(e) {
-            if(e instanceof SyntaxError === false) { throw e; return; }
+            if(e instanceof SyntaxError === false) throw e; 
+            console.log(e.message)
             // TODO: handle SyntaxError 
             // Babel gives the error [ 'stack', 'message', 'pos', 'loc', 'code' ]
             // e.loc has the line and column properties that contain the position

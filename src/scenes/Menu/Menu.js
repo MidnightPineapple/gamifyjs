@@ -1,12 +1,7 @@
 import Scene from "../Scene";
 import keys from '../keys';
 
-const textStyle = { 
-    color:"#42f44b", 
-    fontSize:30 
-}
-
-export default class Menu extends Scene {
+export default class MenuScene extends Scene {
 
     constructor(params) {
         super({ ...params, key: keys.MENU })
@@ -17,11 +12,13 @@ export default class Menu extends Scene {
         // this.add.image(30,40,"download")
         // .setOrigin(0,0)
 
-        const start = this.add.text(100,200,"Start", textStyle)
+        const start = this.add.bitmapText(100, 200, "BitPotion", "Start", 100)
         .setInteractive()
         .on("pointerup", this.startGame.bind(this))
 
-        const load = this.add.text(100,300,"Load", textStyle)
+        const load = this.add.bitmapText(100, 300, "BitPotion", "Load", 100)
+        .setInteractive()
+        .on("pointerup", () => this.scene.start(keys.ERROR))
 
     }
 

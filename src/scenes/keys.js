@@ -2,5 +2,6 @@ export default {
     LOAD: "load",
     BOOT: "boot",
     MENU: "menu",
-    DEMO: "demo"
+    DEMO: "demo",
+    ERROR: "error",
 }

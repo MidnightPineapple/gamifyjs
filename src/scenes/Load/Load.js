@@ -3,7 +3,7 @@ import { ImportsAssets } from '../mixins';
 import Scene from '../Scene';
 import keys from '../keys';
 
-export default class Load extends compose(ImportsAssets)(Scene) {
+export default class LoadScene extends compose(ImportsAssets)(Scene) {
 
     imports = {
         images: require.context("../../assets/images", false, /\.(png|jpe?g)$/),
