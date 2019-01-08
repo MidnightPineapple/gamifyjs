@@ -10,6 +10,7 @@ export default class ErrorScene extends compose(IsDraggable,UsesCustomObjects(ob
 
     constructor(config) {
         super({ ...config, key:keys.ERROR });
+        this.created = false;
     }
 
     defaultPositionY = gameConfig.height - constants.DEFAULT_PEEK_HEIGHT;
@@ -21,7 +22,8 @@ export default class ErrorScene extends compose(IsDraggable,UsesCustomObjects(ob
         this.onDismiss = data.onDismiss;
         this.onNext = data.onNext;
         this.onPrev = data.onPrev;
-        this.cursor = 0
+        this.events.on("setdata", this.refresh, this);
+        this.events.on("changedata", this.refresh, this);
     }
 
     create(data) {
@@ -57,8 +59,9 @@ export default class ErrorScene extends compose(IsDraggable,UsesCustomObjects(ob
         .setFontSize(5)
         
         // TODO: implement scrolling: using scene.cameras.main.scrollY 
-        
-        this.refresh();
+
+        this.created = true;
+        this.events.emit("aftercreate")
     }
 
     nextError() {
@@ -93,13 +96,21 @@ export default class ErrorScene extends compose(IsDraggable,UsesCustomObjects(ob
     }
 
     refresh() {
+        // FIXME: refreshes everything even when some values are undefined
+        // or when only one of the values in datamanager gets changed
         const { cursor, totalErrors, error } = this.data.values;
         this.setError(error); 
         this.setCursor(cursor, totalErrors);
     }
 
     stop() {
-        this.scene.stop(keys.ERROR)
+        this.created = false;
+        this.scene.stop(keys.ERROR);
+    }
+
+    afterCreate(fun, ...args) {
+        if(this.created) fun(...args);
+        else this.events.on("aftercreate", () => fun(...args));
     }
 
 }
