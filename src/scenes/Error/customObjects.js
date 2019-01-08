@@ -18,7 +18,15 @@ class ErrorText extends Phaser.GameObjects.Text {
     }
 
     bottom() {
-        return this.y + this.height;
+        return this.y + this.height * ( 1 - this.originY );
+    }
+
+    right() {
+        return this.x + this.width * ( 1 - this.originX );
+    }
+
+    left() {
+        return this.x - this.width * this.originX; 
     }
 
     putBelow(textObj) {
@@ -34,10 +42,6 @@ class ErrorButton extends ErrorText {
         this.setOrigin(1,0);
         this.setInteractive();
         this.setFontSize(10);
-    }
-
-    left() {
-        return this.x - this.width
     }
 
 }
