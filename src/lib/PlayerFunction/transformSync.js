@@ -5,7 +5,7 @@ import BabelPluginTransformForOf from "@babel/plugin-transform-for-of"
 import BabelPresetEnv from "@babel/preset-env"
 
 const babelOptions = {
-    sourceMaps: 'inline',
+    sourceMaps: true,
     plugins: [ 
         BabelPluginClassProperties,
         BabelPluginObjectRestSpread,

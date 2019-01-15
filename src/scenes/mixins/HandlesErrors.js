@@ -69,6 +69,7 @@ export default superclass => {
 
         emitError(error) {
             this.events.emit("error", error);
+            // TODO: play sound on error
         }
 
     }

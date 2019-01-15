@@ -1,71 +1,142 @@
-import FactoryFunctions from './PlayerFunctionFactories';
-import LineList from './LineList'; 
+import LineList from './LineList';
+import traceEvalError from './traceEvalError';
+import transformSync from './transformSync';
 
-// TODO: I should inject an error handler that hooks into a phaser scene into this class...
+const defaultConfig = {
+    displayName: "fun",
+    parameters: [],
+    description: "A player editable function",
+    lines: [ { text: "" } ],
+}
 
-class PlayerFunction {
 
-    constructor(config, errorHandler) {
-        this.displayName = config.displayName || "fun"
-        this.parameters = config.parameters || []
-        this.description = config.description || ""
-        this.lines = new LineList(config.lines)
-        this.funCache = undefined
-    }
-
-    execute(...params) {
-        if(typeof this.funCache !== "function") this.makeCache()
+function _eval(funStr, transformEs5, errorHandler) {
+    let funFromEval, _eval, _stale, _cache, _error, defaultConfig, PlayerFunction; 
+    funStr = "funFromEval=" + funStr;
+    try {
+        const { code: strToEval, map: babelSourceMap } = transformEs5(funStr);
+        eval(strToEval)
+        return { fun: funFromEval, map: babelSourceMap };
+    } catch(err) {
+        const fromBabel = !!err.code.match(/BABEL/)
+        if(fromBabel) {
+            const msg = err.message.replace(/[\u001b\u009b][[()#;?]*(?:[0-9]{1,4}(?:;[0-9]{0,4})*)?[0-9A-ORZcf-nqry=><]/g,'').split("\n")
+            const code = msg.slice(2).join("\n").replace(/funFromEval=/, "");
+            const message = msg[0];
+            const stack = err.name + ": " + message + "\n" + err.stack.split("\n").slice(msg.length).join("\n");
+            Object.assign(err, { from:"PLAYER_FUNCTION_EVAL", message, code, stack, fromBabel });
+        }
         
+        if(typeof errorHandler === "function") {
+            errorHandler(err);
+        } else {
+            throw err;
+        }
+    }
+}
+
+function _stale() {
+    this.cache = undefined;
+}
+
+function _cache(fun) {
+    this.cache = fun;
+}
+
+/** Class for storing and running user submitted functions */
+export default class PlayerFunction {
+
+    /**
+     * @typedef {Object} parameters 
+     * @property {string} displayName - name of the paramter
+     * @property {string} description - describes what the parameter is for
+     */
+
+    /**
+     * Creates a player function
+     * @param {Object} config - metadata about player function
+     * @param {string} config.displayName - name of function for user to see
+     * @param {string} config.description - description of what this function does
+     * @param {Object[]} config.lines - configuration for lines of the function 
+     * @param {parameters[]} config.parameters - parameters of the function
+     */
+    constructor(errorHandler, config = {}) {
+        this.displayName = config.displayName || defaultConfig.displayName
+        this.parameters = Object.freeze(Object.assign([], config.parameters || defaultConfig.parameters));
+        this.description = config.description || defaultConfig.description
+
+        const lineConfig = ( config.lines instanceof Array && config.lines.length !== 0 && config.lines ) || defaultConfig.lines;
+        this.lines = LineList([
+            { text:"function "+this.displayName+"("+this.parameterNames+") {", restricted: true },
+            ...lineConfig,
+            { text:"}", restricted: true }
+        ]);
+        this.lines.onChange = _stale.bind(this);
+        this.cache = undefined
+
+        this.errorHandler = typeof errorHandler === "function" ? errorHandler : undefined; 
+    }
+
+    isPlayerFunction = true;
+
+    execute(...paramValues) {
+        let fun;
+        if(typeof this.cache === "function") {
+            fun = this.cache.fun;
+        } else {
+            let result = _eval(this.lines.toString(), transformSync, this.errorHandler);
+            if(!result) return;
+
+            _cache.call(this, result);
+            fun = result.fun;
+        }
+
         try {
-            return this.funCache(...params)
+            return fun.apply(null,paramValues);
         } catch(e) {
-            // TODO: catch all other types of errors
-            //console.log(Object.getOwnPropertyNames(e), e.message)
-            throw e;
+            traceEvalError(e, this.cache.map)
+            .then( err => {
+                Object.assign(err, { from: "PLAYER_FUNCTION_EXECUTION", fromBabel:false })
+                if(typeof this.errorHandler === "function") {
+                    this.errorHandler(err);
+                } else {
+                    throw err;
+                }
+            });
         }
 
     }
 
-    makeCache() {
-        try {
-            const fun = new Function(...this.parameters, this.lines.toBabel())
-            this.funCache = fun
-        } catch(e) {
-            if(e instanceof SyntaxError === false) throw e; 
-            console.log(e.message)
-            // TODO: handle SyntaxError 
-            // Babel gives the error [ 'stack', 'message', 'pos', 'loc', 'code' ]
-            // e.loc has the line and column properties that contain the position
-            // e.message has the code snippet I need to display, but it'd be nicer to generate it myself.
-            // runtime errors are gonna be so much harder to source map RIPP
-            // ? I could add some info to the error here and throw it back? Or make a new error based off of it.
-            // errorHandler.catch(e) // TODO: make an ErrorHandler plugin? Idk how I'm using this class later...
-
-            throw e;
-        }
-    }
-
-    stale() {
-        this.funCache = undefined;
-    }
-
-    modify() {
-        // 1.  return an object that holds all methods 
-        //     necessary to handle modifications to this.lines
-        // 2.  stale cache
+    get parameterNames() {
+        return this.parameters.map(x => x.displayName);
     }
 
     toJson() {
-        // remember to remove any functions out of the Line objs
-        return ""
+        const lines = this.lines.config
+        return JSON.stringify({
+            displayName: this.displayName,
+            paramters: this.parameters,
+            description: this.description,
+            lines: lines.slice(1, lines.length - 1),
+        })
     }
 
     toString() {
-        return `function ${this.displayName}(${this.parameters}) {\n${this.lines}\n}`
+        return this.lines.toString();
+    }
+
+    static fromJson(errorHandler, json) {
+        const config = JSON.parse(json);
+        return new PlayerFunction(errorHandler, config);
+    }
+
+    static withHandler(errorHandler) {
+        return PlayerFunction.bind(null, errorHandler);
+    }
+
+    static fromJsonWithHandler(errorHandler) {
+        return PlayerFunction.fromJson.bind(null, errorHandler);
     }
 
 }
 
-Object.assign(PlayerFunction, FactoryFunctions(PlayerFunction));
-
-export default PlayerFunction;
