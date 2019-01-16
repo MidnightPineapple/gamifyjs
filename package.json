@@ -2,14 +2,14 @@
   "name": "gamifyjs",
   "version": "0.0.1",
   "description": "A 2D side scroller RPG powered by Phaser3, where the core game mechanic is JavaScript",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
     "test": "jest",
     "build:prod": "cross-env NODE_ENV=production webpack --mode production",
     "build:dev": "cross-env NODE_ENV=development webpack --mode development",
-    "start:dev": "npm-run-all --parallel build:dev lift",
-    "lift": "echo \"havent installed sails yet\"",
-    "start": "start:dev"
+    "start:dev": "npm-run-all --parallel build:dev lift:dev",
+    "lift:dev": "nodemon sails lift",
+    "lift": "sails lift"
   },
   "author": "Samuel Chen",
   "license": "MIT",
@@ -32,6 +32,7 @@
     "file-loader": "^2.0.0",
     "html-webpack-plugin": "^3.2.0",
     "jest": "^23.6.0",
+    "nodemon": "^1.18.9",
     "npm-run-all": "^4.1.5",
     "phaser": "^3.15.1",
     "ramda": "^0.26.1",
@@ -44,5 +45,10 @@
     "webpack": "^4.26.1",
     "webpack-cli": "^3.1.2",
     "webpack-dev-server": "^3.1.10"
+  },
+  "dependencies": {
+    "@sailshq/lodash": "^3.10.3",
+    "sails": "^1.1.0",
+    "sails-hook-orm": "^2.1.1"
   }
 }
