@@ -1,10 +1,10 @@
 import { compose } from 'ramda'
-import { UsesCustomObjects, EmitsEvents } from '../mixins'
+import { UsesCustomObjects, EmitsEvents, UsesPlayerFunctions } from '../mixins'
 import Scene from "../Scene";
 import keys from '../keys';
 import objs from "./customObjects";
 
-export default class Demo extends compose(EmitsEvents,UsesCustomObjects(objs))(Scene) {
+export default class Demo extends compose(UsesPlayerFunctions,EmitsEvents,UsesCustomObjects(objs))(Scene) {
 
     constructor(params) {
         super({ ...params, key: keys.DEMO })
@@ -43,8 +43,9 @@ export default class Demo extends compose(EmitsEvents,UsesCustomObjects(objs))(S
         this.emitOverlapZone(this.player, "hackable-range", this.robot)
 
         this.player.on(EmitsEvents.events.OVERLAP_ZONE + "_hackable-range", function() {
-            console.log("an object is in hacking range")
-        })
+            // console.log("an object is in hacking range")
+            this.getFunc("demo-function").execute();
+        }, this)
 
     }
 

@@ -10,6 +10,7 @@ export default class LoadScene extends compose(ImportsAssets)(Scene) {
         tilemaps: require.context("../../assets/tilemaps", false, /\.json/),
         tilesets: require.context("../../assets/tilesets", false, /\.(png|jpe?g)$/),
         spritesheets: require.context("../../assets/spritesheets", false, /\.(png|jpe?g)$/),
+        functionData: require.context("../../assets/function-data", false, /\.json$/),
     }
 
     constructor(params) {

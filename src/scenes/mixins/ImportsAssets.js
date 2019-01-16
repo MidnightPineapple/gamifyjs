@@ -19,6 +19,7 @@ export default superclass => class ImportsAssets extends superclass {
         if(this.imports.hasOwnProperty("tilemaps")) this.importTilemaps( this.imports['tilemaps'] )
         if(this.imports.hasOwnProperty("tilesets")) this.importTilesets( this.imports['tilesets'] )
         if(this.imports.hasOwnProperty("spritesheets")) this.importSpritesheets( this.imports['spritesheets'] )
+        if(this.imports.hasOwnProperty("functionData")) this.importPlayerFunctionData( this.imports['functionData'] )
     }
 
     imports = {};
@@ -107,5 +108,19 @@ export default superclass => class ImportsAssets extends superclass {
                 config || spritesheetConfig
             )
         }
+    }
+
+    importPlayerFunctionData(require) {
+
+        const files = importAll(require);
+
+        for( let filename in files ) {
+            this.load.playerFunction(filename
+                .replace(/\.json$/,"")
+                .replace(/^\.(\\|\/)/,""),
+                files[filename]
+            )
+        }
+
     }
 }
