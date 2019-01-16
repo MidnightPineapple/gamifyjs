@@ -1,0 +1,8 @@
+{
+    "displayName": "test",
+    "description": "A function to test the loader and execution in the browser", 
+    "parameters": [],
+    "lines": [
+        { "text":"    console.log('Hello World');", "config": { "restricted": true } }
+    ]
+}
