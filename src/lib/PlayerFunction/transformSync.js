@@ -1,21 +1,15 @@
-import { transformSync } from '@babel/core';
-import BabelPluginClassProperties from "@babel/plugin-proposal-class-properties"
-import BabelPluginObjectRestSpread from "@babel/plugin-proposal-object-rest-spread"
-import BabelPluginTransformForOf from "@babel/plugin-transform-for-of"
-// import BabelPresetEnv from "@babel/preset-env"
-
-// ! BUG: Can't import without an error ^^
+import * as Babel from '@babel/standalone';
 
 const babelOptions = {
     sourceMaps: true,
     plugins: [ 
-        BabelPluginClassProperties,
-        BabelPluginObjectRestSpread,
-        BabelPluginTransformForOf,
+        "proposal-class-properties",
+        "proposal-object-rest-spread",
+        "transform-for-of",
     ],
     presets: [
-        // BabelPresetEnv
+        "es2016"
     ],
 }
 
-export default code => transformSync(code, babelOptions)
+export default code => Babel.transform(code, babelOptions)

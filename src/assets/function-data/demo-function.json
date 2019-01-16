@@ -3,8 +3,6 @@
     "description": "A function to test the loader and execution in the browser", 
     "parameters": [],
     "lines": [
-        { "text":"function test() {", "config": { "restricted": true } },
-        { "text":"    console.log('Hello World');", "config": { "restricted": true } },
-        { "text":"}", "config": { "restricted": true } }
+        { "text":"    console.log('Hello World');", "config": { "restricted": true } }
     ]
 }

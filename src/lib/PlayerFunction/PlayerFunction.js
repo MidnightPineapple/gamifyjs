@@ -18,7 +18,7 @@ function _eval(funStr, transformEs5, errorHandler) {
         eval(strToEval)
         return { fun: funFromEval, map: babelSourceMap };
     } catch(err) {
-        const fromBabel = !!err.code.match(/BABEL/)
+        const fromBabel = err.code && !!err.code.match(/BABEL/)
         if(fromBabel) {
             const msg = err.message.replace(/[\u001b\u009b][[()#;?]*(?:[0-9]{1,4}(?:;[0-9]{0,4})*)?[0-9A-ORZcf-nqry=><]/g,'').split("\n")
             const code = msg.slice(2).join("\n").replace(/funFromEval=/, "");

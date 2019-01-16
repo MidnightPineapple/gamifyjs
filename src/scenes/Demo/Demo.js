@@ -37,13 +37,10 @@ export default class Demo extends compose(UsesPlayerFunctions,EmitsEvents,UsesCu
         this.input.keyboard.on("keydown_A", () => this.robot.move("left"))
         this.input.keyboard.on("keyup_A", () => this.robot.idle())
 
-        // TODO: custom behavior functions
-
         this.emitCollide([ [this.player, this.robot] ])
         this.emitOverlapZone(this.player, "hackable-range", this.robot)
 
         this.player.on(EmitsEvents.events.OVERLAP_ZONE + "_hackable-range", function() {
-            // console.log("an object is in hacking range")
             this.getFunc("demo-function").execute();
         }, this)
 
