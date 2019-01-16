@@ -8,7 +8,7 @@ const babelOptions = {
         "transform-for-of",
     ],
     presets: [
-        "es2016"
+        "es2015", "es2016", "es2017"
     ],
 }
 

@@ -5,13 +5,31 @@ const CleanWebpackPlugin = require("clean-webpack-plugin")
 const env = process.env.NODE_ENV || "production"
 
 module.exports = {
-    entry: path.resolve(__dirname, "./src/index.js"),
+    entry: path.resolve(__dirname, "./client/game/index.js"),
     output: {
-        path: path.resolve(__dirname, './dist'),
+        path: path.resolve(__dirname, './.tmp/public'),
         filename: "assets/js/bundle.js"
     },
     module: {
         rules: [
+            {
+                test: /\.css$/,
+                use: [
+                    { 
+                        loader: "style-loader"
+                    }, 
+                    {
+                        loader: "css-loader", 
+                        options: {
+                            modules:true,
+                            importLoaders: 1,
+                            localIdentName: "[name]_[local]_[hash:base64]",
+                            sourceMap: true,
+                            minimize: true
+                        }
+                    }
+                ]
+            },
             {
                 test: /\.js$/,
                 exclude: /node_modules/,
@@ -42,10 +60,10 @@ module.exports = {
         ]
     },
     plugins: [
-        new CleanWebpackPlugin(["dist"], { root: __dirname }),
+        new CleanWebpackPlugin([".tmp"], { root: __dirname }),
         new HtmlWebpackPlugin({
           filename: 'index.html',
-          template: path.resolve(__dirname,'src/index.html'),
+          template: path.resolve(__dirname,'client/game/index.html'),
           title: "Hello Gamify",
           hash: true
         }),
@@ -57,7 +75,7 @@ module.exports = {
     watch:true,
     devtool:'source-map',
     devServer: {
-        contentBase: path.resolve(__dirname, 'dist'),
+        contentBase: path.resolve(__dirname, '.tmp/public'),
         watchContentBase:true,
         compress: true,
         port: 8000,
@@ -67,6 +85,6 @@ module.exports = {
         extensions: [ ".js" ]
     },
     node: {
-        fs:"empty"
+        fs: 'empty'
     }
 }
