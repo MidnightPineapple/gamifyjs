@@ -168,9 +168,9 @@ function (_Component) {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "app"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Hello from React!"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("iframe", {
-        src: "game.html",
+        src: "/game.html",
         className: _App_css__WEBPACK_IMPORTED_MODULE_1___default.a.frame,
-        sandbox: true
+        sandbox: "allow-scripts allow-same-origin"
       }));
     }
   }]);

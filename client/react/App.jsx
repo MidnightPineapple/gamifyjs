@@ -8,7 +8,7 @@ export default class App extends Component {
         return (
             <div className="app" >
                 <p>Hello from React!</p>
-                <iframe src={GAME_IFRAME_URI} className={styles.frame} sandbox />
+                <iframe src={GAME_IFRAME_URI} className={styles.frame} sandbox="allow-scripts allow-same-origin" />
             </div>
         )
     }

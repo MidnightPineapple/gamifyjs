@@ -10,7 +10,11 @@
 
 module.exports.routes = {
 
-    
-//   '/': { view: 'pages/homepage' },
+    // Add OAuth routes somewhere here
+
+    'GET /*': {
+        skipAssets:true,
+        action:"react",
+    } 
 
 };

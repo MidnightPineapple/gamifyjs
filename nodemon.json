@@ -4,7 +4,8 @@
         "*.test.js", 
         "client/*", 
         ".tmp/*",
-        "node_modules/*"
+        "node_modules/*",
+        "webpack/*"
     ],
     "ext": "js"
 }

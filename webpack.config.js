@@ -1,7 +1,7 @@
 const webpack = require("webpack");
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-const CleanWebpackPlugin = require("clean-webpack-plugin")
+const CleanWebpackPlugin = require("clean-webpack-plugin");
 const env = process.env.NODE_ENV || "production"
 
 module.exports = {
@@ -66,7 +66,7 @@ module.exports = {
         new HtmlWebpackPlugin({
             filename: 'index.html',
             chunks: ["react"],
-            template: path.resolve(__dirname,'client/react/index.html'),
+            template: path.resolve(__dirname,'./client/react/index.html'),
             title: "React App",
             hash: true,
             meta: {
@@ -78,7 +78,7 @@ module.exports = {
         new HtmlWebpackPlugin({
             filename: 'game.html',
             chunks: ["game"],
-            template: path.resolve(__dirname,'client/game/index.html'),
+            template: path.resolve(__dirname,'./client/game/index.html'),
             title: "Hello Gamify",
             hash: true,
             meta: {
@@ -92,13 +92,13 @@ module.exports = {
             'WEBGL_RENDERER': JSON.stringify(true)
         }),
         new webpack.DefinePlugin({
-            "GAME_IFRAME_URI": JSON.stringify("game.html")
+            "GAME_IFRAME_URI": JSON.stringify("/game.html")
         })
     ],
     watch:true,
     devtool:'source-map',
     devServer: {
-        contentBase: path.resolve(__dirname, '.tmp/public'),
+        contentBase: path.resolve(__dirname, './tmp/public'),
         watchContentBase:true,
         compress: true,
         port: 8000,
