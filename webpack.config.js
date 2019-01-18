@@ -92,7 +92,9 @@ module.exports = {
             'WEBGL_RENDERER': JSON.stringify(true)
         }),
         new webpack.DefinePlugin({
-            "GAME_IFRAME_URI": JSON.stringify("/game.html")
+            "GAME_IFRAME_URI": JSON.stringify("/game.html"),
+            // ! idk the real site origin yet so better fill this in later
+            "SITE_ORIGIN": JSON.stringify(env !== "production" ? "http://localhost:1337" : "https://gamify.js" ) 
         })
     ],
     watch:true,

@@ -1,7 +1,13 @@
 import React, { Component } from 'react';
 import styles from './App.css'
 
+import { IFrameParentConnection } from './lib'
+
 export default class App extends Component {
+
+    componentDidMount() {
+        this.frame = new IFrameParentConnection();
+    }
 
     render() {
 

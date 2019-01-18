@@ -130,6 +130,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _App_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./App.css */ "./client/react/App.css");
 /* harmony import */ var _App_css__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_App_css__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _lib__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./lib */ "./client/react/lib/index.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -151,6 +152,7 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 
 
+
 var App =
 /*#__PURE__*/
 function (_Component) {
@@ -163,6 +165,11 @@ function (_Component) {
   }
 
   _createClass(App, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      this.frame = new _lib__WEBPACK_IMPORTED_MODULE_2__["IFrameParentConnection"]();
+    }
+  }, {
     key: "render",
     value: function render() {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -233,6 +240,225 @@ __webpack_require__.r(__webpack_exports__);
 
 
 react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_App__WEBPACK_IMPORTED_MODULE_2__["default"]), document.getElementById("root"));
+
+/***/ }),
+
+/***/ "./client/react/lib/IFrameParentConnection/IFrameParentConnection.js":
+/*!***************************************************************************!*\
+  !*** ./client/react/lib/IFrameParentConnection/IFrameParentConnection.js ***!
+  \***************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return IFrameParentConnection; });
+/* harmony import */ var uuid_v4__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! uuid/v4 */ "./node_modules/uuid/v4.js");
+/* harmony import */ var uuid_v4__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(uuid_v4__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./constants */ "./client/react/lib/IFrameParentConnection/constants.js");
+/* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_constants__WEBPACK_IMPORTED_MODULE_1__);
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+
+
+
+var IFrameParentConnection =
+/*#__PURE__*/
+function () {
+  function IFrameParentConnection() {
+    var _this = this;
+
+    _classCallCheck(this, IFrameParentConnection);
+
+    window.addEventListener("message", function (_ref) {
+      var data = _ref.data,
+          source = _ref.source,
+          origin = _ref.origin;
+      if (origin !== "http://localhost:1337") return;
+      var name, payload, connection, uuid;
+
+      try {
+        var _JSON$parse = JSON.parse(data);
+
+        name = _JSON$parse.name;
+        payload = _JSON$parse.payload;
+        var _JSON$parse$connectio = _JSON$parse.connection;
+        connection = _JSON$parse$connectio === void 0 ? undefined : _JSON$parse$connectio;
+        uuid = _JSON$parse.uuid;
+      } catch (e) {
+        return;
+      }
+
+      if (!_this.connection && name === _constants__WEBPACK_IMPORTED_MODULE_1___default.a.CONNECTION_INIT) {
+        _this.connect(source, connection);
+      }
+
+      if (_this.connection === connection) {
+        _this.emit(name, payload);
+
+        if (name !== _constants__WEBPACK_IMPORTED_MODULE_1___default.a.MESSAGE_RECEIVED) {
+          _this.send(_constants__WEBPACK_IMPORTED_MODULE_1___default.a.MESSAGE_RECEIVED, {
+            uuid: uuid
+          });
+        }
+      }
+    });
+    this.callbacks = {};
+    this.connection, this.source;
+    this.ready = false;
+  }
+
+  _createClass(IFrameParentConnection, [{
+    key: "attachListener",
+    value: function attachListener(name, cb) {
+      if (typeof this.callbacks[name] === "undefined") {
+        this.callbacks[name] = new Array();
+      }
+
+      this.callbacks[name].push(cb);
+    }
+  }, {
+    key: "removeListener",
+    value: function removeListener(name, cb) {
+      var idx = this.callbacks[name].indexOf(cb);
+      if (idx === -1) throw new Error("Cant remove listener for " + name + ". Index not found.");
+      this.callbacks[name].splice(idx, 1);
+    }
+  }, {
+    key: "emit",
+    value: function emit(name, payload) {
+      if (!this.callbacks[name]) return;
+      var _iteratorNormalCompletion = true;
+      var _didIteratorError = false;
+      var _iteratorError = undefined;
+
+      try {
+        for (var _iterator = this.callbacks[name][Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+          var cb = _step.value;
+          cb(payload);
+        }
+      } catch (err) {
+        _didIteratorError = true;
+        _iteratorError = err;
+      } finally {
+        try {
+          if (!_iteratorNormalCompletion && _iterator.return != null) {
+            _iterator.return();
+          }
+        } finally {
+          if (_didIteratorError) {
+            throw _iteratorError;
+          }
+        }
+      }
+    }
+  }, {
+    key: "send",
+    value: function send(name, payload, cb) {
+      var _this2 = this;
+
+      if (!name) throw new Error("Message must have a name");
+
+      if (!this.ready) {
+        var readyCallback = function readyCallback() {
+          _this2.send(name, payload, cb);
+
+          _this2.removeListener(_constants__WEBPACK_IMPORTED_MODULE_1___default.a.CONNECTION_READY, readyCallback);
+        };
+
+        this.attachListener(_constants__WEBPACK_IMPORTED_MODULE_1___default.a.CONNECTION_READY, readyCallback);
+        return;
+      }
+
+      var uuid = uuid_v4__WEBPACK_IMPORTED_MODULE_0___default()();
+      this.child.postMessage(JSON.stringify({
+        name: name,
+        payload: payload,
+        connection: this.connection,
+        uuid: uuid
+      }));
+
+      if (name !== _constants__WEBPACK_IMPORTED_MODULE_1___default.a.MESSAGE_RECEIVED) {
+        var messageCallback = function messageCallback(_ref2) {
+          var _ref2$uuid = _ref2.uuid,
+              mUuid = _ref2$uuid === void 0 ? undefined : _ref2$uuid;
+          if (mUuid !== uuid) return;
+          if (typeof cb === "function") cb();
+
+          _this2.removeListener(_constants__WEBPACK_IMPORTED_MODULE_1___default.a.MESSAGE_RECEIVED, messageCallback);
+        };
+
+        this.attachListener(_constants__WEBPACK_IMPORTED_MODULE_1___default.a.MESSAGE_RECEIVED, messageCallback);
+      }
+    }
+  }, {
+    key: "connect",
+    value: function connect(source, connection) {
+      this.connection = connection;
+      this.child = source;
+      this.ready = true;
+      this.emit(_constants__WEBPACK_IMPORTED_MODULE_1___default.a.CONNECTION_READY);
+    }
+  }]);
+
+  return IFrameParentConnection;
+}();
+
+
+IFrameParentConnection.CONSTANTS = _constants__WEBPACK_IMPORTED_MODULE_1___default.a;
+
+/***/ }),
+
+/***/ "./client/react/lib/IFrameParentConnection/constants.js":
+/*!**************************************************************!*\
+  !*** ./client/react/lib/IFrameParentConnection/constants.js ***!
+  \**************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+var CONSTANTS = {
+  CONNECTION_INIT: "IFrameConnection__connection--init",
+  CONNECTION_READY: "IFrameConnection__connection--ready",
+  MESSAGE_RECEIVED: "IFrameConnection__message--received"
+};
+CONSTANTS.default = CONSTANTS;
+module.exports = CONSTANTS;
+
+/***/ }),
+
+/***/ "./client/react/lib/IFrameParentConnection/index.js":
+/*!**********************************************************!*\
+  !*** ./client/react/lib/IFrameParentConnection/index.js ***!
+  \**********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _IFrameParentConnection__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./IFrameParentConnection */ "./client/react/lib/IFrameParentConnection/IFrameParentConnection.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "default", function() { return _IFrameParentConnection__WEBPACK_IMPORTED_MODULE_0__["default"]; });
+
+
+
+/***/ }),
+
+/***/ "./client/react/lib/index.js":
+/*!***********************************!*\
+  !*** ./client/react/lib/index.js ***!
+  \***********************************/
+/*! exports provided: IFrameParentConnection */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _IFrameParentConnection__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./IFrameParentConnection */ "./client/react/lib/IFrameParentConnection/index.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "IFrameParentConnection", function() { return _IFrameParentConnection__WEBPACK_IMPORTED_MODULE_0__["default"]; });
+
+
 
 /***/ }),
 
@@ -24338,6 +24564,126 @@ module.exports = function (css) {
 	// send back the fixed css
 	return fixedCss;
 };
+
+
+/***/ }),
+
+/***/ "./node_modules/uuid/lib/bytesToUuid.js":
+/*!**********************************************!*\
+  !*** ./node_modules/uuid/lib/bytesToUuid.js ***!
+  \**********************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+/**
+ * Convert array of 16 byte values to UUID string format of the form:
+ * XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX
+ */
+var byteToHex = [];
+for (var i = 0; i < 256; ++i) {
+  byteToHex[i] = (i + 0x100).toString(16).substr(1);
+}
+
+function bytesToUuid(buf, offset) {
+  var i = offset || 0;
+  var bth = byteToHex;
+  // join used to fix memory issue caused by concatenation: https://bugs.chromium.org/p/v8/issues/detail?id=3175#c4
+  return ([bth[buf[i++]], bth[buf[i++]], 
+	bth[buf[i++]], bth[buf[i++]], '-',
+	bth[buf[i++]], bth[buf[i++]], '-',
+	bth[buf[i++]], bth[buf[i++]], '-',
+	bth[buf[i++]], bth[buf[i++]], '-',
+	bth[buf[i++]], bth[buf[i++]],
+	bth[buf[i++]], bth[buf[i++]],
+	bth[buf[i++]], bth[buf[i++]]]).join('');
+}
+
+module.exports = bytesToUuid;
+
+
+/***/ }),
+
+/***/ "./node_modules/uuid/lib/rng-browser.js":
+/*!**********************************************!*\
+  !*** ./node_modules/uuid/lib/rng-browser.js ***!
+  \**********************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+// Unique ID creation requires a high quality random # generator.  In the
+// browser this is a little complicated due to unknown quality of Math.random()
+// and inconsistent support for the `crypto` API.  We do the best we can via
+// feature-detection
+
+// getRandomValues needs to be invoked in a context where "this" is a Crypto
+// implementation. Also, find the complete implementation of crypto on IE11.
+var getRandomValues = (typeof(crypto) != 'undefined' && crypto.getRandomValues && crypto.getRandomValues.bind(crypto)) ||
+                      (typeof(msCrypto) != 'undefined' && typeof window.msCrypto.getRandomValues == 'function' && msCrypto.getRandomValues.bind(msCrypto));
+
+if (getRandomValues) {
+  // WHATWG crypto RNG - http://wiki.whatwg.org/wiki/Crypto
+  var rnds8 = new Uint8Array(16); // eslint-disable-line no-undef
+
+  module.exports = function whatwgRNG() {
+    getRandomValues(rnds8);
+    return rnds8;
+  };
+} else {
+  // Math.random()-based (RNG)
+  //
+  // If all else fails, use Math.random().  It's fast, but is of unspecified
+  // quality.
+  var rnds = new Array(16);
+
+  module.exports = function mathRNG() {
+    for (var i = 0, r; i < 16; i++) {
+      if ((i & 0x03) === 0) r = Math.random() * 0x100000000;
+      rnds[i] = r >>> ((i & 0x03) << 3) & 0xff;
+    }
+
+    return rnds;
+  };
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/uuid/v4.js":
+/*!*********************************!*\
+  !*** ./node_modules/uuid/v4.js ***!
+  \*********************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var rng = __webpack_require__(/*! ./lib/rng */ "./node_modules/uuid/lib/rng-browser.js");
+var bytesToUuid = __webpack_require__(/*! ./lib/bytesToUuid */ "./node_modules/uuid/lib/bytesToUuid.js");
+
+function v4(options, buf, offset) {
+  var i = buf && offset || 0;
+
+  if (typeof(options) == 'string') {
+    buf = options === 'binary' ? new Array(16) : null;
+    options = null;
+  }
+  options = options || {};
+
+  var rnds = options.random || (options.rng || rng)();
+
+  // Per 4.4, set bits for version and `clock_seq_hi_and_reserved`
+  rnds[6] = (rnds[6] & 0x0f) | 0x40;
+  rnds[8] = (rnds[8] & 0x3f) | 0x80;
+
+  // Copy bytes to buffer, if provided
+  if (buf) {
+    for (var ii = 0; ii < 16; ++ii) {
+      buf[i + ii] = rnds[ii];
+    }
+  }
+
+  return buf || bytesToUuid(rnds);
+}
+
+module.exports = v4;
 
 
 /***/ }),
