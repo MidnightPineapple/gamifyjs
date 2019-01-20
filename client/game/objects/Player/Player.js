@@ -54,11 +54,3 @@ export default class Player extends compose(OverlapsZones, IsAnimated(anims))(Ar
 // Those actions are functions as defined in a class above
 // Those functions handle the animations and some logic that shouldn't change
 // If there's a player-customizable behavior, it will call the function associated with it.
-
-// ? If we emit an event in this object, is it received by other objects? any global event emitters/listeners?
-
-// ! I can do the hack range & proximity thing with the physics zone detection!
-// ! http://labs.phaser.io/edit.html?src=src\physics\arcade\overlap%20zone.js
-
-// useful for colliding logic w/o adding a collider
-// http://www.html5gamedevs.com/topic/36632-changing-collision-detection-for-arcade-physics/ 

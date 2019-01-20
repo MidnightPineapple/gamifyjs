@@ -130,13 +130,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _App_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./App.css */ "./client/react/App.css");
 /* harmony import */ var _App_css__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_App_css__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var react_ace__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-ace */ "./node_modules/react-ace/lib/index.js");
-/* harmony import */ var react_ace__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react_ace__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var brace_mode_javascript__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! brace/mode/javascript */ "./node_modules/brace/mode/javascript.js");
-/* harmony import */ var brace_mode_javascript__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(brace_mode_javascript__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var brace_theme_twilight__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! brace/theme/twilight */ "./node_modules/brace/theme/twilight.js");
-/* harmony import */ var brace_theme_twilight__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(brace_theme_twilight__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _lib__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./lib */ "./client/react/lib/index.js");
+/* harmony import */ var _CodeEditor__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./CodeEditor */ "./client/react/CodeEditor/index.js");
+/* harmony import */ var _lib__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./lib */ "./client/react/lib/index.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -154,8 +149,6 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
-
 
 
 
@@ -182,30 +175,29 @@ function (_Component) {
   _createClass(App, [{
     key: "componentDidMount",
     value: function componentDidMount() {
-      this.frame = new _lib__WEBPACK_IMPORTED_MODULE_5__["IFrameParentConnection"]();
+      this.frame = new _lib__WEBPACK_IMPORTED_MODULE_3__["IFrameParentConnection"]();
+      this.messenger = new _CodeEditor__WEBPACK_IMPORTED_MODULE_2__["EditorMessenger"](this.frame, "abcd");
+      this.forceUpdate();
     }
   }, {
     key: "editorOnChange",
     value: function editorOnChange(editorText, event) {
       this.setState({
         editorText: editorText
-      }); // event { start,end:{line,column} lines:[ affected lines ] action:(insert|remove) }
+      });
     }
   }, {
     key: "render",
     value: function render() {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "app"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Hello from React!"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_ace__WEBPACK_IMPORTED_MODULE_2___default.a, {
-        mode: "javascript",
-        theme: "twilight",
-        name: "Editor Name Here",
-        height: "6em",
+        className: _App_css__WEBPACK_IMPORTED_MODULE_1___default.a.App
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Hello from React!"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_CodeEditor__WEBPACK_IMPORTED_MODULE_2__["default"], {
         value: this.state.editorText,
-        onChange: this.editorOnChange.bind(this)
+        onChange: this.editorOnChange.bind(this),
+        messenger: this.messenger
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("iframe", {
         src: "/game.html",
-        className: _App_css__WEBPACK_IMPORTED_MODULE_1___default.a.frame,
+        className: _App_css__WEBPACK_IMPORTED_MODULE_1___default.a.Frame,
         sandbox: "allow-scripts allow-same-origin"
       }));
     }
@@ -213,6 +205,277 @@ function (_Component) {
 
   return App;
 }(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
+
+
+
+/***/ }),
+
+/***/ "./client/react/CodeEditor/CodeEditor.css":
+/*!************************************************!*\
+  !*** ./client/react/CodeEditor/CodeEditor.css ***!
+  \************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(/*! !../../../node_modules/css-loader/dist/cjs.js??ref--4-1!./CodeEditor.css */ "./node_modules/css-loader/dist/cjs.js?!./client/react/CodeEditor/CodeEditor.css");
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(/*! ../../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {}
+
+/***/ }),
+
+/***/ "./client/react/CodeEditor/CodeEditor.jsx":
+/*!************************************************!*\
+  !*** ./client/react/CodeEditor/CodeEditor.jsx ***!
+  \************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return CodeEditor; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_ace__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-ace */ "./node_modules/react-ace/lib/index.js");
+/* harmony import */ var react_ace__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_ace__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _CodeEditor_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./CodeEditor.css */ "./client/react/CodeEditor/CodeEditor.css");
+/* harmony import */ var _CodeEditor_css__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_CodeEditor_css__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var brace_mode_javascript__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! brace/mode/javascript */ "./node_modules/brace/mode/javascript.js");
+/* harmony import */ var brace_mode_javascript__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(brace_mode_javascript__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var brace_theme_twilight__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! brace/theme/twilight */ "./node_modules/brace/theme/twilight.js");
+/* harmony import */ var brace_theme_twilight__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(brace_theme_twilight__WEBPACK_IMPORTED_MODULE_4__);
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+
+
+
+
+
+var CodeEditor =
+/*#__PURE__*/
+function (_Component) {
+  _inherits(CodeEditor, _Component);
+
+  function CodeEditor(props) {
+    _classCallCheck(this, CodeEditor);
+
+    return _possibleConstructorReturn(this, _getPrototypeOf(CodeEditor).call(this, props)); // TODO: remember to set a listener to errors to be this.props.onChange. don't run it in the actual onChange function in Ace 
+  }
+
+  _createClass(CodeEditor, [{
+    key: "onChange",
+    value: function onChange(value, event) {
+      var action = event.action,
+          lines = event.lines,
+          start = event.start,
+          end = event.end;
+      var messenger = this.props.messenger;
+
+      switch (action) {
+        case "insert":
+          var text = lines.join("\n");
+          messenger.insert(start.line, start.column, text);
+          break;
+
+        case "remove":
+          messenger.remove(start.line, start.column, end.line, end.column);
+          break;
+      } // ! FOR DEBUG
+
+
+      this.props.onChange(value, event);
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: _CodeEditor_css__WEBPACK_IMPORTED_MODULE_2___default.a.AceEditorContainer
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_ace__WEBPACK_IMPORTED_MODULE_1___default.a, {
+        mode: "javascript",
+        theme: "twilight",
+        name: this.props.name,
+        height: "600px",
+        width: "800px",
+        className: _CodeEditor_css__WEBPACK_IMPORTED_MODULE_2___default.a.AceEditor,
+        value: this.props.value,
+        onChange: this.onChange.bind(this)
+      }));
+    }
+  }]);
+
+  return CodeEditor;
+}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
+
+
+
+/***/ }),
+
+/***/ "./client/react/CodeEditor/EditorMessenger.js":
+/*!****************************************************!*\
+  !*** ./client/react/CodeEditor/EditorMessenger.js ***!
+  \****************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return EditorMessenger; });
+/* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./constants */ "./client/react/CodeEditor/constants.js");
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+
+
+var EditorMessenger =
+/*#__PURE__*/
+function () {
+  function EditorMessenger(iFrameConnection, funId) {
+    var _this = this;
+
+    _classCallCheck(this, EditorMessenger);
+
+    this.frame = iFrameConnection;
+    this.functionId = funId;
+    this.frame.attachListener(_constants__WEBPACK_IMPORTED_MODULE_0__["default"].EDIT_SUCCESS, function (_ref) {
+      var functionId = _ref.functionId,
+          text = _ref.text;
+      if (functionId !== _this.functionId) return;
+      if (typeof _this.onValueChanged !== "function") return;
+
+      _this.onValueChanged(text);
+    });
+    this.frame.attachListener(_constants__WEBPACK_IMPORTED_MODULE_0__["default"].EDIT_ERROR, function (_ref2) {
+      var functionId = _ref2.functionId,
+          text = _ref2.text,
+          errorMessage = _ref2.errorMessage;
+      if (functionId !== _this.functionId) return;
+      if (typeof _this.onValueChanged !== "function") return;
+
+      _this.onValueChanged(text);
+
+      if (typeof _this.onError !== "function") return;
+
+      _this.onError(text);
+    });
+  }
+
+  _createClass(EditorMessenger, [{
+    key: "insert",
+    value: function insert(row, col, text) {
+      this.frame.send(_constants__WEBPACK_IMPORTED_MODULE_0__["default"].EDITOR_INSERT, {
+        functionId: this.functionId,
+        text: text,
+        start: {
+          row: row,
+          col: col
+        }
+      });
+    }
+  }, {
+    key: "remove",
+    value: function remove(startRow, startCol, endRow, endCol) {
+      this.frame.send(_constants__WEBPACK_IMPORTED_MODULE_0__["default"].EDITOR_REMOVE, {
+        functionId: this.functionId,
+        start: {
+          row: startRow,
+          startCol: startCol
+        },
+        end: {
+          row: endRow,
+          col: endCol
+        }
+      });
+    }
+  }, {
+    key: "setOnValueChangedCallback",
+    value: function setOnValueChangedCallback(fun) {
+      this.onValueChanged = fun;
+    }
+  }, {
+    key: "setOnErrorCallback",
+    value: function setOnErrorCallback(fun) {
+      this.onError = fun;
+    }
+  }]);
+
+  return EditorMessenger;
+}();
+
+
+EditorMessenger.CONSTANTS = _constants__WEBPACK_IMPORTED_MODULE_0__["default"];
+
+/***/ }),
+
+/***/ "./client/react/CodeEditor/constants.js":
+/*!**********************************************!*\
+  !*** ./client/react/CodeEditor/constants.js ***!
+  \**********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ({
+  EDITOR_INSERT: "CodeEditor__messenger--insert",
+  EDITOR_REMOVE: "CodeEditor__messenger--remove",
+  EDITOR_INIT: "PlayerFunction__function--send",
+  EDIT_SUCCESS: "PlayerFunction__lines--success",
+  EDIT_ERROR: "PlayerFunction__lines--error"
+});
+
+/***/ }),
+
+/***/ "./client/react/CodeEditor/index.js":
+/*!******************************************!*\
+  !*** ./client/react/CodeEditor/index.js ***!
+  \******************************************/
+/*! exports provided: default, EditorMessenger */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _CodeEditor__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./CodeEditor */ "./client/react/CodeEditor/CodeEditor.jsx");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "default", function() { return _CodeEditor__WEBPACK_IMPORTED_MODULE_0__["default"]; });
+
+/* harmony import */ var _EditorMessenger__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./EditorMessenger */ "./client/react/CodeEditor/EditorMessenger.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "EditorMessenger", function() { return _EditorMessenger__WEBPACK_IMPORTED_MODULE_1__["default"]; });
+
 
 
 
@@ -21970,11 +22233,30 @@ module.exports.src = "\"no use strict\";!function(window){function resolveModule
 
 exports = module.exports = __webpack_require__(/*! ../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js")(true);
 // Module
-exports.push([module.i, ".App_frame_17LX3bSyUPM8zYyUHF9YsY {\r\n    width:800px;\r\n    height:600px;\r\n}", "",{"version":3,"sources":["D:/Programming/gamifyjs/client/react/App.css"],"names":[],"mappings":"AAAA;IACI,WAAW;IACX,YAAY;AAChB","file":"App.css","sourcesContent":[".frame {\r\n    width:800px;\r\n    height:600px;\r\n}"],"sourceRoot":""}]);
+exports.push([module.i, ".App_Frame_2Gg2fMG59WylspAuQDFjhr {\r\n    width:800px;\r\n    height:600px;\r\n}", "",{"version":3,"sources":["D:/Programming/gamifyjs/client/react/App.css"],"names":[],"mappings":"AAAA;IACI,WAAW;IACX,YAAY;AAChB","file":"App.css","sourcesContent":[".Frame {\r\n    width:800px;\r\n    height:600px;\r\n}"],"sourceRoot":""}]);
 
 // Exports
 exports.locals = {
-	"frame": "App_frame_17LX3bSyUPM8zYyUHF9YsY"
+	"Frame": "App_Frame_2Gg2fMG59WylspAuQDFjhr"
+};
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/dist/cjs.js?!./client/react/CodeEditor/CodeEditor.css":
+/*!************************************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js??ref--4-1!./client/react/CodeEditor/CodeEditor.css ***!
+  \************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js")(true);
+// Module
+exports.push([module.i, ".CodeEditor_AceEditor_5o0YnrXEqwjLtIXf8Pa57 {\r\n    position:absolute;\r\n}\r\n\r\n.CodeEditor_AceEditorContainer_3E7Hfj9NOFw1By_wRQ9tvO {\r\n    width:800px;\r\n    height:600px;\r\n    position:relative;\r\n}", "",{"version":3,"sources":["D:/Programming/gamifyjs/client/react/CodeEditor/CodeEditor.css"],"names":[],"mappings":"AAAA;IACI,iBAAiB;AACrB;;AAEA;IACI,WAAW;IACX,YAAY;IACZ,iBAAiB;AACrB","file":"CodeEditor.css","sourcesContent":[".AceEditor {\r\n    position:absolute;\r\n}\r\n\r\n.AceEditorContainer {\r\n    width:800px;\r\n    height:600px;\r\n    position:relative;\r\n}"],"sourceRoot":""}]);
+
+// Exports
+exports.locals = {
+	"AceEditor": "CodeEditor_AceEditor_5o0YnrXEqwjLtIXf8Pa57",
+	"AceEditorContainer": "CodeEditor_AceEditorContainer_3E7Hfj9NOFw1By_wRQ9tvO"
 };
 
 /***/ }),

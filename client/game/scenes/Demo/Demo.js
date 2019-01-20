@@ -45,11 +45,11 @@ export default class Demo extends compose(UsesPlayerFunctions,EmitsEvents,UsesCu
         }, this)
 
     }
-
+    
     update(...args) {
         if(typeof super.update === "function") super.update(...args)
         const onGround = this.player.onGround()
-
+        
         // TODO: abstract the cursor & keyboard logic into a mixin
         // TODO: add in support for a lot more keys if necessary
         if(this.cursors.right.isDown) {
@@ -59,10 +59,10 @@ export default class Demo extends compose(UsesPlayerFunctions,EmitsEvents,UsesCu
         } else {
             this.player.idle()
         }
-
+        
         if(onGround && this.cursors.up.isDown) {
             this.player.jump()
         }
     }
-
+    
 }

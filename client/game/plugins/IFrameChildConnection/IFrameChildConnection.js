@@ -9,6 +9,9 @@ export default class IFrameConnection extends Phaser.Plugins.BasePlugin {
         this.connection = Phaser.Math.RND.uuid();
         this.ready = false;
         this.parent;
+
+        // ! FOR DEBUG
+        window.addEventListener("message", console.log)
     }
 
     static alias = "frame"
@@ -31,7 +34,7 @@ export default class IFrameConnection extends Phaser.Plugins.BasePlugin {
             if(connection === this.connection) {
                 this.events.emit(name, payload);
                 if(name !== CONSTANTS.MESSAGE_RECEIVED) {
-                    this.send(CONSTANTS.MESSAGE_RECEIVED, { uuid });
+                    this.send(CONSTANTS.MESSAGE_RECEIVED, { uuid }); 
                 }
             }
 

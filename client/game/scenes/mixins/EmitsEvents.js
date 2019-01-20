@@ -13,7 +13,7 @@ const events = {
 
 function emitCollideOrOverlap(type, ...args) {
     if(args.length === 1 && args[0] instanceof Array) {
-        return args[0].map(([ o1, o2 ]) => this.emitCollide(o1,o2))
+        return args[0].map(([ o1, o2 ]) => this.emitCollide(o1,o2)) // I should think about making this work with both collide & overlap 
     } else if(args.length === 2 && isGameObject(args[0]) && isGameObject(args[1])) {
         const [ obj1, obj2 ] = args
         return this.physics.add[type](obj1, obj2, (o1,o2) => {
