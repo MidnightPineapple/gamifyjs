@@ -1,5 +1,7 @@
+import Phaser from 'phaser';
 import { compose } from 'ramda';
 import HandlesErrors from './HandlesErrors';
+import { PlayerFunctionMessenger } from '../../lib';
 
 export default superclass => {
 
@@ -7,15 +9,13 @@ export default superclass => {
     
     return class UsesPlayerFunctions extends compose(HandlesErrors)(superclass) {
 
-        getFunc(key) { 
-            if(!functions.hasOwnProperty(key)) {
-                const funFromCache = this.cache.json.get(key);
-                if(!funFromCache) throw new Error("Function " + key + " not found.");
-                funFromCache.errorHandler = this.emitError.bind(this);
-                functions[key] = funFromCache;
-            } 
-
-            return functions[key];
+        makeFunc(key) { 
+            const PlayerFunction = this.cache.json.get(key);
+            if(!PlayerFunction) throw new Error("Function " + key + " not found.");
+            const functionId = Phaser.Math.RND.uuid();
+            const fun = new PlayerFunction(this.emitError.bind(this), new PlayerFunctionMessenger(functionId, this.frame));
+            functions[functionId] = fun;
+            return fun; 
         }
 
     }

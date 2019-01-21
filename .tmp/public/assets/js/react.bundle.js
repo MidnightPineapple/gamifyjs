@@ -126,29 +126,26 @@ if(false) {}
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return App; });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _App_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./App.css */ "./client/react/App.css");
-/* harmony import */ var _App_css__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_App_css__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _CodeEditor__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./CodeEditor */ "./client/react/CodeEditor/index.js");
-/* harmony import */ var _lib__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./lib */ "./client/react/lib/index.js");
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+/* harmony import */ var _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/classCallCheck */ "./node_modules/@babel/runtime/helpers/classCallCheck.js");
+/* harmony import */ var _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime/helpers/createClass */ "./node_modules/@babel/runtime/helpers/createClass.js");
+/* harmony import */ var _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @babel/runtime/helpers/possibleConstructorReturn */ "./node_modules/@babel/runtime/helpers/possibleConstructorReturn.js");
+/* harmony import */ var _babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @babel/runtime/helpers/getPrototypeOf */ "./node_modules/@babel/runtime/helpers/getPrototypeOf.js");
+/* harmony import */ var _babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @babel/runtime/helpers/inherits */ "./node_modules/@babel/runtime/helpers/inherits.js");
+/* harmony import */ var _babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _App_css__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./App.css */ "./client/react/App.css");
+/* harmony import */ var _App_css__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_App_css__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var _CodeEditor__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./CodeEditor */ "./client/react/CodeEditor/index.js");
+/* harmony import */ var _lib__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./lib */ "./client/react/lib/index.js");
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
 
 
@@ -158,53 +155,35 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 var App =
 /*#__PURE__*/
 function (_Component) {
-  _inherits(App, _Component);
+  _babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_4___default()(App, _Component);
 
   function App(props) {
     var _this;
 
-    _classCallCheck(this, App);
+    _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_0___default()(this, App);
 
-    _this = _possibleConstructorReturn(this, _getPrototypeOf(App).call(this, props));
-    _this.state = {
-      editorText: ""
-    };
+    _this = _babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_2___default()(this, _babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_3___default()(App).call(this, props));
+    _this.frame = new _lib__WEBPACK_IMPORTED_MODULE_8__["IFrameParentConnection"]();
     return _this;
   }
 
-  _createClass(App, [{
-    key: "componentDidMount",
-    value: function componentDidMount() {
-      this.frame = new _lib__WEBPACK_IMPORTED_MODULE_3__["IFrameParentConnection"]();
-      this.messenger = new _CodeEditor__WEBPACK_IMPORTED_MODULE_2__["EditorMessenger"](this.frame, "abcd");
-      this.forceUpdate();
-    }
-  }, {
-    key: "editorOnChange",
-    value: function editorOnChange(editorText, event) {
-      this.setState({
-        editorText: editorText
-      });
-    }
-  }, {
+  _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_1___default()(App, [{
     key: "render",
     value: function render() {
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: _App_css__WEBPACK_IMPORTED_MODULE_1___default.a.App
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Hello from React!"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_CodeEditor__WEBPACK_IMPORTED_MODULE_2__["default"], {
-        value: this.state.editorText,
-        onChange: this.editorOnChange.bind(this),
-        messenger: this.messenger
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("iframe", {
+      return react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("div", {
+        className: _App_css__WEBPACK_IMPORTED_MODULE_6___default.a.App
+      }, react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("p", null, "Hello from React!"), react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement(_CodeEditor__WEBPACK_IMPORTED_MODULE_7__["default"], {
+        frame: this.frame
+      }), react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("iframe", {
         src: "/game.html",
-        className: _App_css__WEBPACK_IMPORTED_MODULE_1___default.a.Frame,
+        className: _App_css__WEBPACK_IMPORTED_MODULE_6___default.a.Frame,
         sandbox: "allow-scripts allow-same-origin"
       }));
     }
   }]);
 
   return App;
-}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
+}(react__WEBPACK_IMPORTED_MODULE_5__["Component"]);
 
 
 
@@ -250,33 +229,30 @@ if(false) {}
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return CodeEditor; });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_ace__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-ace */ "./node_modules/react-ace/lib/index.js");
-/* harmony import */ var react_ace__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_ace__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _CodeEditor_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./CodeEditor.css */ "./client/react/CodeEditor/CodeEditor.css");
-/* harmony import */ var _CodeEditor_css__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_CodeEditor_css__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var brace_mode_javascript__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! brace/mode/javascript */ "./node_modules/brace/mode/javascript.js");
-/* harmony import */ var brace_mode_javascript__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(brace_mode_javascript__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var brace_theme_twilight__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! brace/theme/twilight */ "./node_modules/brace/theme/twilight.js");
-/* harmony import */ var brace_theme_twilight__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(brace_theme_twilight__WEBPACK_IMPORTED_MODULE_4__);
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+/* harmony import */ var _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/classCallCheck */ "./node_modules/@babel/runtime/helpers/classCallCheck.js");
+/* harmony import */ var _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime/helpers/createClass */ "./node_modules/@babel/runtime/helpers/createClass.js");
+/* harmony import */ var _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @babel/runtime/helpers/possibleConstructorReturn */ "./node_modules/@babel/runtime/helpers/possibleConstructorReturn.js");
+/* harmony import */ var _babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @babel/runtime/helpers/getPrototypeOf */ "./node_modules/@babel/runtime/helpers/getPrototypeOf.js");
+/* harmony import */ var _babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @babel/runtime/helpers/inherits */ "./node_modules/@babel/runtime/helpers/inherits.js");
+/* harmony import */ var _babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var react_ace__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-ace */ "./node_modules/react-ace/lib/index.js");
+/* harmony import */ var react_ace__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(react_ace__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var _CodeEditor_css__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./CodeEditor.css */ "./client/react/CodeEditor/CodeEditor.css");
+/* harmony import */ var _CodeEditor_css__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_CodeEditor_css__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var brace_mode_javascript__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! brace/mode/javascript */ "./node_modules/brace/mode/javascript.js");
+/* harmony import */ var brace_mode_javascript__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(brace_mode_javascript__WEBPACK_IMPORTED_MODULE_8__);
+/* harmony import */ var brace_theme_twilight__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! brace/theme/twilight */ "./node_modules/brace/theme/twilight.js");
+/* harmony import */ var brace_theme_twilight__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(brace_theme_twilight__WEBPACK_IMPORTED_MODULE_9__);
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
 
 
@@ -287,15 +263,28 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 var CodeEditor =
 /*#__PURE__*/
 function (_Component) {
-  _inherits(CodeEditor, _Component);
+  _babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_4___default()(CodeEditor, _Component);
 
   function CodeEditor(props) {
-    _classCallCheck(this, CodeEditor);
+    var _this;
 
-    return _possibleConstructorReturn(this, _getPrototypeOf(CodeEditor).call(this, props)); // TODO: remember to set a listener to errors to be this.props.onChange. don't run it in the actual onChange function in Ace 
+    _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_0___default()(this, CodeEditor);
+
+    _this = _babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_2___default()(this, _babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_3___default()(CodeEditor).call(this, props));
+
+    _this.props.messenger.setOnValueChangedCallback(function (_ref) {
+      var functionId = _ref.functionId,
+          newText = _ref.newText;
+
+      _this.props.onChange(functionId, newText);
+    }).setOnErrorCallback(function () {
+      return _this.forceUpdate();
+    });
+
+    return _this;
   }
 
-  _createClass(CodeEditor, [{
+  _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_1___default()(CodeEditor, [{
     key: "onChange",
     value: function onChange(value, event) {
       var action = event.action,
@@ -307,37 +296,38 @@ function (_Component) {
       switch (action) {
         case "insert":
           var text = lines.join("\n");
-          messenger.insert(start.line, start.column, text);
+          messenger.insert(start.row, start.column, text);
           break;
 
         case "remove":
-          messenger.remove(start.line, start.column, end.line, end.column);
+          messenger.remove(start.row, start.column, end.row, end.column);
           break;
-      } // ! FOR DEBUG
-
-
-      this.props.onChange(value, event);
+      }
     }
   }, {
     key: "render",
     value: function render() {
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: _CodeEditor_css__WEBPACK_IMPORTED_MODULE_2___default.a.AceEditorContainer
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_ace__WEBPACK_IMPORTED_MODULE_1___default.a, {
+      return react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("div", {
+        className: _CodeEditor_css__WEBPACK_IMPORTED_MODULE_7___default.a.Container
+      }, react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement(react_ace__WEBPACK_IMPORTED_MODULE_6___default.a, {
         mode: "javascript",
         theme: "twilight",
         name: this.props.name,
         height: "600px",
-        width: "800px",
-        className: _CodeEditor_css__WEBPACK_IMPORTED_MODULE_2___default.a.AceEditor,
+        width: "500px",
+        className: _CodeEditor_css__WEBPACK_IMPORTED_MODULE_7___default.a.AceEditor,
         value: this.props.value,
-        onChange: this.onChange.bind(this)
+        onChange: this.onChange.bind(this),
+        editorProps: {
+          $blockScrolling: true
+        },
+        fontSize: "1rem"
       }));
     }
   }]);
 
   return CodeEditor;
-}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
+}(react__WEBPACK_IMPORTED_MODULE_5__["Component"]);
 
 
 
@@ -353,84 +343,105 @@ function (_Component) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return EditorMessenger; });
-/* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./constants */ "./client/react/CodeEditor/constants.js");
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+/* harmony import */ var _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/classCallCheck */ "./node_modules/@babel/runtime/helpers/classCallCheck.js");
+/* harmony import */ var _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime/helpers/createClass */ "./node_modules/@babel/runtime/helpers/createClass.js");
+/* harmony import */ var _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./constants */ "./client/react/CodeEditor/constants.js");
 
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
 
 
 var EditorMessenger =
 /*#__PURE__*/
 function () {
-  function EditorMessenger(iFrameConnection, funId) {
-    var _this = this;
-
-    _classCallCheck(this, EditorMessenger);
+  function EditorMessenger(iFrameConnection) {
+    _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_0___default()(this, EditorMessenger);
 
     this.frame = iFrameConnection;
-    this.functionId = funId;
-    this.frame.attachListener(_constants__WEBPACK_IMPORTED_MODULE_0__["default"].EDIT_SUCCESS, function (_ref) {
-      var functionId = _ref.functionId,
-          text = _ref.text;
-      if (functionId !== _this.functionId) return;
-      if (typeof _this.onValueChanged !== "function") return;
-
-      _this.onValueChanged(text);
-    });
-    this.frame.attachListener(_constants__WEBPACK_IMPORTED_MODULE_0__["default"].EDIT_ERROR, function (_ref2) {
-      var functionId = _ref2.functionId,
-          text = _ref2.text,
-          errorMessage = _ref2.errorMessage;
-      if (functionId !== _this.functionId) return;
-      if (typeof _this.onValueChanged !== "function") return;
-
-      _this.onValueChanged(text);
-
-      if (typeof _this.onError !== "function") return;
-
-      _this.onError(text);
-    });
   }
 
-  _createClass(EditorMessenger, [{
-    key: "insert",
-    value: function insert(row, col, text) {
-      this.frame.send(_constants__WEBPACK_IMPORTED_MODULE_0__["default"].EDITOR_INSERT, {
-        functionId: this.functionId,
-        text: text,
-        start: {
-          row: row,
-          col: col
-        }
-      });
+  _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_1___default()(EditorMessenger, [{
+    key: "onReceiveFunction",
+    value: function onReceiveFunction(fn) {
+      this.frame.attachListener(_constants__WEBPACK_IMPORTED_MODULE_2__["default"].EDITOR_INIT, fn);
+      return this;
     }
   }, {
-    key: "remove",
-    value: function remove(startRow, startCol, endRow, endCol) {
-      this.frame.send(_constants__WEBPACK_IMPORTED_MODULE_0__["default"].EDITOR_REMOVE, {
-        functionId: this.functionId,
-        start: {
-          row: startRow,
-          startCol: startCol
+    key: "onError",
+    value: function onError(fn) {
+      this.frame.attachListener(_constants__WEBPACK_IMPORTED_MODULE_2__["default"].EDIT_ERROR, fn);
+      return this;
+    }
+  }, {
+    key: "onValueChanged",
+    value: function onValueChanged(fn) {
+      this.frame.attachListener(_constants__WEBPACK_IMPORTED_MODULE_2__["default"].EDIT_SUCCESS, fn);
+      return this;
+    }
+  }, {
+    key: "forId",
+    value: function forId(funId) {
+      var _frame = this.frame;
+      var onValueChanged, onError;
+
+      _frame.attachListener(_constants__WEBPACK_IMPORTED_MODULE_2__["default"].EDIT_SUCCESS, function (_ref) {
+        var functionId = _ref.functionId,
+            newText = _ref.newText;
+        if (functionId !== funId) return;
+        if (typeof onValueChanged !== "function") return;
+        onValueChanged({
+          functionId: functionId,
+          newText: newText
+        });
+      });
+
+      _frame.attachListener(_constants__WEBPACK_IMPORTED_MODULE_2__["default"].EDIT_ERROR, function (_ref2) {
+        var functionId = _ref2.functionId,
+            newText = _ref2.newText,
+            errorMessage = _ref2.errorMessage;
+        if (functionId !== funId) return;
+        if (typeof onError !== "function") return;
+        onError({
+          functionId: functionId,
+          newText: newText,
+          errorMessage: errorMessage
+        });
+      });
+
+      return {
+        insert: function insert(row, col, text) {
+          _frame.send(_constants__WEBPACK_IMPORTED_MODULE_2__["default"].EDITOR_INSERT, {
+            functionId: funId,
+            text: text,
+            start: {
+              row: row,
+              col: col
+            }
+          });
         },
-        end: {
-          row: endRow,
-          col: endCol
+        remove: function remove(startRow, startCol, endRow, endCol) {
+          _frame.send(_constants__WEBPACK_IMPORTED_MODULE_2__["default"].EDITOR_REMOVE, {
+            functionId: funId,
+            start: {
+              row: startRow,
+              col: startCol
+            },
+            end: {
+              row: endRow,
+              col: endCol
+            }
+          });
+        },
+        setOnValueChangedCallback: function setOnValueChangedCallback(fun) {
+          onValueChanged = fun;
+          return this;
+        },
+        setOnErrorCallback: function setOnErrorCallback(fun) {
+          onError = fun;
+          return this;
         }
-      });
-    }
-  }, {
-    key: "setOnValueChangedCallback",
-    value: function setOnValueChangedCallback(fun) {
-      this.onValueChanged = fun;
-    }
-  }, {
-    key: "setOnErrorCallback",
-    value: function setOnErrorCallback(fun) {
-      this.onError = fun;
+      };
     }
   }]);
 
@@ -438,7 +449,206 @@ function () {
 }();
 
 
-EditorMessenger.CONSTANTS = _constants__WEBPACK_IMPORTED_MODULE_0__["default"];
+EditorMessenger.CONSTANTS = _constants__WEBPACK_IMPORTED_MODULE_2__["default"];
+
+/***/ }),
+
+/***/ "./client/react/CodeEditor/TabbedCodeEditor.css":
+/*!******************************************************!*\
+  !*** ./client/react/CodeEditor/TabbedCodeEditor.css ***!
+  \******************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(/*! !../../../node_modules/css-loader/dist/cjs.js??ref--4-1!./TabbedCodeEditor.css */ "./node_modules/css-loader/dist/cjs.js?!./client/react/CodeEditor/TabbedCodeEditor.css");
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(/*! ../../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {}
+
+/***/ }),
+
+/***/ "./client/react/CodeEditor/TabbedCodeEditor.jsx":
+/*!******************************************************!*\
+  !*** ./client/react/CodeEditor/TabbedCodeEditor.jsx ***!
+  \******************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return TabbedCodeEditor; });
+/* harmony import */ var _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/classCallCheck */ "./node_modules/@babel/runtime/helpers/classCallCheck.js");
+/* harmony import */ var _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime/helpers/createClass */ "./node_modules/@babel/runtime/helpers/createClass.js");
+/* harmony import */ var _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @babel/runtime/helpers/possibleConstructorReturn */ "./node_modules/@babel/runtime/helpers/possibleConstructorReturn.js");
+/* harmony import */ var _babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @babel/runtime/helpers/getPrototypeOf */ "./node_modules/@babel/runtime/helpers/getPrototypeOf.js");
+/* harmony import */ var _babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @babel/runtime/helpers/inherits */ "./node_modules/@babel/runtime/helpers/inherits.js");
+/* harmony import */ var _babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _CodeEditor__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./CodeEditor */ "./client/react/CodeEditor/CodeEditor.jsx");
+/* harmony import */ var _EditorMessenger__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./EditorMessenger */ "./client/react/CodeEditor/EditorMessenger.js");
+/* harmony import */ var _TabbedCodeEditor_css__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./TabbedCodeEditor.css */ "./client/react/CodeEditor/TabbedCodeEditor.css");
+/* harmony import */ var _TabbedCodeEditor_css__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(_TabbedCodeEditor_css__WEBPACK_IMPORTED_MODULE_8__);
+
+
+
+
+
+
+
+
+
+
+var TabbedCodeEditor =
+/*#__PURE__*/
+function (_Component) {
+  _babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_4___default()(TabbedCodeEditor, _Component);
+
+  // // 4. figure out where I'm storing function text and where I'm gonna set the text of the editor to a new value
+  // 4.5 style the editor and tabs better. ie bg colors, sth to fill empty space, actual tabs
+  // // ! 5. Don't forget to implement the "insert" and "remove" listeners inside the FunctionMessenger
+  // 6. add an error listener & snackbar
+  function TabbedCodeEditor(props) {
+    var _this;
+
+    _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_0___default()(this, TabbedCodeEditor);
+
+    _this = _babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_2___default()(this, _babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_3___default()(TabbedCodeEditor).call(this, props));
+    _this.messenger = new _EditorMessenger__WEBPACK_IMPORTED_MODULE_7__["default"](_this.props.frame).onReceiveFunction(function (_ref) {
+      var functionId = _ref.functionId,
+          text = _ref.text,
+          parameters = _ref.parameters,
+          displayName = _ref.displayName;
+
+      _this.newFunction(functionId, text, parameters, displayName);
+    });
+    _this.state = {
+      functions: [],
+      cursor: -1
+    };
+    return _this;
+  }
+
+  _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_1___default()(TabbedCodeEditor, [{
+    key: "newFunction",
+    value: function newFunction(functionId, text, parameters, displayName) {
+      var newState = this.state.functions.slice();
+      newState.push({
+        functionId: functionId,
+        text: text,
+        parameters: parameters,
+        displayName: displayName,
+        messenger: this.messenger.forId(functionId)
+      });
+      this.setState({
+        functions: newState,
+        cursor: newState.length - 1
+      });
+    }
+  }, {
+    key: "focusOnFunction",
+    value: function focusOnFunction(cursor) {
+      this.setState({
+        cursor: cursor
+      });
+    }
+  }, {
+    key: "updateFunctionText",
+    value: function updateFunctionText(funId, newText) {
+      var newState = this.state.functions.slice();
+      var idx = newState.indexOf(newState.find(function (f) {
+        return f.functionId === funId;
+      }));
+      if (idx < 0) throw new Error("Can't find function " + funId + " for update");
+      var newFun = Object.assign({}, newState[idx]);
+      newFun.text = newText;
+      newState[idx] = newFun;
+      this.setState({
+        functions: newState
+      });
+    }
+  }, {
+    key: "closeTab",
+    value: function closeTab(key) {// TODO: put the button in for this first
+    }
+  }, {
+    key: "renderEditor",
+    value: function renderEditor(functions, cursor) {
+      var _functions$cursor = functions[cursor],
+          text = _functions$cursor.text,
+          parameters = _functions$cursor.parameters,
+          messenger = _functions$cursor.messenger;
+      return react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement(_CodeEditor__WEBPACK_IMPORTED_MODULE_6__["default"], {
+        value: text,
+        onChange: this.updateFunctionText.bind(this),
+        messenger: messenger
+      });
+    }
+  }, {
+    key: "renderTabs",
+    value: function renderTabs(functions, cursor) {
+      var _this2 = this;
+
+      return react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("ul", {
+        className: _TabbedCodeEditor_css__WEBPACK_IMPORTED_MODULE_8___default.a.TabContainer
+      }, functions.map(function (f, k) {
+        return react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement(Tab, {
+          key: k,
+          highlight: cursor === k,
+          displayName: f.displayName,
+          onClick: function onClick() {
+            return _this2.focusOnFunction(k);
+          }
+        });
+      }));
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var _this$state = this.state,
+          functions = _this$state.functions,
+          cursor = _this$state.cursor;
+      return react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("div", {
+        className: _TabbedCodeEditor_css__WEBPACK_IMPORTED_MODULE_8___default.a.Container
+      }, this.renderTabs(functions, cursor), functions.length > 0 && this.renderEditor(functions, cursor)
+      /* If no functions, render empty or no func page here */
+      );
+    }
+  }]);
+
+  return TabbedCodeEditor;
+}(react__WEBPACK_IMPORTED_MODULE_5__["Component"]);
+
+
+
+var Tab = function Tab(props) {
+  return react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("li", {
+    className: _TabbedCodeEditor_css__WEBPACK_IMPORTED_MODULE_8___default.a.TabContainer
+  }, react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("button", {
+    onClick: props.onClick,
+    className: _TabbedCodeEditor_css__WEBPACK_IMPORTED_MODULE_8___default.a.TabButton
+  }, props.displayName));
+};
 
 /***/ }),
 
@@ -465,17 +675,13 @@ __webpack_require__.r(__webpack_exports__);
 /*!******************************************!*\
   !*** ./client/react/CodeEditor/index.js ***!
   \******************************************/
-/*! exports provided: default, EditorMessenger */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _CodeEditor__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./CodeEditor */ "./client/react/CodeEditor/CodeEditor.jsx");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "default", function() { return _CodeEditor__WEBPACK_IMPORTED_MODULE_0__["default"]; });
-
-/* harmony import */ var _EditorMessenger__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./EditorMessenger */ "./client/react/CodeEditor/EditorMessenger.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "EditorMessenger", function() { return _EditorMessenger__WEBPACK_IMPORTED_MODULE_1__["default"]; });
-
+/* harmony import */ var _TabbedCodeEditor__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./TabbedCodeEditor */ "./client/react/CodeEditor/TabbedCodeEditor.jsx");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "default", function() { return _TabbedCodeEditor__WEBPACK_IMPORTED_MODULE_0__["default"]; });
 
 
 
@@ -545,15 +751,15 @@ react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render(react__WEBPACK_IMPORTED_
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return IFrameParentConnection; });
-/* harmony import */ var uuid_v4__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! uuid/v4 */ "./node_modules/uuid/v4.js");
-/* harmony import */ var uuid_v4__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(uuid_v4__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./constants */ "./client/react/lib/IFrameParentConnection/constants.js");
-/* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_constants__WEBPACK_IMPORTED_MODULE_1__);
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+/* harmony import */ var _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/classCallCheck */ "./node_modules/@babel/runtime/helpers/classCallCheck.js");
+/* harmony import */ var _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime/helpers/createClass */ "./node_modules/@babel/runtime/helpers/createClass.js");
+/* harmony import */ var _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var uuid_v4__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! uuid/v4 */ "./node_modules/uuid/v4.js");
+/* harmony import */ var uuid_v4__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(uuid_v4__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./constants */ "./client/react/lib/IFrameParentConnection/constants.js");
+/* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_constants__WEBPACK_IMPORTED_MODULE_3__);
 
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
 
 
@@ -564,8 +770,12 @@ function () {
   function IFrameParentConnection() {
     var _this = this;
 
-    _classCallCheck(this, IFrameParentConnection);
+    _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_0___default()(this, IFrameParentConnection);
 
+    // ! FOR DEBUG
+    window.addEventListener("message", function (_) {
+      return console.log("PARENT", _);
+    });
     window.addEventListener("message", function (_ref) {
       var data = _ref.data,
           source = _ref.source,
@@ -585,15 +795,15 @@ function () {
         return;
       }
 
-      if (!_this.connection && name === _constants__WEBPACK_IMPORTED_MODULE_1___default.a.CONNECTION_INIT) {
+      if (!_this.connection && name === _constants__WEBPACK_IMPORTED_MODULE_3___default.a.CONNECTION_INIT) {
         _this.connect(source, connection);
       }
 
       if (_this.connection === connection) {
         _this.emit(name, payload);
 
-        if (name !== _constants__WEBPACK_IMPORTED_MODULE_1___default.a.MESSAGE_RECEIVED) {
-          _this.send(_constants__WEBPACK_IMPORTED_MODULE_1___default.a.MESSAGE_RECEIVED, {
+        if (name !== _constants__WEBPACK_IMPORTED_MODULE_3___default.a.MESSAGE_RECEIVED) {
+          _this.send(_constants__WEBPACK_IMPORTED_MODULE_3___default.a.MESSAGE_RECEIVED, {
             uuid: uuid
           });
         }
@@ -604,7 +814,7 @@ function () {
     this.ready = false;
   }
 
-  _createClass(IFrameParentConnection, [{
+  _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_1___default()(IFrameParentConnection, [{
     key: "attachListener",
     value: function attachListener(name, cb) {
       if (typeof this.callbacks[name] === "undefined") {
@@ -659,14 +869,14 @@ function () {
         var readyCallback = function readyCallback() {
           _this2.send(name, payload, cb);
 
-          _this2.removeListener(_constants__WEBPACK_IMPORTED_MODULE_1___default.a.CONNECTION_READY, readyCallback);
+          _this2.removeListener(_constants__WEBPACK_IMPORTED_MODULE_3___default.a.CONNECTION_READY, readyCallback);
         };
 
-        this.attachListener(_constants__WEBPACK_IMPORTED_MODULE_1___default.a.CONNECTION_READY, readyCallback);
+        this.attachListener(_constants__WEBPACK_IMPORTED_MODULE_3___default.a.CONNECTION_READY, readyCallback);
         return;
       }
 
-      var uuid = uuid_v4__WEBPACK_IMPORTED_MODULE_0___default()();
+      var uuid = uuid_v4__WEBPACK_IMPORTED_MODULE_2___default()();
       this.child.postMessage(JSON.stringify({
         name: name,
         payload: payload,
@@ -674,17 +884,17 @@ function () {
         uuid: uuid
       }));
 
-      if (name !== _constants__WEBPACK_IMPORTED_MODULE_1___default.a.MESSAGE_RECEIVED) {
+      if (name !== _constants__WEBPACK_IMPORTED_MODULE_3___default.a.MESSAGE_RECEIVED) {
         var messageCallback = function messageCallback(_ref2) {
           var _ref2$uuid = _ref2.uuid,
               mUuid = _ref2$uuid === void 0 ? undefined : _ref2$uuid;
           if (mUuid !== uuid) return;
           if (typeof cb === "function") cb();
 
-          _this2.removeListener(_constants__WEBPACK_IMPORTED_MODULE_1___default.a.MESSAGE_RECEIVED, messageCallback);
+          _this2.removeListener(_constants__WEBPACK_IMPORTED_MODULE_3___default.a.MESSAGE_RECEIVED, messageCallback);
         };
 
-        this.attachListener(_constants__WEBPACK_IMPORTED_MODULE_1___default.a.MESSAGE_RECEIVED, messageCallback);
+        this.attachListener(_constants__WEBPACK_IMPORTED_MODULE_3___default.a.MESSAGE_RECEIVED, messageCallback);
       }
     }
   }, {
@@ -693,7 +903,7 @@ function () {
       this.connection = connection;
       this.child = source;
       this.ready = true;
-      this.emit(_constants__WEBPACK_IMPORTED_MODULE_1___default.a.CONNECTION_READY);
+      this.emit(_constants__WEBPACK_IMPORTED_MODULE_3___default.a.CONNECTION_READY);
     }
   }]);
 
@@ -701,7 +911,7 @@ function () {
 }();
 
 
-IFrameParentConnection.CONSTANTS = _constants__WEBPACK_IMPORTED_MODULE_1___default.a;
+IFrameParentConnection.CONSTANTS = _constants__WEBPACK_IMPORTED_MODULE_3___default.a;
 
 /***/ }),
 
@@ -751,6 +961,185 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "IFrameParentConnection", function() { return _IFrameParentConnection__WEBPACK_IMPORTED_MODULE_0__["default"]; });
 
 
+
+/***/ }),
+
+/***/ "./node_modules/@babel/runtime/helpers/assertThisInitialized.js":
+/*!**********************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/assertThisInitialized.js ***!
+  \**********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+function _assertThisInitialized(self) {
+  if (self === void 0) {
+    throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+  }
+
+  return self;
+}
+
+module.exports = _assertThisInitialized;
+
+/***/ }),
+
+/***/ "./node_modules/@babel/runtime/helpers/classCallCheck.js":
+/*!***************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/classCallCheck.js ***!
+  \***************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+function _classCallCheck(instance, Constructor) {
+  if (!(instance instanceof Constructor)) {
+    throw new TypeError("Cannot call a class as a function");
+  }
+}
+
+module.exports = _classCallCheck;
+
+/***/ }),
+
+/***/ "./node_modules/@babel/runtime/helpers/createClass.js":
+/*!************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/createClass.js ***!
+  \************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+function _defineProperties(target, props) {
+  for (var i = 0; i < props.length; i++) {
+    var descriptor = props[i];
+    descriptor.enumerable = descriptor.enumerable || false;
+    descriptor.configurable = true;
+    if ("value" in descriptor) descriptor.writable = true;
+    Object.defineProperty(target, descriptor.key, descriptor);
+  }
+}
+
+function _createClass(Constructor, protoProps, staticProps) {
+  if (protoProps) _defineProperties(Constructor.prototype, protoProps);
+  if (staticProps) _defineProperties(Constructor, staticProps);
+  return Constructor;
+}
+
+module.exports = _createClass;
+
+/***/ }),
+
+/***/ "./node_modules/@babel/runtime/helpers/getPrototypeOf.js":
+/*!***************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/getPrototypeOf.js ***!
+  \***************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+function _getPrototypeOf(o) {
+  module.exports = _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) {
+    return o.__proto__ || Object.getPrototypeOf(o);
+  };
+  return _getPrototypeOf(o);
+}
+
+module.exports = _getPrototypeOf;
+
+/***/ }),
+
+/***/ "./node_modules/@babel/runtime/helpers/inherits.js":
+/*!*********************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/inherits.js ***!
+  \*********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var setPrototypeOf = __webpack_require__(/*! ./setPrototypeOf */ "./node_modules/@babel/runtime/helpers/setPrototypeOf.js");
+
+function _inherits(subClass, superClass) {
+  if (typeof superClass !== "function" && superClass !== null) {
+    throw new TypeError("Super expression must either be null or a function");
+  }
+
+  subClass.prototype = Object.create(superClass && superClass.prototype, {
+    constructor: {
+      value: subClass,
+      writable: true,
+      configurable: true
+    }
+  });
+  if (superClass) setPrototypeOf(subClass, superClass);
+}
+
+module.exports = _inherits;
+
+/***/ }),
+
+/***/ "./node_modules/@babel/runtime/helpers/possibleConstructorReturn.js":
+/*!**************************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/possibleConstructorReturn.js ***!
+  \**************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var _typeof = __webpack_require__(/*! ../helpers/typeof */ "./node_modules/@babel/runtime/helpers/typeof.js");
+
+var assertThisInitialized = __webpack_require__(/*! ./assertThisInitialized */ "./node_modules/@babel/runtime/helpers/assertThisInitialized.js");
+
+function _possibleConstructorReturn(self, call) {
+  if (call && (_typeof(call) === "object" || typeof call === "function")) {
+    return call;
+  }
+
+  return assertThisInitialized(self);
+}
+
+module.exports = _possibleConstructorReturn;
+
+/***/ }),
+
+/***/ "./node_modules/@babel/runtime/helpers/setPrototypeOf.js":
+/*!***************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/setPrototypeOf.js ***!
+  \***************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+function _setPrototypeOf(o, p) {
+  module.exports = _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) {
+    o.__proto__ = p;
+    return o;
+  };
+
+  return _setPrototypeOf(o, p);
+}
+
+module.exports = _setPrototypeOf;
+
+/***/ }),
+
+/***/ "./node_modules/@babel/runtime/helpers/typeof.js":
+/*!*******************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/typeof.js ***!
+  \*******************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof2 = function _typeof2(obj) { return typeof obj; }; } else { _typeof2 = function _typeof2(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof2(obj); }
+
+function _typeof(obj) {
+  if (typeof Symbol === "function" && _typeof2(Symbol.iterator) === "symbol") {
+    module.exports = _typeof = function _typeof(obj) {
+      return _typeof2(obj);
+    };
+  } else {
+    module.exports = _typeof = function _typeof(obj) {
+      return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : _typeof2(obj);
+    };
+  }
+
+  return _typeof(obj);
+}
+
+module.exports = _typeof;
 
 /***/ }),
 
@@ -22251,12 +22640,30 @@ exports.locals = {
 
 exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js")(true);
 // Module
-exports.push([module.i, ".CodeEditor_AceEditor_5o0YnrXEqwjLtIXf8Pa57 {\r\n    position:absolute;\r\n}\r\n\r\n.CodeEditor_AceEditorContainer_3E7Hfj9NOFw1By_wRQ9tvO {\r\n    width:800px;\r\n    height:600px;\r\n    position:relative;\r\n}", "",{"version":3,"sources":["D:/Programming/gamifyjs/client/react/CodeEditor/CodeEditor.css"],"names":[],"mappings":"AAAA;IACI,iBAAiB;AACrB;;AAEA;IACI,WAAW;IACX,YAAY;IACZ,iBAAiB;AACrB","file":"CodeEditor.css","sourcesContent":[".AceEditor {\r\n    position:absolute;\r\n}\r\n\r\n.AceEditorContainer {\r\n    width:800px;\r\n    height:600px;\r\n    position:relative;\r\n}"],"sourceRoot":""}]);
+exports.push([module.i, ".CodeEditor_AceEditor_5o0YnrXEqwjLtIXf8Pa57 {\r\n    position:absolute;\r\n}\r\n\r\n.CodeEditor_Container_3s-RfSgpHw93WRPE1BLAAh {\r\n    width:500px;\r\n    height:600px;\r\n    position:relative;\r\n    border: .2rem solid #232323;\r\n}", "",{"version":3,"sources":["D:/Programming/gamifyjs/client/react/CodeEditor/CodeEditor.css"],"names":[],"mappings":"AAAA;IACI,iBAAiB;AACrB;;AAEA;IACI,WAAW;IACX,YAAY;IACZ,iBAAiB;IACjB,2BAA2B;AAC/B","file":"CodeEditor.css","sourcesContent":[".AceEditor {\r\n    position:absolute;\r\n}\r\n\r\n.Container {\r\n    width:500px;\r\n    height:600px;\r\n    position:relative;\r\n    border: .2rem solid #232323;\r\n}"],"sourceRoot":""}]);
 
 // Exports
 exports.locals = {
 	"AceEditor": "CodeEditor_AceEditor_5o0YnrXEqwjLtIXf8Pa57",
-	"AceEditorContainer": "CodeEditor_AceEditorContainer_3E7Hfj9NOFw1By_wRQ9tvO"
+	"Container": "CodeEditor_Container_3s-RfSgpHw93WRPE1BLAAh"
+};
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/dist/cjs.js?!./client/react/CodeEditor/TabbedCodeEditor.css":
+/*!******************************************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js??ref--4-1!./client/react/CodeEditor/TabbedCodeEditor.css ***!
+  \******************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js")(true);
+// Module
+exports.push([module.i, ".TabbedCodeEditor_Container_1Op1Mi-58gIIbpmvvoleF6 {\r\n    \r\n}", "",{"version":3,"sources":["D:/Programming/gamifyjs/client/react/CodeEditor/TabbedCodeEditor.css"],"names":[],"mappings":"AAAA;;AAEA","file":"TabbedCodeEditor.css","sourcesContent":[".Container {\r\n    \r\n}"],"sourceRoot":""}]);
+
+// Exports
+exports.locals = {
+	"Container": "TabbedCodeEditor_Container_1Op1Mi-58gIIbpmvvoleF6"
 };
 
 /***/ }),

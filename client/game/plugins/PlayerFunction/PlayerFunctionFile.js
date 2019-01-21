@@ -9,7 +9,7 @@ export default class PlayerFunctionFile extends Phaser.Loader.FileTypes.JSONFile
 
     onProcess() {
         const json = this.xhrLoader.responseText;
-        this.data = PlayerFunction.fromJson(undefined, json);
+        this.data = PlayerFunction.withJsonConfig(json);
         this.onProcessComplete();
     }
 

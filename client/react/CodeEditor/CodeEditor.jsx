@@ -10,39 +10,40 @@ export default class CodeEditor extends Component {
     constructor(props) {
         super(props);
 
-        // TODO: remember to set a listener to errors to be this.props.onChange. don't run it in the actual onChange function in Ace 
+        this.props.messenger.setOnValueChangedCallback( ({ functionId, newText }) => {
+            this.props.onChange(functionId, newText);
+        }).setOnErrorCallback(() => this.forceUpdate());
     }
 
     onChange(value, event) {
-
         const { action, lines, start, end } = event;
         const { messenger } = this.props;
         switch(action) {
             case "insert":
                 const text = lines.join("\n");
-                messenger.insert(start.line, start.column, text);
+                messenger.insert(start.row, start.column, text);
                 break;
             case "remove":
-                messenger.remove(start.line, start.column, end.line, end.column);
+                messenger.remove(start.row, start.column, end.row, end.column);
                 break;
         }
 
-        // ! FOR DEBUG
-        this.props.onChange(value,event)
     }
 
     render() {
         return (
-            <div className={styles.AceEditorContainer} >
+            <div className={styles.Container} >
                 <AceEditor
                     mode="javascript"
                     theme="twilight"
                     name={this.props.name}
                     height="600px"
-                    width="800px"
+                    width="500px"
                     className={styles.AceEditor}
                     value={this.props.value}
                     onChange={this.onChange.bind(this)}
+                    editorProps={{$blockScrolling: true}}
+                    fontSize="1rem"
                 />
             </div>
         )

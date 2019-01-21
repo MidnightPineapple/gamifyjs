@@ -59,22 +59,29 @@ export default class PlayerFunction {
      * @param {string} config.description - description of what this function does
      * @param {Object[]} config.lines - configuration for lines of the function 
      * @param {parameters[]} config.parameters - parameters of the function
+     * @param {Function} [errorHandler] - this is where errors will be sent during eval and execution
+     * @param {PlayerFunctionMessenger} [messenger] - handles communications with parent iframe
      */
-    constructor(errorHandler, config = {}) {
+    constructor(config = {}, errorHandler, messenger) {
         this.displayName = config.displayName || defaultConfig.displayName
         this.parameters = Object.freeze(Object.assign([], config.parameters || defaultConfig.parameters));
         this.description = config.description || defaultConfig.description
 
         const lineConfig = ( config.lines instanceof Array && config.lines.length !== 0 && config.lines ) || defaultConfig.lines;
         this.lines = LineList([
-            { text:"function "+this.displayName+"("+this.parameterNames+") {", restricted: true },
+            { text:"function "+this.displayName+"("+this.parameterNames+") {", config: { restricted: true } },
             ...lineConfig,
-            { text:"}", restricted: true }
+            { text:"}", config: { restricted: true } }
         ]);
         this.lines.onChange = _stale.bind(this);
         this.cache = undefined
 
         this.errorHandler = typeof errorHandler === "function" ? errorHandler : undefined; 
+        
+        if(messenger) {
+            if(messenger.isPlayerFunctionMessenger !== true) throw new TypeError("Messenger must be a PlayerFunctionMessenger");
+            this.messenger = messenger.setPlayerFunction(this);
+        }
     }
 
     isPlayerFunction = true;
@@ -107,6 +114,16 @@ export default class PlayerFunction {
 
     }
 
+    setErrorHandler(handler, ctx) {
+        this.errorHandler=handler.bind(ctx);
+        return this;
+    }
+
+    setMessenger(messenger) {
+        this.messenger=messenger;
+        return this;
+    }
+
     get parameterNames() {
         return this.parameters.map(x => x.displayName);
     }
@@ -125,17 +142,18 @@ export default class PlayerFunction {
         return this.lines.toString();
     }
 
-    static fromJson(errorHandler, json) {
+    static fromJson(json) {
         const config = JSON.parse(json);
-        return new PlayerFunction(errorHandler, config);
+        return new PlayerFunction(config);
     }
 
-    static withHandler(errorHandler) {
-        return PlayerFunction.bind(null, errorHandler);
-    }
-
-    static fromJsonWithHandler(errorHandler) {
-        return PlayerFunction.fromJson.bind(null, errorHandler);
+    static withJsonConfig(json) {
+        const config = JSON.parse(json);
+        const BoundClass = PlayerFunction.bind(undefined, config);
+        BoundClass.withHandler = function(handler) {
+            return BoundClass.bind(undefined, handler);
+        }
+        return BoundClass;
     }
 
 }

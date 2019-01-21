@@ -50,15 +50,15 @@ module.exports = {
                 },
             },
             {
-                type: "javascript/auto", // bypass the default json loader from webpack
-                test: /\.(json|xml|fnt)$/,
+                type: "javascript/auto", // bypass the default json & wasm loaders from webpack
+                test: /\.(json|xml|fnt|wasm)$/,
                 use: {
                     loader: "file-loader", 
                     options:{
                         name:"assets/data/[hash].[ext]",
                     }
                 },
-            }
+            }, 
         ]
     },
     plugins: [

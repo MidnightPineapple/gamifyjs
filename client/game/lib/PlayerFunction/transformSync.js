@@ -6,6 +6,7 @@ const babelOptions = {
         "proposal-class-properties",
         "proposal-object-rest-spread",
         "transform-for-of",
+        "transform-runtime",
     ],
     presets: [
         "es2015", "es2016", "es2017"

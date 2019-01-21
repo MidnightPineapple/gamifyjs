@@ -117,6 +117,9 @@ export default function LineFactory(initialText, config) {
             if(restricted instanceof Array) return restricted.slice();
             else return undefined;
         },
+        get restricted() {
+            return !this.editable;
+        },
         get data() { return { 
             text, 
             config: { restricted: typeof restricted === "boolean" ? restricted : this.restrictedRanges },

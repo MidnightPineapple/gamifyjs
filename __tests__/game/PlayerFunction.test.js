@@ -44,46 +44,6 @@ describe("PlayerFunction instantiation with undefined errorhandler", () => {
 
 })
 
-describe("PlayerFunction with bound errorHandler", () => {
-
-    it("should be able to make a class bound to an errorHandler", done => {
-        
-        const handler = function(err) {
-            expect(err.message).toMatch(/asdf/)
-            done();
-        }
-
-        const PFun = PlayerFunction.withHandler(handler);
-
-        const fun = new PFun({
-            displayName: "testFunc",
-            description: "a demo function",
-            parameters:[
-                { displayName: "arg1", description: "a test parameter" },
-                { displayName: "arg2", description: "a second test parameter" }
-            ],
-            lines: [
-                { text: "console.log(asdf)", config: { restricted: true } }
-            ]
-        })
-
-        fun.execute();
-    })
-
-    it("should be able to make a PlayerFunction withJson factory that is bound to an errorhandler", done => {
-        const handler = function(err) {
-            expect(err.message).toMatch(/asdf/)
-            done();
-        }
-
-        const withJson = PlayerFunction.fromJsonWithHandler(handler);
-
-        const fun = withJson('{"displayName":"testFunc","description":"a demo function","parameters":[{"displayName":"arg1","description":"a test parameter"},{"displayName":"arg2","description":"a second test parameter"}],"lines":[{"text":"console.log(asdf)","config":{"restricted":true}}]}')
-        fun.execute()
-    })
-
-})
-
 describe("PlayerFunction instantiated with config", () => {
     let var1, var2, fun;
 

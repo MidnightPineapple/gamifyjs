@@ -128,14 +128,15 @@ export default function LineListFactory(initialLines) {
     constructor(initialLines);
     return {
         addText: bindCb("addText", addText),
-        removeText: bindCb("deleteText", deleteText),
-        newLine: bindCb("addLine", addLine),
-        newLineBelow: bindCb("addLineBelow", addLineBelow),
-        removeLine: bindCb("deleteLine", deleteLine),
+        removeText: bindCb("removeText", deleteText),
+        newLine: bindCb("newLine", addLine),
+        newLineBelow: bindCb("newLineBelow", addLineBelow),
+        removeLine: bindCb("removeLine", deleteLine),
         toString() { return lines.map( l => l.text ).join("\n") },
         isLineList:true,
         get text() { return this.toString() },
         get config() { return lines.map( l => l.data ) },
+        get restrictedRanges() { return lines.map( l => l.restrictedRanges || l.restricted ) },
         set onChange(cb) {
             onChangeCallback = cb;
         },

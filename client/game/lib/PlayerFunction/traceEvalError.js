@@ -1,5 +1,10 @@
 import StackTracey from 'stacktracey';
 import { SourceMapConsumer } from 'source-map';
+import mappings from 'source-map/lib/mappings.wasm';
+
+SourceMapConsumer.initialize({
+    "lib/mappings.wasm": mappings
+})
 
 export default async function traceEvalError(error, sourceMap) {
 

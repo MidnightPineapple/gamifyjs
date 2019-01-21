@@ -40,9 +40,15 @@ export default class Demo extends compose(UsesPlayerFunctions,EmitsEvents,UsesCu
         this.emitCollide([ [this.player, this.robot] ])
         this.emitOverlapZone(this.player, "hackable-range", this.robot)
 
+        const demoFunction = this.makeFunc("demo-function")
+
+
+        // ! FOR DEBUG
         this.player.on(EmitsEvents.events.OVERLAP_ZONE + "_hackable-range", function() {
-            this.getFunc("demo-function").execute();
+            demoFunction.execute();
         }, this)
+
+        demoFunction.messenger.send();
 
     }
     

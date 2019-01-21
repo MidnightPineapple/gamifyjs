@@ -2,8 +2,9 @@
     position:absolute;
 }
 
-.AceEditorContainer {
-    width:800px;
+.Container {
+    width:500px;
     height:600px;
     position:relative;
+    border: .2rem solid #232323;
 }
