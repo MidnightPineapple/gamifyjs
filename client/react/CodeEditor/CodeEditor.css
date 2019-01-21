@@ -3,7 +3,7 @@
 }
 
 .Container {
-    width:inherit;
     height:600px;
+    width:inherit;
     position:relative;
 }

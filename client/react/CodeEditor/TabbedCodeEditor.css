@@ -1,6 +1,8 @@
 .Container {
     border: .2rem solid #232323;
     width: 500px;
+    position: relative;
+    font-family: "Lucida Console", Monaco, monospace;
 }
 
 .TabContainer {
@@ -36,9 +38,58 @@
     padding: .75rem;
     border:0;    
     font-size: 1.5em;
-    font-family: "Lucida Console", Monaco, monospace;
 }
 
 .TabButton:focus {
     outline:none;
+}
+
+.BlankEditor {
+    background-color: #121212;
+    color: #7e7e7e;
+    height: 600px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align:center;
+    font-size: 2.5em;
+}
+
+.BlankEditor p {
+    margin: .5em;
+}
+
+.ErrorToast {
+    position:absolute;
+    width:100%;
+    bottom:0;
+    background-color: #fbfb37;
+    font-size: 1.5em;
+    display:flex;
+    justify-content: space-between;
+    z-index: 10;
+}
+
+.ErrorToast p {
+    margin: .5em;
+}
+
+.ErrorToast button {
+    font: inherit;
+    font-size: 1rem;
+    border: .2em solid #ffffad; 
+    background:none;
+    margin: .2em;
+    padding: .5em;
+    height: 2.4em;
+    align-self:center;
+}
+
+.ErrorToast button:hover {
+    background-color: #ffff6a;
+}
+
+.ErrorToast button:focus {
+    outline: none;
 }

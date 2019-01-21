@@ -13,7 +13,7 @@ export default class TabbedCodeEditor extends Component {
 
     // // ! 5. Don't forget to implement the "insert" and "remove" listeners inside the FunctionMessenger
 
-    // 6. add an error listener & snackbar
+    // // 6. add an error listener & snackbar
 
     constructor(props) {
         super(props)
@@ -21,12 +21,13 @@ export default class TabbedCodeEditor extends Component {
         .onReceiveFunction(({ functionId, text, parameters, displayName }) => {
             this.newFunction(functionId, text, parameters, displayName);
         }).onError(({ functionId, errorMessage }) => {
-            console.log(errorMessage);
+            this.newError(errorMessage);
         })
 
         this.state = {
             functions: [],
             cursor:-1,
+            errors:[],
         }
 
     }
@@ -95,14 +96,36 @@ export default class TabbedCodeEditor extends Component {
         )
     }
 
+    renderBlankEditor() {
+        return (
+            <div className={styles.BlankEditor}>
+                <p>No functions here yet.</p>
+                <p>¯\_(ツ)_/¯</p>
+            </div>
+        )
+    }
+
+    newError(errMsg) {
+        const newState = this.state.errors.slice();
+        newState.push(errMsg);
+        this.setState({ errors: newState });
+    }
+
+    dismissError() {
+        const newState = this.state.errors.slice();
+        newState.pop();
+        this.setState({ errors: newState });
+    }
+
     render() {
 
-        const { functions, cursor } = this.state;
+        const { functions, cursor, errors } = this.state;
 
         return (
             <div className={styles.Container}>
                 { this.renderTabs(functions, cursor) }
-                { functions.length > 0 && this.renderEditor(functions, cursor) /* If no functions, render empty or no func page here */ }
+                { functions.length > 0 ? this.renderEditor(functions, cursor) : this.renderBlankEditor() }
+                { errors.length > 0 && <ErrorToast message={errors[errors.length-1]} onDismiss={this.dismissError.bind(this)} />}
             </div>
         )
     }
@@ -125,4 +148,9 @@ const Tab = ({ focus, onClick, onClose, displayName}) => (
     </li>
 )
 
-// ! BUG: when I switch tabs and switch back, somehow the second tab reverts to default value? but linked function has appropraite state still...
+const ErrorToast = ({ message, onDismiss }) => (
+    <div className={styles.ErrorToast}>
+        <p>{ message }</p>
+        <button onClick={onDismiss}>Dismiss</button>
+    </div>
+)

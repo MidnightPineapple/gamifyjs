@@ -548,7 +548,7 @@ function (_Component) {
   // // 4. figure out where I'm storing function text and where I'm gonna set the text of the editor to a new value
   // 4.5 style the editor and tabs better. ie bg colors, sth to fill empty space, actual tabs
   // // ! 5. Don't forget to implement the "insert" and "remove" listeners inside the FunctionMessenger
-  // 6. add an error listener & snackbar
+  // // 6. add an error listener & snackbar
   function TabbedCodeEditor(props) {
     var _this;
 
@@ -565,11 +565,13 @@ function (_Component) {
     }).onError(function (_ref2) {
       var functionId = _ref2.functionId,
           errorMessage = _ref2.errorMessage;
-      console.log(errorMessage);
+
+      _this.newError(errorMessage);
     });
     _this.state = {
       functions: [],
-      cursor: -1
+      cursor: -1,
+      errors: []
     };
     return _this;
   }
@@ -664,16 +666,43 @@ function (_Component) {
       }));
     }
   }, {
+    key: "renderBlankEditor",
+    value: function renderBlankEditor() {
+      return react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("div", {
+        className: _TabbedCodeEditor_css__WEBPACK_IMPORTED_MODULE_8___default.a.BlankEditor
+      }, react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("p", null, "No functions here yet."), react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("p", null, "\xAF\\_(\u30C4)_/\xAF"));
+    }
+  }, {
+    key: "newError",
+    value: function newError(errMsg) {
+      var newState = this.state.errors.slice();
+      newState.push(errMsg);
+      this.setState({
+        errors: newState
+      });
+    }
+  }, {
+    key: "dismissError",
+    value: function dismissError() {
+      var newState = this.state.errors.slice();
+      newState.pop();
+      this.setState({
+        errors: newState
+      });
+    }
+  }, {
     key: "render",
     value: function render() {
       var _this$state = this.state,
           functions = _this$state.functions,
-          cursor = _this$state.cursor;
+          cursor = _this$state.cursor,
+          errors = _this$state.errors;
       return react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("div", {
         className: _TabbedCodeEditor_css__WEBPACK_IMPORTED_MODULE_8___default.a.Container
-      }, this.renderTabs(functions, cursor), functions.length > 0 && this.renderEditor(functions, cursor)
-      /* If no functions, render empty or no func page here */
-      );
+      }, this.renderTabs(functions, cursor), functions.length > 0 ? this.renderEditor(functions, cursor) : this.renderBlankEditor(), errors.length > 0 && react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement(ErrorToast, {
+        message: errors[errors.length - 1],
+        onDismiss: this.dismissError.bind(this)
+      }));
     }
   }]);
 
@@ -696,7 +725,17 @@ var Tab = function Tab(_ref3) {
     onClick: onClose,
     className: _TabbedCodeEditor_css__WEBPACK_IMPORTED_MODULE_8___default.a.TabButton
   }, "\xD7"));
-}; // ! BUG: when I switch tabs and switch back, somehow the second tab reverts to default value? but linked function has appropraite state still...
+};
+
+var ErrorToast = function ErrorToast(_ref4) {
+  var message = _ref4.message,
+      onDismiss = _ref4.onDismiss;
+  return react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("div", {
+    className: _TabbedCodeEditor_css__WEBPACK_IMPORTED_MODULE_8___default.a.ErrorToast
+  }, react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("p", null, message), react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("button", {
+    onClick: onDismiss
+  }, "Dismiss"));
+};
 
 /***/ }),
 
@@ -22688,7 +22727,7 @@ exports.locals = {
 
 exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js")(true);
 // Module
-exports.push([module.i, ".CodeEditor_AceEditor_5o0YnrXEqwjLtIXf8Pa57 {\r\n    position:absolute;\r\n}\r\n\r\n.CodeEditor_Container_3s-RfSgpHw93WRPE1BLAAh {\r\n    width:inherit;\r\n    height:600px;\r\n    position:relative;\r\n}", "",{"version":3,"sources":["D:/Programming/gamifyjs/client/react/CodeEditor/CodeEditor.css"],"names":[],"mappings":"AAAA;IACI,iBAAiB;AACrB;;AAEA;IACI,aAAa;IACb,YAAY;IACZ,iBAAiB;AACrB","file":"CodeEditor.css","sourcesContent":[".AceEditor {\r\n    position:absolute;\r\n}\r\n\r\n.Container {\r\n    width:inherit;\r\n    height:600px;\r\n    position:relative;\r\n}"],"sourceRoot":""}]);
+exports.push([module.i, ".CodeEditor_AceEditor_5o0YnrXEqwjLtIXf8Pa57 {\r\n    position:absolute;\r\n}\r\n\r\n.CodeEditor_Container_3s-RfSgpHw93WRPE1BLAAh {\r\n    height:600px;\r\n    width:inherit;\r\n    position:relative;\r\n}", "",{"version":3,"sources":["D:/Programming/gamifyjs/client/react/CodeEditor/CodeEditor.css"],"names":[],"mappings":"AAAA;IACI,iBAAiB;AACrB;;AAEA;IACI,YAAY;IACZ,aAAa;IACb,iBAAiB;AACrB","file":"CodeEditor.css","sourcesContent":[".AceEditor {\r\n    position:absolute;\r\n}\r\n\r\n.Container {\r\n    height:600px;\r\n    width:inherit;\r\n    position:relative;\r\n}"],"sourceRoot":""}]);
 
 // Exports
 exports.locals = {
@@ -22707,7 +22746,7 @@ exports.locals = {
 
 exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js")(true);
 // Module
-exports.push([module.i, ".TabbedCodeEditor_Container_1Op1Mi-58gIIbpmvvoleF6 {\r\n    border: .2rem solid #232323;\r\n    width: 500px;\r\n}\r\n\r\n.TabbedCodeEditor_TabContainer_1hVF60lwm-vtN5hOJzLsqc {\r\n    list-style-type: none;\r\n    margin:0;\r\n    padding:0;\r\n    padding-left: 42px;\r\n    background-color:#232323;\r\n    display:flex;\r\n    height:3em;\r\n}\r\n\r\n.TabbedCodeEditor_Tab_3y2DVsleGRcW3G-7nBhPKQ {\r\n    display:flex;\r\n}\r\n\r\n.TabbedCodeEditor_Tab_3y2DVsleGRcW3G-7nBhPKQ.TabbedCodeEditor_Inactive_3GZadZyq9rO6V_cs58gB6U {\r\n    background-color: #232323;\r\n    border-right: 1px solid black;\r\n    border-left: 1px solid black;\r\n    color: #7e7e7e;\r\n}\r\n\r\n.TabbedCodeEditor_Tab_3y2DVsleGRcW3G-7nBhPKQ.TabbedCodeEditor_Active_3cHGbk-iUTJlpcxQpl4cKG {\r\n    background-color: #121212;\r\n    color: #f8f8f8;\r\n}\r\n\r\n.TabbedCodeEditor_TabButton_1Uh4CHumfp5pYLBsKuwllW {\r\n    background:none;\r\n    color:inherit;\r\n    margin: 0;\r\n    padding: .75rem;\r\n    border:0;    \r\n    font-size: 1.5em;\r\n    font-family: \"Lucida Console\", Monaco, monospace;\r\n}\r\n\r\n.TabbedCodeEditor_TabButton_1Uh4CHumfp5pYLBsKuwllW:focus {\r\n    outline:none;\r\n}", "",{"version":3,"sources":["D:/Programming/gamifyjs/client/react/CodeEditor/TabbedCodeEditor.css"],"names":[],"mappings":"AAAA;IACI,2BAA2B;IAC3B,YAAY;AAChB;;AAEA;IACI,qBAAqB;IACrB,QAAQ;IACR,SAAS;IACT,kBAAkB;IAClB,wBAAwB;IACxB,YAAY;IACZ,UAAU;AACd;;AAEA;IACI,YAAY;AAChB;;AAEA;IACI,yBAAyB;IACzB,6BAA6B;IAC7B,4BAA4B;IAC5B,cAAc;AAClB;;AAEA;IACI,yBAAyB;IACzB,cAAc;AAClB;;AAEA;IACI,eAAe;IACf,aAAa;IACb,SAAS;IACT,eAAe;IACf,QAAQ;IACR,gBAAgB;IAChB,gDAAgD;AACpD;;AAEA;IACI,YAAY;AAChB","file":"TabbedCodeEditor.css","sourcesContent":[".Container {\r\n    border: .2rem solid #232323;\r\n    width: 500px;\r\n}\r\n\r\n.TabContainer {\r\n    list-style-type: none;\r\n    margin:0;\r\n    padding:0;\r\n    padding-left: 42px;\r\n    background-color:#232323;\r\n    display:flex;\r\n    height:3em;\r\n}\r\n\r\n.Tab {\r\n    display:flex;\r\n}\r\n\r\n.Tab.Inactive {\r\n    background-color: #232323;\r\n    border-right: 1px solid black;\r\n    border-left: 1px solid black;\r\n    color: #7e7e7e;\r\n}\r\n\r\n.Tab.Active {\r\n    background-color: #121212;\r\n    color: #f8f8f8;\r\n}\r\n\r\n.TabButton {\r\n    background:none;\r\n    color:inherit;\r\n    margin: 0;\r\n    padding: .75rem;\r\n    border:0;    \r\n    font-size: 1.5em;\r\n    font-family: \"Lucida Console\", Monaco, monospace;\r\n}\r\n\r\n.TabButton:focus {\r\n    outline:none;\r\n}"],"sourceRoot":""}]);
+exports.push([module.i, ".TabbedCodeEditor_Container_1Op1Mi-58gIIbpmvvoleF6 {\r\n    border: .2rem solid #232323;\r\n    width: 500px;\r\n    position: relative;\r\n    font-family: \"Lucida Console\", Monaco, monospace;\r\n}\r\n\r\n.TabbedCodeEditor_TabContainer_1hVF60lwm-vtN5hOJzLsqc {\r\n    list-style-type: none;\r\n    margin:0;\r\n    padding:0;\r\n    padding-left: 42px;\r\n    background-color:#232323;\r\n    display:flex;\r\n    height:3em;\r\n}\r\n\r\n.TabbedCodeEditor_Tab_3y2DVsleGRcW3G-7nBhPKQ {\r\n    display:flex;\r\n}\r\n\r\n.TabbedCodeEditor_Tab_3y2DVsleGRcW3G-7nBhPKQ.TabbedCodeEditor_Inactive_3GZadZyq9rO6V_cs58gB6U {\r\n    background-color: #232323;\r\n    border-right: 1px solid black;\r\n    border-left: 1px solid black;\r\n    color: #7e7e7e;\r\n}\r\n\r\n.TabbedCodeEditor_Tab_3y2DVsleGRcW3G-7nBhPKQ.TabbedCodeEditor_Active_3cHGbk-iUTJlpcxQpl4cKG {\r\n    background-color: #121212;\r\n    color: #f8f8f8;\r\n}\r\n\r\n.TabbedCodeEditor_TabButton_1Uh4CHumfp5pYLBsKuwllW {\r\n    background:none;\r\n    color:inherit;\r\n    margin: 0;\r\n    padding: .75rem;\r\n    border:0;    \r\n    font-size: 1.5em;\r\n}\r\n\r\n.TabbedCodeEditor_TabButton_1Uh4CHumfp5pYLBsKuwllW:focus {\r\n    outline:none;\r\n}\r\n\r\n.TabbedCodeEditor_BlankEditor_3yQPWhyB4iNBUJ1H3wImFy {\r\n    background-color: #121212;\r\n    color: #7e7e7e;\r\n    height: 600px;\r\n    display: flex;\r\n    flex-direction: column;\r\n    justify-content: center;\r\n    align-items: center;\r\n    text-align:center;\r\n    font-size: 2.5em;\r\n}\r\n\r\n.TabbedCodeEditor_BlankEditor_3yQPWhyB4iNBUJ1H3wImFy p {\r\n    margin: .5em;\r\n}\r\n\r\n.TabbedCodeEditor_ErrorToast_3Yr6pajc6lR9Xhp_rVjZCx {\r\n    position:absolute;\r\n    width:100%;\r\n    bottom:0;\r\n    background-color: #fbfb37;\r\n    font-size: 1.5em;\r\n    display:flex;\r\n    justify-content: space-between;\r\n    z-index: 10;\r\n}\r\n\r\n.TabbedCodeEditor_ErrorToast_3Yr6pajc6lR9Xhp_rVjZCx p {\r\n    margin: .5em;\r\n}\r\n\r\n.TabbedCodeEditor_ErrorToast_3Yr6pajc6lR9Xhp_rVjZCx button {\r\n    font: inherit;\r\n    font-size: 1rem;\r\n    border: .2em solid #ffffad; \r\n    background:none;\r\n    margin: .2em;\r\n    padding: .5em;\r\n    height: 2.4em;\r\n    align-self:center;\r\n}\r\n\r\n.TabbedCodeEditor_ErrorToast_3Yr6pajc6lR9Xhp_rVjZCx button:hover {\r\n    background-color: #ffff6a;\r\n}\r\n\r\n.TabbedCodeEditor_ErrorToast_3Yr6pajc6lR9Xhp_rVjZCx button:focus {\r\n    outline: none;\r\n}", "",{"version":3,"sources":["D:/Programming/gamifyjs/client/react/CodeEditor/TabbedCodeEditor.css"],"names":[],"mappings":"AAAA;IACI,2BAA2B;IAC3B,YAAY;IACZ,kBAAkB;IAClB,gDAAgD;AACpD;;AAEA;IACI,qBAAqB;IACrB,QAAQ;IACR,SAAS;IACT,kBAAkB;IAClB,wBAAwB;IACxB,YAAY;IACZ,UAAU;AACd;;AAEA;IACI,YAAY;AAChB;;AAEA;IACI,yBAAyB;IACzB,6BAA6B;IAC7B,4BAA4B;IAC5B,cAAc;AAClB;;AAEA;IACI,yBAAyB;IACzB,cAAc;AAClB;;AAEA;IACI,eAAe;IACf,aAAa;IACb,SAAS;IACT,eAAe;IACf,QAAQ;IACR,gBAAgB;AACpB;;AAEA;IACI,YAAY;AAChB;;AAEA;IACI,yBAAyB;IACzB,cAAc;IACd,aAAa;IACb,aAAa;IACb,sBAAsB;IACtB,uBAAuB;IACvB,mBAAmB;IACnB,iBAAiB;IACjB,gBAAgB;AACpB;;AAEA;IACI,YAAY;AAChB;;AAEA;IACI,iBAAiB;IACjB,UAAU;IACV,QAAQ;IACR,yBAAyB;IACzB,gBAAgB;IAChB,YAAY;IACZ,8BAA8B;IAC9B,WAAW;AACf;;AAEA;IACI,YAAY;AAChB;;AAEA;IACI,aAAa;IACb,eAAe;IACf,0BAA0B;IAC1B,eAAe;IACf,YAAY;IACZ,aAAa;IACb,aAAa;IACb,iBAAiB;AACrB;;AAEA;IACI,yBAAyB;AAC7B;;AAEA;IACI,aAAa;AACjB","file":"TabbedCodeEditor.css","sourcesContent":[".Container {\r\n    border: .2rem solid #232323;\r\n    width: 500px;\r\n    position: relative;\r\n    font-family: \"Lucida Console\", Monaco, monospace;\r\n}\r\n\r\n.TabContainer {\r\n    list-style-type: none;\r\n    margin:0;\r\n    padding:0;\r\n    padding-left: 42px;\r\n    background-color:#232323;\r\n    display:flex;\r\n    height:3em;\r\n}\r\n\r\n.Tab {\r\n    display:flex;\r\n}\r\n\r\n.Tab.Inactive {\r\n    background-color: #232323;\r\n    border-right: 1px solid black;\r\n    border-left: 1px solid black;\r\n    color: #7e7e7e;\r\n}\r\n\r\n.Tab.Active {\r\n    background-color: #121212;\r\n    color: #f8f8f8;\r\n}\r\n\r\n.TabButton {\r\n    background:none;\r\n    color:inherit;\r\n    margin: 0;\r\n    padding: .75rem;\r\n    border:0;    \r\n    font-size: 1.5em;\r\n}\r\n\r\n.TabButton:focus {\r\n    outline:none;\r\n}\r\n\r\n.BlankEditor {\r\n    background-color: #121212;\r\n    color: #7e7e7e;\r\n    height: 600px;\r\n    display: flex;\r\n    flex-direction: column;\r\n    justify-content: center;\r\n    align-items: center;\r\n    text-align:center;\r\n    font-size: 2.5em;\r\n}\r\n\r\n.BlankEditor p {\r\n    margin: .5em;\r\n}\r\n\r\n.ErrorToast {\r\n    position:absolute;\r\n    width:100%;\r\n    bottom:0;\r\n    background-color: #fbfb37;\r\n    font-size: 1.5em;\r\n    display:flex;\r\n    justify-content: space-between;\r\n    z-index: 10;\r\n}\r\n\r\n.ErrorToast p {\r\n    margin: .5em;\r\n}\r\n\r\n.ErrorToast button {\r\n    font: inherit;\r\n    font-size: 1rem;\r\n    border: .2em solid #ffffad; \r\n    background:none;\r\n    margin: .2em;\r\n    padding: .5em;\r\n    height: 2.4em;\r\n    align-self:center;\r\n}\r\n\r\n.ErrorToast button:hover {\r\n    background-color: #ffff6a;\r\n}\r\n\r\n.ErrorToast button:focus {\r\n    outline: none;\r\n}"],"sourceRoot":""}]);
 
 // Exports
 exports.locals = {
@@ -22716,7 +22755,9 @@ exports.locals = {
 	"Tab": "TabbedCodeEditor_Tab_3y2DVsleGRcW3G-7nBhPKQ",
 	"Inactive": "TabbedCodeEditor_Inactive_3GZadZyq9rO6V_cs58gB6U",
 	"Active": "TabbedCodeEditor_Active_3cHGbk-iUTJlpcxQpl4cKG",
-	"TabButton": "TabbedCodeEditor_TabButton_1Uh4CHumfp5pYLBsKuwllW"
+	"TabButton": "TabbedCodeEditor_TabButton_1Uh4CHumfp5pYLBsKuwllW",
+	"BlankEditor": "TabbedCodeEditor_BlankEditor_3yQPWhyB4iNBUJ1H3wImFy",
+	"ErrorToast": "TabbedCodeEditor_ErrorToast_3Yr6pajc6lR9Xhp_rVjZCx"
 };
 
 /***/ }),
