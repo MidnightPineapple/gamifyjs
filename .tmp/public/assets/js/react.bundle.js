@@ -265,26 +265,43 @@ var CodeEditor =
 function (_Component) {
   _babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_4___default()(CodeEditor, _Component);
 
-  function CodeEditor(props) {
-    var _this;
-
+  function CodeEditor() {
     _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_0___default()(this, CodeEditor);
 
-    _this = _babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_2___default()(this, _babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_3___default()(CodeEditor).call(this, props));
-
-    _this.props.messenger.setOnValueChangedCallback(function (_ref) {
-      var functionId = _ref.functionId,
-          newText = _ref.newText;
-
-      _this.props.onChange(functionId, newText);
-    }).setOnErrorCallback(function () {
-      return _this.forceUpdate();
-    });
-
-    return _this;
+    return _babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_2___default()(this, _babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_3___default()(CodeEditor).apply(this, arguments));
   }
 
   _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_1___default()(CodeEditor, [{
+    key: "setCallbacks",
+    value: function setCallbacks() {
+      var _this = this;
+
+      var changeCallback = function changeCallback(_ref) {
+        var functionId = _ref.functionId,
+            newText = _ref.newText;
+
+        _this.props.onChange(functionId, newText);
+      };
+
+      var errorCallback = function errorCallback() {
+        return _this.forceUpdate();
+      };
+
+      this.props.messenger.setOnValueChangedCallback(changeCallback).setOnErrorCallback(errorCallback);
+    }
+  }, {
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      this.setCallbacks();
+    }
+  }, {
+    key: "componentDidUpdate",
+    value: function componentDidUpdate(prevProps) {
+      if (this.props.messenger !== prevProps.messenger) {
+        this.setCallbacks();
+      }
+    }
+  }, {
     key: "onChange",
     value: function onChange(value, event) {
       var action = event.action,

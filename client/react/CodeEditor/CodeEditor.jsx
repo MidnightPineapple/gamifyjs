@@ -7,12 +7,26 @@ import 'brace/theme/twilight';
 
 export default class CodeEditor extends Component {
 
-    constructor(props) {
-        super(props);
-
-        this.props.messenger.setOnValueChangedCallback( ({ functionId, newText }) => {
+    setCallbacks() {
+        const changeCallback = ({ functionId, newText }) => {
             this.props.onChange(functionId, newText);
-        }).setOnErrorCallback(() => this.forceUpdate());
+        }
+    
+        const errorCallback = () => this.forceUpdate()
+
+        this.props.messenger
+        .setOnValueChangedCallback(changeCallback)
+        .setOnErrorCallback(errorCallback)
+    }
+
+    componentDidMount() {
+        this.setCallbacks();
+    }
+
+    componentDidUpdate(prevProps) {
+        if(this.props.messenger !== prevProps.messenger) {
+            this.setCallbacks();
+        }
     }
 
     onChange(value, event) {
