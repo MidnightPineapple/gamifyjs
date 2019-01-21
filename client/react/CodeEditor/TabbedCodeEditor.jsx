@@ -7,14 +7,6 @@ const classNames = (...args) => args.join(" ");
 
 export default class TabbedCodeEditor extends Component {
 
-    // // 4. figure out where I'm storing function text and where I'm gonna set the text of the editor to a new value
-
-    // 4.5 style the editor and tabs better. ie bg colors, sth to fill empty space, actual tabs
-
-    // // ! 5. Don't forget to implement the "insert" and "remove" listeners inside the FunctionMessenger
-
-    // // 6. add an error listener & snackbar
-
     constructor(props) {
         super(props)
         this.messenger = new EditorMessenger(this.props.frame)

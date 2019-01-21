@@ -3,7 +3,9 @@
 }
 
 .Container {
-    height:600px;
-    width:inherit;
+    height:100%; /* I really don't understand why height 100% here works */
+    width:100%;
     position:relative;
 }
+
+/* TODO: if viewport can't fit both editor and game, put editor below game! No changing width! */

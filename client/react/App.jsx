@@ -14,10 +14,10 @@ export default class App extends Component {
         return (
             <div className={styles.App} >
                 <p>Hello from React!</p>
-                <CodeEditor
-                frame={this.frame}
-                />
-                <iframe src={GAME_IFRAME_URI} className={styles.Frame} sandbox="allow-scripts allow-same-origin" />
+                <div className={styles.ContentContainer}>
+                    <iframe src={GAME_IFRAME_URI} className={styles.Frame} sandbox="allow-scripts allow-same-origin" />
+                    <CodeEditor frame={this.frame} />
+                </div>
             </div>
         )
     }

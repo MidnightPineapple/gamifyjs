@@ -1,8 +1,12 @@
 .Container {
     border: .2rem solid #232323;
     width: 500px;
+    height: 600px;
     position: relative;
+    display:flex;
+    flex-direction: column;
     font-family: "Lucida Console", Monaco, monospace;
+    box-sizing: border-box;
 }
 
 .TabContainer {
@@ -47,7 +51,7 @@
 .BlankEditor {
     background-color: #121212;
     color: #7e7e7e;
-    height: 600px;
+    flex:1;
     display: flex;
     flex-direction: column;
     justify-content: center;
