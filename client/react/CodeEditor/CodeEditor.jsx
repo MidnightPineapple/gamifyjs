@@ -12,11 +12,9 @@ export default class CodeEditor extends Component {
             this.props.onChange(functionId, newText);
         }
     
-        const errorCallback = () => this.forceUpdate()
-
         this.props.messenger
         .setOnValueChangedCallback(changeCallback)
-        .setOnErrorCallback(errorCallback)
+        .setOnErrorCallback(changeCallback)
     }
 
     componentDidMount() {

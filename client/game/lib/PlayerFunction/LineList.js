@@ -72,12 +72,12 @@ export default function LineListFactory(initialLines) {
         if(row < 0 || row > lines.length) throw new RangeError("Can't add at index "+row+". Out of bounds.");
         if(newLines.length === 1) {
             if(row === lines.length) return addLine(row, str);
-            else if(!lines[row].isEditable(col)) throw new Error("Not allowed to add at "+row+":"+col+".");
+            else if(!lines[row].isEditable(col)) throw new Error("Not allowed to add at line "+(row+1)+", column "+(col+1)+".");
             lines[row].add(col, str);
         } else if(newLines.length > 1) {
             const addingBelowLastLine = row === lines.length
             if(!addingBelowLastLine) {
-                if(!lines[row].editable) throw new Error("Can't add multiline text at line "+row+". Restricted range");
+                if(!lines[row].editable) throw new Error("Can't add multiline text at line "+(row+1)+". Restricted range");
                 const thisLine = lines[row];
                 const textPushedDown = thisLine.text.slice(col);
                 thisLine.remove(col, textPushedDown.length);
@@ -97,10 +97,17 @@ export default function LineListFactory(initialLines) {
         if([startRow, startCol, endRow, endCol].includes(undefined)) throw new TypeError("Can't delete. Starting and ending row and col can't be undefined.")
         if(startRow > endRow) throw new Error("Delete must start on a higher row than it ends on.")
         if(startRow === endRow) {
-            // char at endCol doesn't get removed. remove range is from startCol to endCol-1
-            lines[startRow].remove(startCol, endCol - startCol);
+            try {
+                // char at endCol doesn't get removed. remove range is from startCol to endCol-1
+                lines[startRow].remove(startCol, endCol - startCol);
+            } catch (e) {
+                e.message = "Line "+(startRow+1)+": "+e.message;
+                throw e;
+            }
         }
         if(startRow < endRow) {
+            if(!lines[startRow].editable) throw new Error("Line "+(startRow+1)+" is not editable.");
+            if(!lines[endRow].editable) throw new Error("Line "+(endRow+1)+" is not editable.");
             let range = endRow - startRow + 1
             let startLine = lines[startRow];
             let endLine = lines[endRow];
@@ -110,7 +117,12 @@ export default function LineListFactory(initialLines) {
             range -= 2;
             // del intermediate rows
             for(let i = 0; i<range; i++){
-                deleteLine(startRow+1);  
+                try {
+                    deleteLine(startRow+1);  
+                } catch(e) {
+                    e.message = "Line "+(startRow+1)+": "+e.message
+                    throw e;
+                }
             }
             // append text to startRow and del endRow
             startLine.add(startLine.text.length, endLine.text);

@@ -283,11 +283,7 @@ function (_Component) {
         _this.props.onChange(functionId, newText);
       };
 
-      var errorCallback = function errorCallback() {
-        return _this.forceUpdate();
-      };
-
-      this.props.messenger.setOnValueChangedCallback(changeCallback).setOnErrorCallback(errorCallback);
+      this.props.messenger.setOnValueChangedCallback(changeCallback).setOnErrorCallback(changeCallback);
     }
   }, {
     key: "componentDidMount",
@@ -566,6 +562,10 @@ function (_Component) {
           displayName = _ref.displayName;
 
       _this.newFunction(functionId, text, parameters, displayName);
+    }).onError(function (_ref2) {
+      var functionId = _ref2.functionId,
+          errorMessage = _ref2.errorMessage;
+      console.log(errorMessage);
     });
     _this.state = {
       functions: [],
@@ -682,11 +682,11 @@ function (_Component) {
 
 
 
-var Tab = function Tab(_ref2) {
-  var focus = _ref2.focus,
-      onClick = _ref2.onClick,
-      onClose = _ref2.onClose,
-      displayName = _ref2.displayName;
+var Tab = function Tab(_ref3) {
+  var focus = _ref3.focus,
+      onClick = _ref3.onClick,
+      onClose = _ref3.onClose,
+      displayName = _ref3.displayName;
   return react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("li", {
     className: classNames(_TabbedCodeEditor_css__WEBPACK_IMPORTED_MODULE_8___default.a.Tab, focus ? _TabbedCodeEditor_css__WEBPACK_IMPORTED_MODULE_8___default.a.Active : _TabbedCodeEditor_css__WEBPACK_IMPORTED_MODULE_8___default.a.Inactive)
   }, react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("button", {

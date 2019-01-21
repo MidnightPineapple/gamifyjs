@@ -20,6 +20,8 @@ export default class TabbedCodeEditor extends Component {
         this.messenger = new EditorMessenger(this.props.frame)
         .onReceiveFunction(({ functionId, text, parameters, displayName }) => {
             this.newFunction(functionId, text, parameters, displayName);
+        }).onError(({ functionId, errorMessage }) => {
+            console.log(errorMessage);
         })
 
         this.state = {
