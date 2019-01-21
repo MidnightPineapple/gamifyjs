@@ -3,6 +3,8 @@ import CodeEditor from './CodeEditor';
 import EditorMessenger from './EditorMessenger';
 import styles from './TabbedCodeEditor.css';
 
+const classNames = (...args) => args.join(" ");
+
 export default class TabbedCodeEditor extends Component {
 
     // // 4. figure out where I'm storing function text and where I'm gonna set the text of the editor to a new value
@@ -51,11 +53,17 @@ export default class TabbedCodeEditor extends Component {
         newFun.text = newText;
         newState[idx] = newFun;
         this.setState({ functions: newState });
-
     }
 
     closeTab(key) {
-        // TODO: put the button in for this first
+        // IDEA: might wanna send an editor close event so we undo the event listeners in the game
+        const newState = this.state.functions.slice();
+        newState.splice(key,1);
+        let newCursor = this.state.cursor - 1;
+        if(newCursor < 0 && newState.length > 0) {
+            newCursor = 0;
+        }
+        this.setState({ functions: newState, cursor: newCursor })
     }
 
     renderEditor(functions, cursor) {
@@ -72,7 +80,15 @@ export default class TabbedCodeEditor extends Component {
     renderTabs(functions, cursor) {
         return (
             <ul className={styles.TabContainer}>
-                { functions.map( (f,k) => <Tab key={k} highlight={cursor===k} displayName={f.displayName} onClick={ ()=>this.focusOnFunction(k) } /> ) }
+                { 
+                    functions.map( (f,k) => (
+                        <Tab key={k} 
+                        focus={cursor===k} 
+                        displayName={f.displayName} 
+                        onClick={ ()=>this.focusOnFunction(k) } 
+                        onClose={ ()=>this.closeTab(k) }/> 
+                    )) 
+                }
             </ul>
         )
     }
@@ -91,8 +107,20 @@ export default class TabbedCodeEditor extends Component {
 
 }
 
-const Tab = props => (
-    <li className={styles.TabContainer}>
-        <button onClick={props.onClick} className={styles.TabButton}>{ props.displayName }</button>
+const Tab = ({ focus, onClick, onClose, displayName}) => (
+    <li className={classNames(styles.Tab, focus?styles.Active:styles.Inactive)}>
+        <button 
+        onClick={onClick} 
+        className={styles.TabButton} >
+            { displayName }
+        </button>
+        <button
+        onClick={onClose}
+        className={styles.TabButton}>
+            &times;
+        </button>
+
     </li>
 )
+
+// ! BUG: when I switch tabs and switch back, somehow the second tab reverts to default value? but linked function has appropraite state still...

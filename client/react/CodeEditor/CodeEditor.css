@@ -3,8 +3,7 @@
 }
 
 .Container {
-    width:500px;
+    width:inherit;
     height:600px;
     position:relative;
-    border: .2rem solid #232323;
 }

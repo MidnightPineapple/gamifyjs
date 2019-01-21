@@ -37,8 +37,8 @@ export default class CodeEditor extends Component {
                     mode="javascript"
                     theme="twilight"
                     name={this.props.name}
-                    height="600px"
-                    width="500px"
+                    height="inherit"
+                    width="inherit"
                     className={styles.AceEditor}
                     value={this.props.value}
                     onChange={this.onChange.bind(this)}
