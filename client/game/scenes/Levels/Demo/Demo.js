@@ -12,7 +12,7 @@ export default class Demo extends Level({customObjects}) {
     create() {
         this.cameras.main.setBackgroundColor("#1d212d");        
 
-        this.map = this.add.tilemap("demomap", 16, 16);
+        this.map = this.add.tilemap("demomap", 32, 32);
         const tileset = this.map.addTilesetImage("Industrial", "industrial-tileset")
 
         this.map.createStaticLayer("behind-player", tileset, 0, 0)

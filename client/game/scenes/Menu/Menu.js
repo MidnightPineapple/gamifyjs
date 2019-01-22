@@ -27,7 +27,7 @@ export default class MenuScene extends HandlesErrors(Scene) {
     }
 
     openLevelMenu() {
-
+        this.scene.start(keys.WELCOME)
     }
 
 }

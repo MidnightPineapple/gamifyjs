@@ -31,6 +31,7 @@ export default class Player extends compose(OverlapsZones, IsAnimated(anims))(Ar
     }
 
     jump() {
+        // 
         this.setVelocityY(-200)
     }
 
@@ -42,6 +43,12 @@ export default class Player extends compose(OverlapsZones, IsAnimated(anims))(Ar
     onGround() {
         return this.body.blocked.down
     }
+
+    die() {
+
+    }
+
+
 
 }
 

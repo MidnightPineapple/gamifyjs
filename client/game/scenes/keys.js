@@ -3,5 +3,6 @@ export default {
     BOOT: "boot",
     MENU: "menu",
     DEMO: "demo",
+    WELCOME: "welcome",
     ERROR: "error",
 }
