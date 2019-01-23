@@ -19,8 +19,6 @@ export default class Player extends compose(CanMove, OverlapsZones, IsAnimated(a
     isPlayer = true;
 
     onRun(direction) {
-        const left = direction === "left"
-        this.setFlip(!!left);
         this.anims.play(constants.ANIMS.RUNNING, true)
     }
 

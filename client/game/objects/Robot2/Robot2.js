@@ -14,11 +14,6 @@ export default class Robot2 extends compose(CanMove, IsAnimated(anims))(ArcadeSp
         this.anims.play(constants.ANIMS.IDLE);
     }
 
-    onRun(direction) {
-        const left = direction === "left" 
-        this.setFlip(left)
-    }
-
     MAX_VELOCITY_X = 150;
     ACCELERATION_X = 50;
 

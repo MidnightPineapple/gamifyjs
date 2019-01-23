@@ -19,13 +19,20 @@ function emitCollideOrOverlap(type, ...args) {
             const eventPrefix = type === "collider" ? "COLLIDE" : "OVERLAP"
             o1.emit(events[eventPrefix], o1, o2)
             o2.emit(events[eventPrefix], o2, o1)
-            if(o1.isPlayer===true) o2.emit(events[eventPrefix + "_PLAYER"])
-            if(o2.isPlayer===true) o1.emit(events[eventPrefix + "_PLAYER"])
+            if(o1.isPlayer===true) o2.emit(events[eventPrefix + "_PLAYER"], o1)
+            if(o2.isPlayer===true) o1.emit(events[eventPrefix + "_PLAYER"], o2)
         }, null, this)
     }
 }
 
 const EmitsEventsFactory = superclass => class EmitsEvents extends superclass {
+
+    constructor(...args) {
+        super(...args);
+        Object.assign(this.constants, { EmitsEvents: events })
+    }
+
+    emitsEvents = true;
 
     update(time, delta) {
         if(typeof super.update === "function") super.update(time, delta);

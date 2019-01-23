@@ -1,10 +1,8 @@
-import ArcadeSprite from '../ArcadeSprite';
-import { CanMove, IsAnimated } from '../mixins';
-import { compose } from 'ramda';
+import Enemy from '../Enemy';
 import constants from './constants';
 import anims from './anims';
 
-export default class Slime extends compose(CanMove, IsAnimated(anims))(ArcadeSprite) {
+export default class Slime extends Enemy({ anims }){
 
     constructor(scene, x, y) {
         super(scene, x, y, constants.SPRITESHEET_KEY, 0);
@@ -16,12 +14,10 @@ export default class Slime extends compose(CanMove, IsAnimated(anims))(ArcadeSpr
     }
 
     onRun(direction) {
-        const left = direction === "left";
-        this.setFlip(left);
         this.anims.play(constants.ANIMS.RUNNING, true);
     }
 
-    MAX_VELOCITY_X = 10;
+    MAX_VELOCITY_X = 5;
     ACCELERATION_X = 5;
 
 }

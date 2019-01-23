@@ -16,8 +16,6 @@ export default class Robot extends compose(CanMove, IsAnimated(anims))(ArcadeSpr
     }
 
     onRun(direction) {
-        const left = direction === "left" 
-        this.setFlip(left)
         this.anims.play(constants.ANIMS.MOVING, true)
     }
 

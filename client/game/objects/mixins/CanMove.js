@@ -14,7 +14,8 @@ const CanMoveFactory = superclass => class CanMove extends superclass {
         if(direction!=="left" && direction!=="right") return
         const left = direction === "left"
         const accel = this.ACCELERATION_X || CONSTANTS.DEFAULT_ACCELERATION_X; 
-        this.setAccelerationX(!!left?-accel:accel)
+        this.setAccelerationX(!!left?-accel:accel);
+        this.setFlip(left)
         if(typeof this.onRun === "function") this.onRun(direction);
     }
 
