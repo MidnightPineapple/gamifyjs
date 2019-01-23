@@ -8,7 +8,6 @@ const events = {
     COLLIDE_PLAYER:"collide_player",
     OVERLAP:"overlap",
     OVERLAP_PLAYER:"overlap_player",
-    OVERLAP_ZONE:"overlap_zone"
 }
 
 function emitCollideOrOverlap(type, ...args) {
@@ -43,12 +42,6 @@ const EmitsEventsFactory = superclass => class EmitsEvents extends superclass {
 
     emitOverlap(...args) {
         emitCollideOrOverlap.call(this, "overlap", ...args)
-    }
-
-    emitOverlapZone(zoneObj, key, foreignObj) {
-        zoneObj.overlapZone(key, foreignObj, function(thisObj, foreignObj) {
-            zoneObj.emit(events.OVERLAP_ZONE + "_" + key, thisObj, foreignObj)
-        }, this)
     }
 
 }

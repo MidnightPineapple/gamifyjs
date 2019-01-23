@@ -37,15 +37,24 @@ export default class Demo extends Level({customObjects}) {
         this.input.keyboard.on("keyup_A", () => this.robot.idle())
 
         this.emitCollide([ [this.player, this.robot] ])
-        this.emitOverlapZone(this.player, "hackable-range", this.robot)
+        this.player.overlapZone("hackable-range", this.robot)
 
         const demoFunction = this.makeFunc("demo-function")
         const demoFunction2 = this.makeFunc("demo-function")
 
 
         // ! FOR DEBUG
-        this.player.on(Level.EmitsEvents.events.OVERLAP_ZONE + "_hackable-range", function() {
+        this.player.on(this.player.constants.OverlapsZones.OVERLAP_START + "_hackable-range", function() {
             demoFunction.execute();
+            console.log("start")
+        }, this)
+        this.player.on(this.player.constants.OverlapsZones.OVERLAP_EVENT + "_hackable-range", function() {
+            // demoFunction.execute();
+            console.log("overlapping")
+        }, this)
+        this.player.on(this.player.constants.OverlapsZones.OVERLAP_END + "_hackable-range", function() {
+            // demoFunction.execute();
+            console.log("end")
         }, this)
 
         demoFunction.messenger.send();

@@ -9,7 +9,7 @@ import Line from './Line';
 
 export default function LineListFactory(initialLines) {
 
-    let lines = [], onChangeCallback = () => {};
+    let lines = [], onChangeCallback, onChangeFinishedCallback;
 
     function checkLineInputIntegrity(lines) {
         const problem = msg => ({ ok: false, msg })
@@ -130,9 +130,21 @@ export default function LineListFactory(initialLines) {
         }
     }
 
+    let changeCounter = 0;
+    function _onChange(action) {
+        if(typeof onChangeCallback === "function") onChangeCallback(action);
+        changeCounter++;
+        const capturedCounter = changeCounter;
+        setTimeout(() => {
+            if(capturedCounter === changeCounter) {
+                if(typeof onChangeFinishedCallback === "function") onChangeFinishedCallback(action);
+            }
+        }, 1000)
+    }
+
     function bindCb(action, fun) {
         return function(...args) {
-            onChangeCallback(action);
+            _onChange(action);
             return fun(...args);
         }
     }
@@ -149,9 +161,12 @@ export default function LineListFactory(initialLines) {
         get text() { return this.toString() },
         get config() { return lines.map( l => l.data ) },
         get restrictedRanges() { return lines.map( l => l.restrictedRanges || l.restricted ) },
-        set onChange(cb) {
+        setOnEditCallback(cb) {
             onChangeCallback = cb;
         },
+        setOnEditFinishedCallback(cb) {
+            onChangeFinishedCallback = cb;
+        }
     }
 
 }

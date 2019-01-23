@@ -73,8 +73,11 @@ export default class PlayerFunction {
             ...lineConfig,
             { text:"}", config: { restricted: true } }
         ]);
-        this.lines.onChange = _stale.bind(this);
-        this.cache = undefined
+
+        this.lines.setOnEditCallback(_stale.bind(this));
+        this.lines.setOnEditFinishedCallback(() => console.log("Finished Edit"));
+
+        this.cache = undefined;
 
         this.errorHandler = typeof errorHandler === "function" ? errorHandler : undefined; 
         

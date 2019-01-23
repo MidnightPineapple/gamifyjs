@@ -7,6 +7,6 @@ export default class ArcadeSprite extends Phaser.Physics.Arcade.Sprite {
         this.scene.physics.world.enable(this)
     }
 
-    isPlayer = false;
+    constants = {}
 
 }
