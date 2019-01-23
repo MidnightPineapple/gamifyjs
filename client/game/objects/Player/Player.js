@@ -10,7 +10,7 @@ export default class Player extends compose(OverlapsZones, IsAnimated(anims))(Ar
         super(scene, x, y, constants.SPRITESHEET_KEY, 0);
 
         this.setBounce(.1, .1);
-        this.setMaxVelocity(300,400);
+        this.setMaxVelocity(100,100);
         this.setDrag(500,0);
         this.setCollideWorldBounds(true)
 
@@ -31,8 +31,13 @@ export default class Player extends compose(OverlapsZones, IsAnimated(anims))(Ar
     }
 
     jump() {
-        this.anims.play(constants.anims.JUMPING)
-        this.setVelocityY(-200)
+        if(this.onGround()) {
+            this.anims.play(constants.anims.JUMPING)
+            this.setVelocityY(-100)
+        } else {
+            const vY = this.body.velocity.y
+            this.setVelocityY( vY - 1 );
+        }
     }
 
     idle() {
@@ -51,7 +56,7 @@ export default class Player extends compose(OverlapsZones, IsAnimated(anims))(Ar
 
     hit() {
         this.anims.play(constants.anims.HITTING);
-        
+
     }
 
 

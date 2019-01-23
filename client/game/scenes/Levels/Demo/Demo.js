@@ -44,21 +44,26 @@ export default class Demo extends Level({customObjects}) {
 
 
         // ! FOR DEBUG
-        this.player.on(this.player.constants.OverlapsZones.OVERLAP_START + "_hackable-range", function() {
-            demoFunction.execute();
-            console.log("start")
-        }, this)
-        this.player.on(this.player.constants.OverlapsZones.OVERLAP_EVENT + "_hackable-range", function() {
-            // demoFunction.execute();
-            console.log("overlapping")
-        }, this)
-        this.player.on(this.player.constants.OverlapsZones.OVERLAP_END + "_hackable-range", function() {
-            // demoFunction.execute();
-            console.log("end")
-        }, this)
+        // this.player.on(this.player.constants.OverlapsZones.OVERLAP_START + "_hackable-range", function() {
+        //     demoFunction.execute();
+        // }, this)
+        // this.player.on(this.player.constants.OverlapsZones.OVERLAP_EVENT + "_hackable-range", function() {
+        //     // demoFunction.execute();
+        //     console.log("overlapping")
+        // }, this)
+        // this.player.on(this.player.constants.OverlapsZones.OVERLAP_END + "_hackable-range", function() {
+        //     // demoFunction.execute();
+        //     console.log("end")
+        // }, this)
 
+        // how to run a function right after it finishes being edited
         demoFunction.messenger.send();
-        demoFunction2.messenger.send();
+        demoFunction.lines.setOnEditFinishedCallback( () => {
+            demoFunction.execute();
+        })
+
+        // demoFunction2.messenger.send();
+        
         
 
     }
@@ -77,7 +82,7 @@ export default class Demo extends Level({customObjects}) {
             this.player.idle()
         }
         
-        if(onGround && this.cursors.up.isDown) {
+        if(this.cursors.up.isDown) {
             this.player.jump()
         }
     }
