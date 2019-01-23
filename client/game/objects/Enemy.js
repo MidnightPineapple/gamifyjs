@@ -17,6 +17,22 @@ export default ({ anims }) => {
             super(...args);
         }
 
+        onRun() {
+            if(!this.alive) return false;
+        }
+
+        onJump() {
+            if(!this.alive) return false;
+        }
+
+        onIdle() {
+            if(!this.alive) return false;
+        }
+
+        onDie() {
+            // TODO: add safe way to remove the object from scene
+        }
+
     }
 
 }

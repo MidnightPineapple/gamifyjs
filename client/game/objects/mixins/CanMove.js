@@ -11,30 +11,38 @@ const CanMoveFactory = superclass => class CanMove extends superclass {
     }
 
     run(direction) {
+        if(typeof this.onRun === "function") {
+            if(this.onRun(direction) === false) return;
+        }
         if(direction!=="left" && direction!=="right") return
         const left = direction === "left"
         const accel = this.ACCELERATION_X || CONSTANTS.DEFAULT_ACCELERATION_X; 
         this.setAccelerationX(!!left?-accel:accel);
         this.setFlip(left)
-        if(typeof this.onRun === "function") this.onRun(direction);
     }
 
     jump() {
         const velocity = this.VELOCITY_Y || CONSTANTS.DEFAULT_VELOCITY_Y;
         if(this.onGround()) {
+            if(typeof this.onJump === "function") {
+                if(this.onJump() === false) return;
+            }
             this.setVelocityY(velocity);
-            if(typeof this.onJump === "function") this.onJump();
         } else {
+            if(typeof this.onHoldJump === "function") {
+                if(this.onHoldJump() === false) return;
+            }
             const dampener = - velocity * ( this.JUMP_DAMPENER || CONSTANTS.DEFAULT_JUMP_DAMPENER )
             const vY = this.body.velocity.y
             this.setVelocityY( vY - dampener );
-            if(typeof this.onHoldJump === "function") this.onHoldJump();
         }
     }
 
     idle() {
+        if(typeof this.onIdle === "function") {
+            if(this.onIdle() === false) return;
+        }
         this.setAccelerationX(0);
-        if(typeof this.onIdle === "function") this.onIdle();
     }
 
     onGround() {

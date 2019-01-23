@@ -4,16 +4,14 @@ export default superclass => class KillsOnTouch extends superclass {
         super(...args);
 
         if(this.scene.emitsEvents) {
-            this.addListener(this.scene.constants.EmitsEvents.COLLIDE_PLAYER, () => {
-                this.killPlayer();
-            })
+            this.addListener(this.scene.constants.EmitsEvents.COLLIDE_PLAYER, this.killPlayer.bind(this));
         }
     }
 
     killsOnTouch = true;
 
     killPlayer(player) {
-        console.log("TODO: add a .die function on the player? or give it the IsMortal mixin?")
+        player.die();
     }
 
 }
