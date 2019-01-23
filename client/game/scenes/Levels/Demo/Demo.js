@@ -44,8 +44,8 @@ export default class Demo extends Level({customObjects}) {
 
 
         // ! FOR DEBUG
+        this.alert("Hai")
         // this.player.on(this.player.constants.OverlapsZones.OVERLAP_START + "_hackable-range", function() {
-        //     demoFunction.execute();
         // }, this)
         // this.player.on(this.player.constants.OverlapsZones.OVERLAP_EVENT + "_hackable-range", function() {
         //     // demoFunction.execute();

@@ -1,13 +1,23 @@
 import { compose } from 'ramda';
-import { UsesCustomObjects, EmitsEvents, UsesPlayerFunctions } from '../mixins'
+import { UsesCustomObjects, EmitsEvents, UsesPlayerFunctions, DisplaysAlerts } from '../mixins'
 import Scene from '../Scene';
 
-const LevelFactory = ({ customObjects }) => class Level extends compose(UsesPlayerFunctions,EmitsEvents,UsesCustomObjects(customObjects))(Scene) {
+const LevelFactory = ({ customObjects }) => {
 
-    constructor(...args) {
-        super(...args);
+    const traits = [
+        DisplaysAlerts, 
+        UsesPlayerFunctions,
+        EmitsEvents,
+        UsesCustomObjects(customObjects)
+    ]
+
+    return class Level extends compose(...traits)(Scene) {
+
+        constructor(...args) {
+            super(...args);
+        }
+
     }
-
 }
 
 LevelFactory.UsesCustomObjects = UsesCustomObjects;

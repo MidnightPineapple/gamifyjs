@@ -5,4 +5,5 @@ export default {
     DEMO: "demo",
     WELCOME: "welcome",
     ERROR: "error",
+    ALERT:"alert",
 }
