@@ -33,7 +33,7 @@ export default class Demo extends Level({customObjects}) {
 
         this.cursors = this.input.keyboard.createCursorKeys();
 
-        this.input.keyboard.on("keydown_A", () => this.robot.move("left"))
+        this.input.keyboard.on("keydown_A", () => this.robot.run("left"))
         this.input.keyboard.on("keyup_A", () => this.robot.idle())
 
         this.emitCollide([ [this.player, this.robot] ])
@@ -70,20 +70,22 @@ export default class Demo extends Level({customObjects}) {
     
     update(...args) {
         if(typeof super.update === "function") super.update(...args)
-        const onGround = this.player.onGround()
         
         // TODO: abstract the cursor & keyboard logic into a mixin
         // TODO: add in support for a lot more keys if necessary
-        if(this.cursors.right.isDown) {
-            this.player.run("right")
-        } else if(this.cursors.left.isDown) {
-            this.player.run("left")
+        const { right, left, up } = this.cursors;
+
+        if( right.isDown || left.isDown || up.isDown ) {
+            if(right.isDown) {
+                this.player.run("right")
+            } else if(left.isDown) {
+                this.player.run("left")
+            } 
+            if(up.isDown) {
+                this.player.jump()
+            }
         } else {
             this.player.idle()
-        }
-        
-        if(this.cursors.up.isDown) {
-            this.player.jump()
         }
     }
     

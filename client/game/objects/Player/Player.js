@@ -1,72 +1,50 @@
 import { compose } from 'ramda';
-import { IsAnimated, OverlapsZones } from '../mixins';
+import { IsAnimated, OverlapsZones, CanMove } from '../mixins';
 import ArcadeSprite from '../ArcadeSprite';
 import anims from './anims';
 import constants from './constants'
 
-export default class Player extends compose(OverlapsZones, IsAnimated(anims))(ArcadeSprite) {
+export default class Player extends compose(CanMove, OverlapsZones, IsAnimated(anims))(ArcadeSprite) {
 
     constructor(scene, x, y) {
         super(scene, x, y, constants.SPRITESHEET_KEY, 0);
 
-        this.setBounce(.1, .1);
-        this.setMaxVelocity(100,100);
-        this.setDrag(500,0);
-        this.setCollideWorldBounds(true)
+        Object.assign(this, constants);
 
         this.addZone("hackable-range", 100, 100)
         .setOrigin();
 
     }
 
-    accel = constants.DEFAULT_ACCEL
-    isPlayer = true
+    isPlayer = true;
 
-    run(direction) {
-        if(direction!=="left" && direction!=="right") return
+    onRun(direction) {
         const left = direction === "left"
         this.setFlip(!!left);
-        this.setAccelerationX(!!left?-this.accel:this.accel)
-        this.anims.play(constants.anims.RUNNING, true)
+        this.anims.play(constants.ANIMS.RUNNING, true)
     }
 
-    jump() {
-        if(this.onGround()) {
-            this.anims.play(constants.anims.JUMPING)
-            this.setVelocityY(-100)
-        } else {
-            const vY = this.body.velocity.y
-            this.setVelocityY( vY - 1 );
-        }
+    onJump() {
+        this.anims.play(constants.ANIMS.JUMPING)
     }
 
-    idle() {
-        this.setAccelerationX(0)
-        this.anims.play(constants.anims.IDLE, true)
-    }
-
-    onGround() {
-        return this.body.blocked.down
+    onIdle() {
+        this.anims.play(constants.ANIMS.IDLE, true)
     }
 
     die() {
-        this.anims.play(constants.anims.DYING);
+        this.anims.play(constants.ANIMS.DYING);
         
     }
 
     hit() {
-        this.anims.play(constants.anims.HITTING);
-
+        this.anims.play(constants.ANIMS.HITTING, true);
     }
-
-
 
 }
 
 // IDEA: I could make a factory function to create an object that provides
 // an API for players that can only control what I let them change
-
-// TODO: make a place to put behavior functions --- Object.assign the mutable way lol
 
 // IDEA: There are a set number of actions that any object can perform.
 // Those actions are functions as defined in a class above

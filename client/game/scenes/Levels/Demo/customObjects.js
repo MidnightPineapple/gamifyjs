@@ -1,6 +1,6 @@
-import { Player, Robot } from '../../../objects';
+import { Player, Slime } from '../../../objects';
 
 export default {
     player: Player,
-    robot: Robot,
+    robot: Slime,
 }

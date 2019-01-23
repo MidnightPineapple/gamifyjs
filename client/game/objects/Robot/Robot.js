@@ -1,30 +1,24 @@
 import { compose } from 'ramda';
-import { IsAnimated } from '../mixins';
+import { IsAnimated, CanMove } from '../mixins';
 import ArcadeSprite from '../ArcadeSprite';
 import anims from './anims';
 import constants from './constants';
 
-export default class Robot extends compose(IsAnimated(anims))(ArcadeSprite) {
+export default class Robot extends compose(CanMove, IsAnimated(anims))(ArcadeSprite) {
 
     constructor(scene, x, y){
-        super(scene, x, y, constants.SPRITESHEET_KEY, 0)
-
-        this.setDrag(1000,0)
-        this.setCollideWorldBounds(true)
+        super(scene, x, y, constants.SPRITESHEET_KEY, 0);
+        this.idle();
     }
 
-    idle() {
-        this.setAccelerationX(0)
-        this.anims.play(constants.anims.IDLE)
+    onIdle() {
+        this.anims.play(constants.ANIMS.IDLE)
     }
 
-    move(direction) {
-        if(direction!=="left" && direction!=="right") return
+    onRun(direction) {
         const left = direction === "left" 
-
-        this.setAccelerationX(left?-constants.DEFAULT_ACCEL:constants.DEFAULT_ACCEL)
         this.setFlip(left)
-        this.anims.play(constants.anims.MOVING, true)
+        this.anims.play(constants.ANIMS.MOVING, true)
     }
 
 }

@@ -4,7 +4,8 @@ export default class ArcadeSprite extends Phaser.Physics.Arcade.Sprite {
     
     constructor(...params) {
         super(...params)
-        this.scene.physics.world.enable(this)
+        this.scene.physics.world.enable(this);
+        this.setCollideWorldBounds(true);
     }
 
     constants = {}
