@@ -33,12 +33,10 @@ export default class Demo extends Level({customObjects}) {
         this.physics.add.collider(this.robot2, platforms)
         this.robot.idle()
 
-        this.cursors = this.input.keyboard.createCursorKeys();
-
-        this.input.keyboard.on("keydown_A", () => this.robot.run("left"))
-        this.input.keyboard.on("keydown_W", () => this.robot.jump())
-        this.input.keyboard.on("keyup_A", () => this.robot.idle())
-        this.input.keyboard.on("keyup_D", () => this.robot.die())
+        this.input.keyboard.on("keydown_H", () => this.robot.run("left"))
+        this.input.keyboard.on("keydown_U", () => this.robot.jump())
+        this.input.keyboard.on("keyup_H", () => this.robot.idle())
+        this.input.keyboard.on("keyup_K", () => this.robot.die())
 
         this.emitCollide([ [this.player, this.robot], [ this.robot2, this.robot ], [ this.player, this.robot2 ] ])
         this.player.overlapZone(this.player.ZONES.HACK, this.robot);
@@ -48,7 +46,10 @@ export default class Demo extends Level({customObjects}) {
 
 
         // ! FOR DEBUG
-        this.player.setOnDieCallback(()=>this.modal.jumbotron("You Died!", "Try Again! (space)"))
+        this.player.setOnDieCallback( ()=> {
+            this.modal.jumbotron("You Died!", "Try Again! (space)")
+            .setOnDismiss( () => this.scene.restart() )
+        });
         // this.player.on(this.player.constants.OverlapsZones.OVERLAP_START + "_hackable-range", function() {
         // }, this)
         // this.player.on(this.player.constants.OverlapsZones.OVERLAP_EVENT + "_hackable-range", function() {
@@ -74,25 +75,28 @@ export default class Demo extends Level({customObjects}) {
     
     update(...args) {
         if(typeof super.update === "function") super.update(...args)
-        
-        // TODO: abstract the cursor & keyboard logic into a mixin
-        // TODO: add in support for a lot more keys if necessary
-        const { right, left, up } = this.cursors;
-
-        if( right.isDown || left.isDown || up.isDown ) {
-            if(right.isDown) {
-                this.player.run("right")
-            } else if(left.isDown) {
-                this.player.run("left")
-            } 
-            if(up.isDown) {
-                this.player.jump()
-            }
-        } else {
-            this.player.idle()
-        }
 
         this.robot2.moveToward(this.player)
+    }
+
+    keydown_left() {
+        this.player.run("left")
+    }
+
+    keyup_left() {
+        this.player.idle();
+    }
+
+    keydown_right() {
+        this.player.run("right");
+    }
+
+    keyup_right() {
+        this.player.idle();
+    }
+
+    keydown_up() {
+        this.player.jump()
     }
     
 }

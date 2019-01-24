@@ -1,5 +1,5 @@
 import { compose } from 'ramda';
-import { UsesCustomObjects, EmitsEvents, UsesPlayerFunctions, DisplaysModals } from '../mixins'
+import { UsesCustomObjects, EmitsEvents, UsesPlayerFunctions, DisplaysModals, UsesCommonKeyboardKeys } from '../mixins'
 import Scene from '../Scene';
 
 const LevelFactory = ({ customObjects }) => {
@@ -8,7 +8,8 @@ const LevelFactory = ({ customObjects }) => {
         DisplaysModals, 
         UsesPlayerFunctions,
         EmitsEvents,
-        UsesCustomObjects(customObjects)
+        UsesCustomObjects(customObjects),
+        UsesCommonKeyboardKeys,
     ]
 
     return class Level extends compose(...traits)(Scene) {

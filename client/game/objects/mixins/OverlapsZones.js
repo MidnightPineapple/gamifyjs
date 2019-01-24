@@ -65,6 +65,11 @@ const OverlapsZonesFactory = superclass => {
                 }
             }
         }
+
+        getOverlappingObjects(key) {
+            const zone = zones[key];
+            return zone.overlapping.keys().filter(o => this.isOverlapping(key,o));
+        }
         
     }
 

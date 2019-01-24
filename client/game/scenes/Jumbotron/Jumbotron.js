@@ -21,7 +21,7 @@ export default class Jumbotron extends Scene {
         this.title = title;
         this.subtitle = subtitle;
         this.parent = parent;
-        this.onDismiss = onDismiss;
+        onDismiss && (this.onDismiss = onDismiss);
     }
 
     create() {
@@ -49,7 +49,14 @@ export default class Jumbotron extends Scene {
     dismiss() {
         this.parent.scene.resume();
         this.scene.stop();
-        if(typeof this.onDismiss === "function") this.onDismiss();
+        if(typeof this.onDismiss === "function") {
+            this.onDismiss();
+        }
+    }
+
+    setOnDismiss(fn) {
+        this.onDismiss = fn;
+        return this;
     }
 
 }
