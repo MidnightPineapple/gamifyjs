@@ -28,23 +28,27 @@ export default class Demo extends Level({customObjects}) {
         this.physics.add.collider(this.player, platforms)
         
         this.robot = this.add.robot(actionZone.x, actionZone.y)
+        this.robot2 = this.add.robot2(actionZone.x-50, actionZone.y);
         this.physics.add.collider(this.robot, platforms)
+        this.physics.add.collider(this.robot2, platforms)
         this.robot.idle()
 
         this.cursors = this.input.keyboard.createCursorKeys();
 
         this.input.keyboard.on("keydown_A", () => this.robot.run("left"))
+        this.input.keyboard.on("keydown_W", () => this.robot.jump())
         this.input.keyboard.on("keyup_A", () => this.robot.idle())
+        this.input.keyboard.on("keyup_D", () => this.robot.die())
 
-        this.emitCollide([ [this.player, this.robot] ])
-        this.player.overlapZone("hackable-range", this.robot)
+        this.emitCollide([ [this.player, this.robot], [ this.robot2, this.robot ], [ this.player, this.robot2 ] ])
+        this.player.overlapZone(this.player.ZONES.HACK, this.robot);
 
         const demoFunction = this.makeFunc("demo-function")
         const demoFunction2 = this.makeFunc("demo-function")
 
 
         // ! FOR DEBUG
-        this.alert("Hai")
+        this.player.setOnDieCallback(()=>this.modal.jumbotron("You Died!", "Try Again! (space)"))
         // this.player.on(this.player.constants.OverlapsZones.OVERLAP_START + "_hackable-range", function() {
         // }, this)
         // this.player.on(this.player.constants.OverlapsZones.OVERLAP_EVENT + "_hackable-range", function() {
@@ -87,6 +91,8 @@ export default class Demo extends Level({customObjects}) {
         } else {
             this.player.idle()
         }
+
+        this.robot2.moveToward(this.player)
     }
     
 }

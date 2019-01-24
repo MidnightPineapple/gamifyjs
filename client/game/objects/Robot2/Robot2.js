@@ -6,13 +6,13 @@ export default class Robot2 extends Enemy({ anims }) {
 
     constructor(scene, x, y) {
         super(scene, x, y, constants.SPRITESHEET_KEY, 0);
+        Object.assign(this, constants);
+
+        this.idle();
     }
 
     onIdle() {
-        this.anims.play(constants.ANIMS.IDLE);
+        
     }
-
-    MAX_VELOCITY_X = 150;
-    ACCELERATION_X = 50;
 
 }

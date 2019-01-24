@@ -6,18 +6,16 @@ export default class Slime extends Enemy({ anims }){
 
     constructor(scene, x, y) {
         super(scene, x, y, constants.SPRITESHEET_KEY, 0);
+        Object.assign(this, constants);
         this.idle();
     }
 
     onIdle() {
-        this.anims.play(constants.ANIMS.IDLE);
+
     }
 
     onRun(direction) {
-        this.anims.play(constants.ANIMS.RUNNING, true);
-    }
 
-    MAX_VELOCITY_X = 5;
-    ACCELERATION_X = 5;
+    }
 
 }

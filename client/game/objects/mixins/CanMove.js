@@ -16,9 +16,14 @@ const CanMoveFactory = superclass => class CanMove extends superclass {
         }
         if(direction!=="left" && direction!=="right") return
         const left = direction === "left"
-        const accel = this.ACCELERATION_X || CONSTANTS.DEFAULT_ACCELERATION_X; 
-        this.setAccelerationX(!!left?-accel:accel);
+        const accel = (left ? -1 : 1 ) * ( this.ACCELERATION_X || CONSTANTS.DEFAULT_ACCELERATION_X ); 
+        if(this.body.acceleration.x * accel < 0) {
+            // cancel out momentum
+            this.setVelocityX(0);
+        }
+        this.setAccelerationX(accel);
         this.setFlip(left)
+        if(this.ANIMS.RUNNING) this.anims.play(this.ANIMS.RUNNING, true)
     }
 
     jump() {
@@ -26,6 +31,7 @@ const CanMoveFactory = superclass => class CanMove extends superclass {
         if(this.onGround()) {
             if(typeof this.onJump === "function") {
                 if(this.onJump() === false) return;
+                if(this.ANIMS.JUMPING) this.anims.play(this.ANIMS.JUMPING, true);
             }
             this.setVelocityY(velocity);
         } else {
@@ -43,6 +49,7 @@ const CanMoveFactory = superclass => class CanMove extends superclass {
             if(this.onIdle() === false) return;
         }
         this.setAccelerationX(0);
+        if(this.ANIMS.IDLE) this.anims.play(this.ANIMS.IDLE, true)        
     }
 
     onGround() {

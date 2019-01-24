@@ -6,4 +6,5 @@ export default {
     WELCOME: "welcome",
     ERROR: "error",
     ALERT:"alert",
+    JUMBOTRON:"jumbotron",
 }

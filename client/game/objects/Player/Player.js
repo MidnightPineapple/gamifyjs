@@ -11,7 +11,10 @@ export default class Player extends compose(IsMortal, CanMove, OverlapsZones, Is
 
         Object.assign(this, constants);
 
-        this.addZone("hackable-range", 100, 100)
+        this.addZone(constants.ZONES.HACK, 100, 100)
+        .setOrigin();
+
+        this.addZone(constants.ZONES.INTERACT, 50, 50)
         .setOrigin();
 
     }
@@ -20,21 +23,18 @@ export default class Player extends compose(IsMortal, CanMove, OverlapsZones, Is
 
     onRun(direction) {
         if(!this.alive) return false;
-        this.anims.play(constants.ANIMS.RUNNING, true)
     }
 
     onJump() {
         if(!this.alive) return false;
-        this.anims.play(constants.ANIMS.JUMPING);
     }
 
     onIdle() {
         if(!this.alive) return false;
-        this.anims.play(constants.ANIMS.IDLE, true);
     }
 
     onDie() {
-        this.anims.playReverse(constants.ANIMS.DYING, true);
+        
     }
 
     hit() {

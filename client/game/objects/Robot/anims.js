@@ -7,7 +7,7 @@ export default anims => [
         frameRate:6,
         repeat: -1,
     }, {
-        key:constants.ANIMS.MOVING,
+        key:constants.ANIMS.RUNNING,
         frames: anims.generateFrameNumbers(constants.SPRITESHEET_KEY, { start:7, end:12 }),
         frameRate: 12,
         repeat: -1,

@@ -17,6 +17,8 @@ export default ({ anims }) => {
             super(...args);
         }
 
+        isEnemy = true;
+
         onRun() {
             if(!this.alive) return false;
         }
@@ -30,7 +32,14 @@ export default ({ anims }) => {
         }
 
         onDie() {
-            // TODO: add safe way to remove the object from scene
+            this.destroy(false);
+            // add some despawn effects 
+        }
+
+        moveToward(foreignObj) {
+            if(this.x < foreignObj.x) this.run('right');
+            if(this.x > foreignObj.x) this.run('left');
+            if(this.y - foreignObj.y > 50) this.jump();
         }
 
     }

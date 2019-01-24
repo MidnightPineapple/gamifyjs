@@ -1,11 +1,11 @@
 import { compose } from 'ramda';
-import { UsesCustomObjects, EmitsEvents, UsesPlayerFunctions, DisplaysAlerts } from '../mixins'
+import { UsesCustomObjects, EmitsEvents, UsesPlayerFunctions, DisplaysModals } from '../mixins'
 import Scene from '../Scene';
 
 const LevelFactory = ({ customObjects }) => {
 
     const traits = [
-        DisplaysAlerts, 
+        DisplaysModals, 
         UsesPlayerFunctions,
         EmitsEvents,
         UsesCustomObjects(customObjects)
