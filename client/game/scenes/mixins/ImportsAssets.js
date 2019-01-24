@@ -89,23 +89,31 @@ export default superclass => class ImportsAssets extends superclass {
         }
     }
 
-    importSpritesheets(require, config) {
+    importSpritesheets(require) {
         const files = importAll(require);
 
-        const spritesheetConfig = {
-            frameWidth: 32,
-            frameHeight: 32,
-            spacing: 0, 
-            margin: 0,
-        }
-
         for( let filename in files ) {
+            const match = filename.match(/\.([0-9]{1,2}\.[0-9]{1,2}).(png|jpe?g)$/)
+            let frameWidth, frameHeight;
+
+            if(match instanceof Array) {
+                const dims = match[1].split(".");
+                frameWidth = parseInt(dims[0]);
+                frameHeight = parseInt(dims[1]);
+            }
+
             this.load.spritesheet(
                 filename
                 .replace(/\.(png|jpe?g)$/,"")
-                .replace(/^\.(\\|\/)/,""),
+                .replace(/^\.(\\|\/)/,"")
+                .replace(/\.[0-9]{1,2}\.[0-9]{1,2}/, ""),
                 files[filename], 
-                config || spritesheetConfig
+                { 
+                    frameWidth: frameWidth || 32,
+                    frameHeight: frameHeight || 32,
+                    spacing: 0, 
+                    margin: 0,    
+                }
             )
         }
     }

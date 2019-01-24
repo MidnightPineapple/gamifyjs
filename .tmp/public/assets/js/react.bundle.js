@@ -559,7 +559,17 @@ function (_Component) {
           parameters = _ref.parameters,
           displayName = _ref.displayName;
 
-      _this.newFunction(functionId, text, parameters, displayName);
+      var existingFun = _this.state.functions.find(function (f) {
+        return f.functionId === functionId;
+      });
+
+      if (!existingFun) {
+        _this.newFunction(functionId, text, parameters, displayName);
+      } else {
+        var idx = _this.state.functions.indexOf(existingFun);
+
+        _this.focusOnFunction(idx);
+      }
     }).onError(function (_ref2) {
       var functionId = _ref2.functionId,
           errorMessage = _ref2.errorMessage;

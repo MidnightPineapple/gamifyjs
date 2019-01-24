@@ -22,7 +22,7 @@ const CanMoveFactory = superclass => class CanMove extends superclass {
             this.setVelocityX(0);
         }
         this.setAccelerationX(accel);
-        this.setFlip(left)
+        this.setFlip(this.FLIP_X ? !left : left)
         if(this.ANIMS.RUNNING) this.anims.play(this.ANIMS.RUNNING, true)
     }
 
@@ -61,7 +61,7 @@ const CanMoveFactory = superclass => class CanMove extends superclass {
 const CONSTANTS = {
     DEFAULT_ACCELERATION_X:50,
     DEFAULT_VELOCITY_Y:-100,
-    DEFAULT_JUMP_DAMPENER: 0.0,
+    DEFAULT_JUMP_DAMPENER: 0.04,
     DEFAULT_MAX_VELOCITY_X: 100,
     DEFAULT_MAX_VELOCITY_Y: 100,
     DEFAULT_BOUNCE_X: .1,

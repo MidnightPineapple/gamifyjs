@@ -59,10 +59,21 @@ export default ({ anims }) => {
             } else {
                 this.run(tieBreakDirection);
             }
-            if(tieBreakY !== this.y || this.body.touching.left || this.body.touching.right) {
+            if(tieBreakY !== this.y || this.body.touching.left || this.body.touching.right || this.body.onWall() ) {
                 tieBreaking = false;
             }
             if(this.y - foreignObj.y > 50) this.jump();
+        }
+
+        patrol() {
+            const touchWall = this.body.touching.left || this.body.touching.right || this.body.onWall();
+            if(!tieBreakDirection || touchWall) {
+                tieBreakDirection = tieBreaker();
+            } 
+            if(Phaser.Math.RND.integerInRange(0,99) < 30) {
+                this.jump();
+            }
+            this.run(tieBreakDirection);
         }
 
     }

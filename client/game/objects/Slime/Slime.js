@@ -14,8 +14,8 @@ export default class Slime extends Enemy({ anims }){
 
     }
 
-    onRun(direction) {
-
+    onJump() {
+        return false;
     }
 
 }

@@ -41,8 +41,8 @@ export default class Demo extends Level({customObjects}) {
         this.emitCollide([ [this.player, this.robot], [ this.robot2, this.robot ], [ this.player, this.robot2 ] ])
         this.player.overlapZone(this.player.ZONES.HACK, this.robot);
 
-        const demoFunction = this.makeFunc("demo-function")
-        const demoFunction2 = this.makeFunc("demo-function")
+        const demoFunction = this.makeFunc("demo-function", "demolevel1")
+        this.demoFunction2 = this.makeFunc("demo-function", "demolevel2")
 
 
         // ! FOR DEBUG
@@ -67,7 +67,6 @@ export default class Demo extends Level({customObjects}) {
             demoFunction.execute();
         })
 
-        // demoFunction2.messenger.send();
         
         
 
@@ -76,7 +75,8 @@ export default class Demo extends Level({customObjects}) {
     update(...args) {
         if(typeof super.update === "function") super.update(...args)
 
-        this.robot2.moveToward(this.player)
+        this.robot2.moveToward(this.player);
+        this.robot.patrol();
     }
 
     keydown_left() {
@@ -99,4 +99,13 @@ export default class Demo extends Level({customObjects}) {
         this.player.jump()
     }
     
+    keyup_SPACE() {
+        const overlapping = this.player.getOverlappingObjects(this.player.ZONES.HACK)
+
+        for( const obj of overlapping ) {
+            if(obj === this.robot) {
+                this.demoFunction2.messenger.send();
+            }
+        }
+    }
 }

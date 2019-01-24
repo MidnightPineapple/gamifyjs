@@ -11,7 +11,13 @@ export default class TabbedCodeEditor extends Component {
         super(props)
         this.messenger = new EditorMessenger(this.props.frame)
         .onReceiveFunction(({ functionId, text, parameters, displayName }) => {
-            this.newFunction(functionId, text, parameters, displayName);
+            const existingFun = this.state.functions.find(f=>f.functionId === functionId)
+            if(!existingFun) {
+                this.newFunction(functionId, text, parameters, displayName);
+            } else {
+                const idx = this.state.functions.indexOf(existingFun);
+                this.focusOnFunction(idx);
+            }
         }).onError(({ functionId, errorMessage }) => {
             this.newError(errorMessage);
         })

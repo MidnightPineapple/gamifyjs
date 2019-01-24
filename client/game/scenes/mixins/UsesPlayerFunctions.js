@@ -9,10 +9,9 @@ export default superclass => {
     
     return class UsesPlayerFunctions extends compose(HandlesErrors)(superclass) {
 
-        makeFunc(key) { 
-            const PlayerFunction = this.cache.json.get(key);
-            if(!PlayerFunction) throw new Error("Function " + key + " not found.");
-            const functionId = Phaser.Math.RND.uuid();
+        makeFunc(templateKey, functionId) { 
+            const PlayerFunction = this.cache.json.get(templateKey);
+            if(!PlayerFunction) throw new Error("Function " + templateKey + " not found.");
             const fun = new PlayerFunction(this.emitError.bind(this), new PlayerFunctionMessenger(functionId, this.frame));
             functions[functionId] = fun;
             return fun; 
