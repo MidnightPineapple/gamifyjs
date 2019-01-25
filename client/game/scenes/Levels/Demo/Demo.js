@@ -24,7 +24,7 @@ export default class Demo extends Level({customObjects}) {
         const spawnPoint = this.map.findObject("objects", o => o.name === "spawn")
         const actionZone = this.map.findObject("objects", o => o.name === "action")
 
-        this.player = this.add.player(spawnPoint.x, spawnPoint.y)
+        this.player = this.add.player(spawnPoint.x, spawnPoint.y - 20)
         this.physics.add.collider(this.player, platforms)
         
         this.robot = this.add.robot(actionZone.x, actionZone.y)
@@ -36,7 +36,7 @@ export default class Demo extends Level({customObjects}) {
         this.input.keyboard.on("keydown_H", () => this.robot.run("left"))
         this.input.keyboard.on("keydown_U", () => this.robot.jump())
         this.input.keyboard.on("keyup_H", () => this.robot.idle())
-        this.input.keyboard.on("keyup_K", () => this.robot.die())
+        this.input.keyboard.on("keydown_K", () => this.player.jump())
 
         this.emitCollide([ [this.player, this.robot], [ this.robot2, this.robot ], [ this.player, this.robot2 ] ])
         this.player.overlapZone(this.player.ZONES.HACK, this.robot2);
@@ -44,8 +44,9 @@ export default class Demo extends Level({customObjects}) {
         const demoFunction = this.makeFunc("demo-function", "demolevel1")
         this.demoFunction2 = this.makeFunc("demo-function", "demolevel2")
 
-
         // ! FOR DEBUG
+
+
         this.player.setOnDieCallback( ()=> {
             this.modal.jumbotron("You Died!", "Try Again! (space)")
             .setOnDismiss( () => this.scene.restart() )
@@ -70,15 +71,14 @@ export default class Demo extends Level({customObjects}) {
             demoFunction.execute();
         })
 
-        
-
+        this.cursor = this.input.keyboard.createCursorKeys()
     }
     
     update(...args) {
         if(typeof super.update === "function") super.update(...args)
 
         if(this.robot2.isAlive) this.robot2.moveToward(this.player);
-        this.robot.patrol();
+        //this.robot.patrol();
     }
 
     keydown_left() {

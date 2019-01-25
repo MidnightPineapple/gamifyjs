@@ -24,9 +24,12 @@ const CanMoveFactory = superclass => class CanMove extends superclass {
         this.setAccelerationX(accel);
         this.setFlip(this.FLIP_X ? !left : left)
         if(this.ANIMS.RUNNING) this.anims.play(this.ANIMS.RUNNING, true)
+
     }
 
     jump() {
+        const vY = this.body.velocity.y
+        
         const velocity = this.VELOCITY_Y || CONSTANTS.DEFAULT_VELOCITY_Y;
         if(this.onGround()) {
             if(typeof this.onJump === "function") {
@@ -39,9 +42,9 @@ const CanMoveFactory = superclass => class CanMove extends superclass {
                 if(this.onHoldJump() === false) return;
             }
             const dampener = velocity * -1 * ( this.JUMP_DAMPENER || CONSTANTS.DEFAULT_JUMP_DAMPENER )
-            const vY = this.body.velocity.y
             this.setVelocityY( vY - dampener );
         }
+
     }
 
     idle() {
@@ -61,7 +64,7 @@ const CanMoveFactory = superclass => class CanMove extends superclass {
 const CONSTANTS = {
     DEFAULT_ACCELERATION_X:50,
     DEFAULT_VELOCITY_Y:-100,
-    DEFAULT_JUMP_DAMPENER: 0.02,
+    DEFAULT_JUMP_DAMPENER: 0.01,
     DEFAULT_MAX_VELOCITY_X: 100,
     DEFAULT_MAX_VELOCITY_Y: 100,
     DEFAULT_BOUNCE_X: .1,
