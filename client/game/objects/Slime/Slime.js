@@ -10,10 +10,6 @@ export default class Slime extends Enemy({ anims }){
         this.idle();
     }
 
-    onIdle() {
-
-    }
-
     onJump() {
         return false;
     }

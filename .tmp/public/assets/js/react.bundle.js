@@ -395,6 +395,12 @@ function () {
       return this;
     }
   }, {
+    key: "onRevokeFunction",
+    value: function onRevokeFunction(fn) {
+      this.frame.attachListener(_constants__WEBPACK_IMPORTED_MODULE_2__["default"].EDITOR_STOP, fn);
+      return this;
+    }
+  }, {
     key: "forId",
     value: function forId(funId) {
       var _frame = this.frame;
@@ -575,6 +581,18 @@ function (_Component) {
           errorMessage = _ref2.errorMessage;
 
       _this.newError(errorMessage);
+    }).onRevokeFunction(function (_ref3) {
+      var functionId = _ref3.functionId;
+
+      var existingFun = _this.state.functions.find(function (f) {
+        return f.functionId === functionId;
+      });
+
+      if (existingFun) {
+        var idx = _this.state.functions.indexOf(existingFun);
+
+        _this.closeTab(idx);
+      }
     });
     _this.state = {
       functions: [],
@@ -719,11 +737,11 @@ function (_Component) {
 
 
 
-var Tab = function Tab(_ref3) {
-  var focus = _ref3.focus,
-      onClick = _ref3.onClick,
-      onClose = _ref3.onClose,
-      displayName = _ref3.displayName;
+var Tab = function Tab(_ref4) {
+  var focus = _ref4.focus,
+      onClick = _ref4.onClick,
+      onClose = _ref4.onClose,
+      displayName = _ref4.displayName;
   return react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("li", {
     className: classNames(_TabbedCodeEditor_css__WEBPACK_IMPORTED_MODULE_8___default.a.Tab, focus ? _TabbedCodeEditor_css__WEBPACK_IMPORTED_MODULE_8___default.a.Active : _TabbedCodeEditor_css__WEBPACK_IMPORTED_MODULE_8___default.a.Inactive)
   }, react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("button", {
@@ -735,9 +753,9 @@ var Tab = function Tab(_ref3) {
   }, "\xD7"));
 };
 
-var ErrorToast = function ErrorToast(_ref4) {
-  var message = _ref4.message,
-      onDismiss = _ref4.onDismiss;
+var ErrorToast = function ErrorToast(_ref5) {
+  var message = _ref5.message,
+      onDismiss = _ref5.onDismiss;
   return react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("div", {
     className: _TabbedCodeEditor_css__WEBPACK_IMPORTED_MODULE_8___default.a.ErrorToast
   }, react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("p", null, message), react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("button", {
@@ -760,6 +778,7 @@ __webpack_require__.r(__webpack_exports__);
   EDITOR_INSERT: "CodeEditor__messenger--insert",
   EDITOR_REMOVE: "CodeEditor__messenger--remove",
   EDITOR_INIT: "PlayerFunction__function--send",
+  EDITOR_STOP: "PlayerFunction__function--revoke",
   EDIT_SUCCESS: "PlayerFunction__lines--success",
   EDIT_ERROR: "PlayerFunction__lines--error"
 });

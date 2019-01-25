@@ -58,4 +58,11 @@ export default class PlayerFunctionMessenger {
         })
     }
 
+    revoke() {
+        if(!this.playerFunction) throw new Error("Messenger has not been attached to a PlayerFunction yet.")
+        this.frame.send(CONSTANTS.FUNCTION_REVOKE, {
+            functionId: this.functionId,
+        })
+    }
+
 }

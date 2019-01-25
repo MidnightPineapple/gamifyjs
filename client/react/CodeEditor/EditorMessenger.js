@@ -20,6 +20,11 @@ export default class EditorMessenger {
         this.frame.attachListener(CONSTANTS.EDIT_SUCCESS, fn);
         return this;
     }
+
+    onRevokeFunction(fn) {
+        this.frame.attachListener(CONSTANTS.EDITOR_STOP, fn);
+        return this;
+    }
     
     forId(funId) {
         const _frame = this.frame;

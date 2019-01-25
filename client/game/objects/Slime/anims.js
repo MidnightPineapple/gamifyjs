@@ -17,7 +17,7 @@ export default anims => [
         key:constants.ANIMS.DYING, 
         frames: anims.generateFrameNumbers(constants.SPRITESHEET_KEY, { start:17, end:20 }),
         frameRate: 3,
-        repeat: -1,
+        repeat: 0,
     }
 ]
 

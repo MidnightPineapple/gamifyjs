@@ -2,9 +2,16 @@ import { compose } from 'ramda';
 import { IsAnimated, OverlapsZones, CanMove, IsMortal } from '../mixins';
 import ArcadeSprite from '../ArcadeSprite';
 import anims from './anims';
-import constants from './constants'
+import constants from './constants';
 
-export default class Player extends compose(IsMortal, CanMove, OverlapsZones, IsAnimated(anims))(ArcadeSprite) {
+const traits = [
+    IsMortal, 
+    CanMove, 
+    OverlapsZones, 
+    IsAnimated(anims)
+]
+
+export default class Player extends compose(...traits)(ArcadeSprite) {
 
     constructor(scene, x, y) {
         super(scene, x, y, constants.SPRITESHEET_KEY, 0);
@@ -22,15 +29,15 @@ export default class Player extends compose(IsMortal, CanMove, OverlapsZones, Is
     isPlayer = true;
 
     onRun(direction) {
-        if(!this.alive) return false;
+        if(!this.isAlive) return false;
     }
 
     onJump() {
-        if(!this.alive) return false;
+        if(!this.isAlive) return false;
     }
 
     onIdle() {
-        if(!this.alive) return false;
+        if(!this.isAlive) return false;
     }
 
     onDie() {
@@ -38,7 +45,7 @@ export default class Player extends compose(IsMortal, CanMove, OverlapsZones, Is
     }
 
     hit() {
-        if(!this.alive) return false;
+        if(!this.isAlive) return false;
         this.anims.play(constants.ANIMS.HITTING, true);
     }
 

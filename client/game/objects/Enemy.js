@@ -26,15 +26,15 @@ export default ({ anims }) => {
         isEnemy = true;
 
         onRun() {
-            if(!this.alive) return false;
+            if(!this.isAlive) return false;
         }
 
         onJump() {
-            if(!this.alive) return false;
+            if(!this.isAlive) return false;
         }
 
         onIdle() {
-            if(!this.alive) return false;
+            if(!this.isAlive) return false;
         }
 
         onDie() {
@@ -70,7 +70,7 @@ export default ({ anims }) => {
             if(!tieBreakDirection || touchWall) {
                 tieBreakDirection = tieBreaker();
             } 
-            if(Phaser.Math.RND.integerInRange(0,99) < 30) {
+            if(Phaser.Math.RND.integerInRange(0,99) < 10) {
                 this.jump();
             }
             this.run(tieBreakDirection);

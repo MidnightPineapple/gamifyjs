@@ -39,7 +39,7 @@ export default class Demo extends Level({customObjects}) {
         this.input.keyboard.on("keyup_K", () => this.robot.die())
 
         this.emitCollide([ [this.player, this.robot], [ this.robot2, this.robot ], [ this.player, this.robot2 ] ])
-        this.player.overlapZone(this.player.ZONES.HACK, this.robot);
+        this.player.overlapZone(this.player.ZONES.HACK, this.robot2);
 
         const demoFunction = this.makeFunc("demo-function", "demolevel1")
         this.demoFunction2 = this.makeFunc("demo-function", "demolevel2")
@@ -50,24 +50,26 @@ export default class Demo extends Level({customObjects}) {
             this.modal.jumbotron("You Died!", "Try Again! (space)")
             .setOnDismiss( () => this.scene.restart() )
         });
-        // this.player.on(this.player.constants.OverlapsZones.OVERLAP_START + "_hackable-range", function() {
-        // }, this)
+        this.player.on([this.player.constants.OverlapsZones.OVERLAP_START,this.player.ZONES.HACK].join("_"), function() {
+            this.robot2.die();
+            demoFunction.messenger.send();
+        }, this)
+        this.player.on([this.player.constants.OverlapsZones.OVERLAP_END,this.player.ZONES.HACK].join("_"), function() {
+            demoFunction.messenger.revoke();
+            // TODO: also add a way to check if we're in hackable range before executing. 
+            // I could add a class pF.context that holds all gameobjects player must be near to hack it?
+        }, this)
         // this.player.on(this.player.constants.OverlapsZones.OVERLAP_EVENT + "_hackable-range", function() {
         //     // demoFunction.execute();
         //     console.log("overlapping")
         // }, this)
-        // this.player.on(this.player.constants.OverlapsZones.OVERLAP_END + "_hackable-range", function() {
-        //     // demoFunction.execute();
-        //     console.log("end")
-        // }, this)
 
         // how to run a function right after it finishes being edited
-        demoFunction.messenger.send();
+        // demoFunction.messenger.send();
         demoFunction.lines.setOnEditFinishedCallback( () => {
             demoFunction.execute();
         })
 
-        
         
 
     }
@@ -75,7 +77,7 @@ export default class Demo extends Level({customObjects}) {
     update(...args) {
         if(typeof super.update === "function") super.update(...args)
 
-        this.robot2.moveToward(this.player);
+        if(this.robot2.isAlive) this.robot2.moveToward(this.player);
         this.robot.patrol();
     }
 

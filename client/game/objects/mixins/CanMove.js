@@ -38,7 +38,7 @@ const CanMoveFactory = superclass => class CanMove extends superclass {
             if(typeof this.onHoldJump === "function") {
                 if(this.onHoldJump() === false) return;
             }
-            const dampener = - velocity * ( this.JUMP_DAMPENER || CONSTANTS.DEFAULT_JUMP_DAMPENER )
+            const dampener = velocity * -1 * ( this.JUMP_DAMPENER || CONSTANTS.DEFAULT_JUMP_DAMPENER )
             const vY = this.body.velocity.y
             this.setVelocityY( vY - dampener );
         }
@@ -61,7 +61,7 @@ const CanMoveFactory = superclass => class CanMove extends superclass {
 const CONSTANTS = {
     DEFAULT_ACCELERATION_X:50,
     DEFAULT_VELOCITY_Y:-100,
-    DEFAULT_JUMP_DAMPENER: 0.04,
+    DEFAULT_JUMP_DAMPENER: 0.02,
     DEFAULT_MAX_VELOCITY_X: 100,
     DEFAULT_MAX_VELOCITY_Y: 100,
     DEFAULT_BOUNCE_X: .1,

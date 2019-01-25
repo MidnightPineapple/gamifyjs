@@ -20,6 +20,12 @@ export default class TabbedCodeEditor extends Component {
             }
         }).onError(({ functionId, errorMessage }) => {
             this.newError(errorMessage);
+        }).onRevokeFunction(({ functionId }) => {
+            const existingFun = this.state.functions.find(f=>f.functionId === functionId)
+            if(existingFun) {
+                const idx = this.state.functions.indexOf(existingFun);
+                this.closeTab(idx);
+            }
         })
 
         this.state = {
