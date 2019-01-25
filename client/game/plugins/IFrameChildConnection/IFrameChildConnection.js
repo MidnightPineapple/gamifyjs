@@ -10,8 +10,8 @@ export default class IFrameConnection extends Phaser.Plugins.BasePlugin {
         this.ready = false;
         this.parent;
 
-        // // ! FOR DEBUG
-        // window.addEventListener("message", _ => console.log("CHILD", _))
+        // ! FOR DEBUG
+        window.addEventListener("message", _ => console.log("CHILD", _))
     }
 
     static alias = "frame"

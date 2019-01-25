@@ -9,12 +9,12 @@ export default class GameStateManager extends Phaser.Plugins.BasePlugin {
 
     static alias = "stateManager"
 
-    initialize(frameConnection) {
+    initialize(frameConnection, cb) {
         this.messenger = new GameMessenger(frameConnection);
-        this.getGameProgress();
+        this.getGameProgress(cb);
     }
 
-    getGameProgress() {
+    getGameProgress(cb) {
         const { registry } = this.game;
 
         this.messenger.getGameProgress( ({ levels = [], error }) => {
@@ -25,6 +25,9 @@ export default class GameStateManager extends Phaser.Plugins.BasePlugin {
                 registry.set(level.levelId, level);
             }
 
+            if(typeof cb === "function") {
+                cb();
+            }
         });
     }
 

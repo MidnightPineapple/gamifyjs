@@ -1,0 +1,9 @@
+.Frame {
+    width:800px;
+    height:600px;
+}
+
+.ContentContainer {
+    display:flex;
+    flex-wrap: wrap;
+}

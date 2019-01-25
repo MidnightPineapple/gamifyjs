@@ -19,7 +19,7 @@ export default class LoadScene extends compose(ImportsAssets)(Scene) {
     }
 
     init() {
-        // this.stateManager.initialize(this.frame);
+        this.stateManager.initialize(this.frame, () => this.loaded++);
     }
 
     preload() {
@@ -67,7 +67,7 @@ export default class LoadScene extends compose(ImportsAssets)(Scene) {
     }
 
     update() {
-        if(this.loaded === 2) {
+        if(this.loaded === 3) {
             // * Start Menu Scene Here
             this.scene.start(keys.MENU)
             this.loaded = true; 
