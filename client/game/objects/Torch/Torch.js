@@ -5,10 +5,12 @@ import constants from './constants';
 
 class Torch extends compose(OverlapsZones)(Sprite) {
     
-    constructor(scene,x,y, { height = constants.DEFAULT_HEIGHT, width = constants.DEFAULT_WIDTH, player }) {
+    constructor(scene,x,y, { height = constants.DEFAULT_HEIGHT, width = constants.DEFAULT_WIDTH, player, checkpointId }) {
         super(scene, x, y, constants.SPRITESHEET_KEY, 0);
         Object.assign(this, constants);
-
+        this.checkpointId = checkpointId;
+        
+        
         this.body.setEnable(false);
         this.saveCheckpoint = this.addZone(constants.ZONES.SAVE_CHECKPOINT, width, height);
         

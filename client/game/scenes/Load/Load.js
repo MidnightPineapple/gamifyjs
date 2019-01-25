@@ -18,6 +18,10 @@ export default class LoadScene extends compose(ImportsAssets)(Scene) {
         this.loaded = 0;
     }
 
+    init() {
+        console.log(this)
+    }
+
     preload() {
         window.setTimeout(() => this.loaded++, 2000);
         
