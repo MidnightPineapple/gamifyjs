@@ -1,5 +1,5 @@
 import Phaser from 'phaser';
-import GameMessenger from '../../lib';
+import { GameMessenger } from '../../lib';
 
 export default class GameStateManager extends Phaser.Plugins.BasePlugin {
 
@@ -7,7 +7,7 @@ export default class GameStateManager extends Phaser.Plugins.BasePlugin {
         super(...params);
     }
 
-    alias = "stateManager"
+    static alias = "stateManager"
 
     initialize(frameConnection) {
         this.messenger = new GameMessenger(frameConnection);

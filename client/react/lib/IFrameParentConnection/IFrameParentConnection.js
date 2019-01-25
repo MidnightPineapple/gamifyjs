@@ -5,7 +5,7 @@ export default class IFrameParentConnection {
 
     constructor() {
         // // ! FOR DEBUG
-        // window.addEventListener("message", _ => console.log("PARENT", _))
+        window.addEventListener("message", _ => console.log("PARENT", _))
 
         window.addEventListener("message", ({ data, source, origin }) => {
             if(origin !== SITE_ORIGIN ) return;

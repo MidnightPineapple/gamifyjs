@@ -19,7 +19,7 @@ export default class LoadScene extends compose(ImportsAssets)(Scene) {
     }
 
     init() {
-        console.log(this)
+        // this.stateManager.initialize(this.frame);
     }
 
     preload() {
