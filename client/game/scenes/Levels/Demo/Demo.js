@@ -25,7 +25,9 @@ export default class Demo extends Level({customObjects}) {
         const actionZone = this.map.findObject("objects", o => o.name === "action")
 
         this.player = this.add.player(spawnPoint.x, spawnPoint.y - 20)
+        this.savePoint = this.add.torch(spawnPoint.x + 300, spawnPoint.y - 20, { player: this.player })
         this.physics.add.collider(this.player, platforms)
+        
         
         this.robot = this.add.robot(actionZone.x, actionZone.y)
         this.robot2 = this.add.robot2(actionZone.x-50, actionZone.y);
