@@ -1,15 +1,14 @@
-import Scene from "../Scene";
-import keys from '../keys';
-import { HandlesErrors } from '../mixins';
+import Scene from "../../Scene";
+import keys from '../../keys';
 
-export default class MenuScene extends HandlesErrors(Scene) {
+export default class MainMenu extends Scene {
 
     constructor(params) {
         super({ ...params, key: keys.MENU })
     }
 
     create() {
-        this.cameras.main.setBackgroundColor("#00004d");
+        this.cameras.main.setBackgroundColor("#1d212d");
 
         const start = this.add.bitmapText(100, 200, "BitPotion", "Start", 100)
         .setInteractive()
@@ -18,7 +17,6 @@ export default class MenuScene extends HandlesErrors(Scene) {
         const load = this.add.bitmapText(100, 300, "BitPotion", "Levels", 100)
         .setInteractive()
         .on("pointerup", this.openLevelMenu.bind(this));
-
 
     }
 

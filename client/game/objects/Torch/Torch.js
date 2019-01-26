@@ -14,13 +14,14 @@ class Torch extends compose(OverlapsZones)(Sprite) {
         this.body.setEnable(false);
         this.saveCheckpoint = this.addZone(constants.ZONES.SAVE_CHECKPOINT, width, height);
         
-        this.overlapZone(constants.ZONES.SAVE_CHECKPOINT, player, () => {
+        this.overlapZone(constants.ZONES.SAVE_CHECKPOINT, player)
+
+        this.on(OverlapsZones.CONSTANTS.OVERLAP_START+"_"+constants.ZONES.SAVE_CHECKPOINT, () => {
             this.setFrame(7);
             if(typeof this.checkpointCallback === "function") {
                 this.checkpointCallback();
             }
         })
-
 
     }
 

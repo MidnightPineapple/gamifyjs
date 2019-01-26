@@ -23,13 +23,17 @@ export default class Demo extends Level({customObjects}) {
         this.map.createStaticLayer("above-player", tileset, 0, 0)
         .setDepth(10)
         
-        const spawnPoint = this.map.findObject("objects", o => o.name === "spawn")
+        const spawnPoint = this.checkpoint === 0 ? this.map.findObject("objects", o => o.name === "spawn") : {x:500,y:500}
         const actionZone = this.map.findObject("objects", o => o.name === "action")
 
         this.player = this.add.player(spawnPoint.x, spawnPoint.y - 20)
         this.savePoint = this.add.torch(spawnPoint.x + 300, spawnPoint.y - 20, { player: this.player })
+        this.savePoint.setCheckpointCallback(() => {
+            this.stateManager.sendCheckpointReached(this.scene.key, 1)
+        })
         this.physics.add.collider(this.player, platforms)
         
+
         
         this.robot = this.add.robot(actionZone.x, actionZone.y)
         this.robot2 = this.add.robot2(actionZone.x-50, actionZone.y);
@@ -51,7 +55,6 @@ export default class Demo extends Level({customObjects}) {
         // this.demoFunction2 = this.makeFunc("demo-function", "demolevel2")
 
         // ! FOR DEBUG
-
         
         this.player.setOnDieCallback( ()=> {
             this.modal.jumbotron("You Died!", "Try Again! (space)")

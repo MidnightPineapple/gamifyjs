@@ -25,7 +25,7 @@ export default class LoadScene extends compose(ImportsAssets)(Scene) {
     preload() {
         window.setTimeout(() => this.loaded++, 2000);
         
-        this.cameras.main.setBackgroundColor("#00004d")
+        this.cameras.main.setBackgroundColor("#1d212d")
         
         const logo = this.add.image(400,300, 'logo')
         .setOrigin(.5, 1);
