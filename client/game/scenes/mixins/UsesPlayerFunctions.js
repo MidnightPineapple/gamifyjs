@@ -1,7 +1,7 @@
 import Phaser from 'phaser';
 import { compose } from 'ramda';
 import HandlesErrors from './HandlesErrors';
-import { PlayerFunctionMessenger } from '../../lib';
+import { PlayerFunctionMessenger, PlayerFunction } from '../../lib';
 
 export default superclass => {
 
@@ -15,6 +15,18 @@ export default superclass => {
             const fun = new PlayerFunction(this.emitError.bind(this), new PlayerFunctionMessenger(functionId, this.frame));
             functions[functionId] = fun;
             return fun; 
+        }
+
+        loadFunc(functionId, json) {
+            const fun = PlayerFunction.fromJson(json)
+            .setMessenger(new PlayerFunctionMessenger(functionId, this.frame))
+            .setErrorHandler(this.emitError.bind(this));
+            functions[functionId] = fun;
+            return fun;
+        }
+
+        getFunc(functionId) {
+            return functions[functionId];
         }
 
     }

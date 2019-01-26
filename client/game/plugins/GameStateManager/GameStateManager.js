@@ -18,13 +18,10 @@ export default class GameStateManager extends Phaser.Plugins.BasePlugin {
         const { registry } = this.game;
 
         this.messenger.getGameProgress( ({ levels = [], error }) => {
-
             if(error) throw new Error(error.message);
-
             for( const level of levels ) {
                 registry.set(level.levelId, level);
             }
-
             if(typeof cb === "function") {
                 cb();
             }
@@ -62,7 +59,7 @@ export default class GameStateManager extends Phaser.Plugins.BasePlugin {
         this.messenger.sendFunctionChanged(levelId, functionId, json, () => {
             const prevState = registry.get(levelId);
             const newState = Object.assign({}, prevState);
-            newState.functions = newState.functions.slice();
+            newState.functions = Object.assign({}, newState.functions);
             newState.functions[functionId] = json;
             registry.set(levelId, newState);
         })

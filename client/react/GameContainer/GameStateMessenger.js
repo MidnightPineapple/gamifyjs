@@ -19,7 +19,7 @@ export default class GameStateMessenger {
                     levelId:"demo",
                     lastCheckpoint:0,
                     functions: {
-                        demofunction:`{
+                        "demo-function":`{
                             "displayName": "test",
                             "description": "A function to test the loader and execution in the browser", 
                             "parameters": [],

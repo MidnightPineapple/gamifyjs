@@ -9,6 +9,8 @@ export default class Demo extends Level({customObjects}) {
         super({ ...params, key: keys.DEMO })
     }
 
+    playerFunctionMetas = [ { functionId:"demo-function2", template:"demo-function" } ]
+
     create() {
         this.cameras.main.setBackgroundColor("#1d212d");        
 
@@ -42,25 +44,25 @@ export default class Demo extends Level({customObjects}) {
 
         this.emitCollide([ [this.player, this.robot], [ this.robot2, this.robot ], [ this.player, this.robot2 ] ])
         this.player.overlapZone(this.player.ZONES.HACK, this.robot2);
+        this.player.overlapZone(this.player.ZONES.HACK, this.robot);
 
-        const demoFunction = this.makeFunc("demo-function", "demolevel1")
-        this.demoFunction2 = this.makeFunc("demo-function", "demolevel2")
+        const demoFunction = this.getFunc("demo-function2")
+        const demoFunction1 = this.getFunc("demo-function")
+        // this.demoFunction2 = this.makeFunc("demo-function", "demolevel2")
 
         // ! FOR DEBUG
 
-
+        
         this.player.setOnDieCallback( ()=> {
             this.modal.jumbotron("You Died!", "Try Again! (space)")
             .setOnDismiss( () => this.scene.restart() )
         });
-        this.player.on([this.player.constants.OverlapsZones.OVERLAP_START,this.player.ZONES.HACK].join("_"), function() {
-            this.robot2.die();
+        this.player.on([this.player.constants.OverlapsZones.OVERLAP_START,this.player.ZONES.HACK].join("_"), function(foreignObj) {
             demoFunction.messenger.send();
+            this.robot2.die();
         }, this)
         this.player.on([this.player.constants.OverlapsZones.OVERLAP_END,this.player.ZONES.HACK].join("_"), function() {
             demoFunction.messenger.revoke();
-            // TODO: also add a way to check if we're in hackable range before executing. 
-            // I could add a class pF.context that holds all gameobjects player must be near to hack it?
         }, this)
         // this.player.on(this.player.constants.OverlapsZones.OVERLAP_EVENT + "_hackable-range", function() {
         //     // demoFunction.execute();
@@ -69,7 +71,7 @@ export default class Demo extends Level({customObjects}) {
 
         // how to run a function right after it finishes being edited
         // demoFunction.messenger.send();
-        demoFunction.lines.setOnEditFinishedCallback( () => {
+        demoFunction.attachOnEditFinishedListener( () => {
             demoFunction.execute();
         })
 

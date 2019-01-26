@@ -11,8 +11,8 @@ export default superclass => {
             super(params);
         }
 
-        init() {
-            if(typeof super.init === "function") super.init();
+        init(...args) {
+            if(typeof super.init === "function") super.init(...args);
             
             keys = this.input.keyboard.addKeys(directionalKeys.reduce((a,v) => [...a,...v], []).concat(interactionKeys).join(","));
 

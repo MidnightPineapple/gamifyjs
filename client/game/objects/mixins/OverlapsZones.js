@@ -63,6 +63,8 @@ const OverlapsZonesFactory = superclass => {
                         zone.overlapping.set(obj, { state: overlapping - 1, eventSuffix });
                     }
                 }
+
+                
             }
         }
 

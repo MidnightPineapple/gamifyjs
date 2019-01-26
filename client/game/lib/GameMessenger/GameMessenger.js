@@ -21,7 +21,7 @@ export default class GameMessenger {
         this.frame.send(constants.LEVEL_CHECKPOINT, { levelId, checkpointId }, cb);
     }
 
-    sendFunctionChanged(levelId, functionId, json, cb) {
-        this.frame.send(constants.FUNCTION_SAVE, { levelId, functionId, json }, cb);
+    sendFunctionChanged(levelId, functionId, functionJson, cb) {
+        this.frame.send(constants.FUNCTION_SAVE, { levelId, functionId, functionJson }, cb);
     }
 }

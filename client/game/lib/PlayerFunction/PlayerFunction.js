@@ -75,19 +75,30 @@ export default class PlayerFunction {
         ]);
 
         this.lines.setOnEditCallback(_stale.bind(this));
-        this.lines.setOnEditFinishedCallback(() => console.log("Finished Edit"));
+
+        this.lines.setOnEditFinishedCallback( () => {
+            for( const cb of this.onEditFinishedListeners ) {
+                cb();
+            }
+        } )
 
         this.cache = undefined;
 
-        this.errorHandler = typeof errorHandler === "function" ? errorHandler : undefined; 
-        
+        if(errorHandler) {
+            this.setErrorHandler(errorHandler, undefined);      
+        }
         if(messenger) {
-            if(messenger.isPlayerFunctionMessenger !== true) throw new TypeError("Messenger must be a PlayerFunctionMessenger");
-            this.messenger = messenger.setPlayerFunction(this);
+            this.setMessenger(messenger);
         }
     }
 
     isPlayerFunction = true;
+
+    onEditFinishedListeners = [];
+
+    attachOnEditFinishedListener(cb) {
+        this.onEditFinishedListeners.push(cb);
+    }
 
     execute(...paramValues) {
         let fun;
@@ -118,12 +129,14 @@ export default class PlayerFunction {
     }
 
     setErrorHandler(handler, ctx) {
-        this.errorHandler=handler.bind(ctx);
+        this.errorHandler = handler.bind(ctx);
         return this;
     }
 
     setMessenger(messenger) {
-        this.messenger=messenger;
+        if(messenger.isPlayerFunctionMessenger !== true) throw new TypeError("Messenger must be a PlayerFunctionMessenger");
+        this.messenger = messenger;
+        this.messenger = messenger.setPlayerFunction(this);
         return this;
     }
 
@@ -139,6 +152,16 @@ export default class PlayerFunction {
             description: this.description,
             lines: lines.slice(1, lines.length - 1),
         })
+    }
+
+    getData() {
+        const lines = this.lines.config
+        return {
+            displayName: this.displayName,
+            paramters: this.parameters,
+            description: this.description,
+            lines: lines.slice(1, lines.length - 1),
+        }
     }
 
     toString() {
