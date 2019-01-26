@@ -7,4 +7,5 @@ export default {
     ERROR: "error",
     ALERT:"alert",
     JUMBOTRON:"jumbotron",
+    TEXT_CONSOLE:"text-console",
 }
