@@ -21,7 +21,19 @@
      password: {
        type: 'string',
        required: true
+     },
+
+     //add calculation function from user level. last checkpoint passed update
+     grade: {
+       type: 'number',
+       defaultsTo: 0
+     },
+
+     userLevels: {
+       collection: 'userlevel',
+       via:'user'
      }
+
    },
    customToJSON: function() {
       return _.omit(this, ['password'])
