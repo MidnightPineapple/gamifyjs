@@ -4,6 +4,7 @@ export default {
     MENU: "main-menu",
     PAUSE_MENU: "pause-menu",
     MAIN_MENU: "main-menu",
+    CREDITS_MENU: "credits-menu",
     DEMO: "demo",
     WELCOME: "welcome",
     ERROR: "error",

@@ -1,21 +1,26 @@
 import Phaser from 'phaser';
 
-export default function ConsoleTextStream(inputLines, outputLines) {
+export default function ConsoleTextStream(inputLines, outputLines, { random } = {}) {
     return {
         [Symbol.iterator]: function *() {
             const inputArray = inputLines.slice();
             const outputArray = outputLines.slice();
-            let cursor;
-
+            let cursor = -1;
             while(true) {
-                while(true) {
-                    // make sure new cursor isn't equal to the old one
-                    const rn = Phaser.Math.RND.between(0, inputArray.length - 1);
-                    if( cursor !== rn ) {
-                        cursor = rn;
-                        break;
+                if(random === true) {
+                    // find a random cursor & make sure new cursor isn't equal to the old one
+                    while(true) {
+                        const rn = Phaser.Math.RND.between(0, inputArray.length - 1);
+                        if( cursor !== rn ) {
+                            cursor = rn;
+                            break;
+                        }
                     }
+                } else {
+                    cursor++;
+                    if(!inputArray[cursor]) return;
                 }
+
                 const inputLine = inputArray[cursor];
                 const outputLine = outputArray[cursor] || "";
                 let resultLine = "> ";
@@ -29,14 +34,15 @@ export default function ConsoleTextStream(inputLines, outputLines) {
                 }
 
                 yield resultLine + "\n" + outputLine
+
             }
 
         }
     }
 }
 
-ConsoleTextStream.delayed = function(ms, inputLines, outputLines) {
-    return delayIterator(ms, ConsoleTextStream(inputLines, outputLines))
+ConsoleTextStream.delayed = function(ms, inputLines, outputLines, config) {
+    return delayIterator(ms, ConsoleTextStream(inputLines, outputLines, config))
 }
 
 function delayIterator(ms, iterable) {

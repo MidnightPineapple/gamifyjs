@@ -32,7 +32,9 @@ export default class TextConsole extends compose(...traits)(Etc) {
         const { inputLines, outputLines = [], config = {} } = data
 
         const delay = config.delay || 80;
-        this.stream = ConsoleTextStream.delayed(delay, inputLines, outputLines);
+        const random = config.random || false;
+        this.stream = ConsoleTextStream.delayed(delay, inputLines, outputLines, { random });
+        this.instance = Phaser.Math.RND.uuid();
 
     }
 
@@ -49,9 +51,10 @@ export default class TextConsole extends compose(...traits)(Etc) {
         let prevLine = "";
         let newLineIndex = -1;
         const empty = "> \u25ae";
+        const instance = this.instance
 
         for await ( const line of this.stream ) {
-            if(!this.scene.isActive()) break;
+            if(!this.scene.isActive() || this.instance !== instance) break;
             if(line === empty && prevLine !== "") {
                 rotateArray(this.rows);
                 newLineIndex = -1;

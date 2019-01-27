@@ -1,4 +1,3 @@
-import Phaser from 'phaser';
 import Menu from '../Menu';
 import keys from '../../keys';
 
@@ -16,12 +15,13 @@ export default class MainMenu extends Menu() {
 
         const { input: inputWtf, output: outputWtf } = this.cache.json.get('wtfjs');
         this.scene.launch(keys.BACKGROUND, { parent:this, color:"#1d212d"} );
-        this.scene.launch(keys.TEXT_CONSOLE, { parent:this, inputLines:inputWtf, outputLines:outputWtf });
+        this.scene.launch(keys.TEXT_CONSOLE, { parent:this, inputLines:inputWtf, outputLines:outputWtf, config: { random: true } });
         this.scene.moveAbove(keys.TEXT_CONSOLE);
 
-        this.add.button(80,540, {text: "<Continue>", onClick: this.startGame.bind(this) });
-        this.add.button(280,540, {text: "<Start Game>", onClick: this.startGame.bind(this) });
-        this.add.button(510,540, {text: "<Select Level>", onClick: this.startGame.bind(this) });
+        this.add.button(15,540, {text: "<Continue>", onClick: this.startGame.bind(this) });
+        this.add.button(193,540, {text: "<Start Game>", onClick: this.startGame.bind(this) });
+        this.add.button(400,540, {text: "<Select Level>", onClick: this.startLevelMenu.bind(this) });
+        this.add.button(636,540, {text: "<Credits>", onClick: this.startCreditsMenu.bind(this) });
 
         this.tweens.add({
             targets: logo,
@@ -30,13 +30,23 @@ export default class MainMenu extends Menu() {
             ease: 'Power3',
             duration: 300
         })
+
+        this.events.on("shutdown", () => {
+            this.scene.stop(keys.BACKGROUND);
+            this.scene.stop(keys.TEXT_CONSOLE);
+        })
+
     }
 
     startGame() {
         this.scene.start(keys.DEMO)
     }
 
-    openLevelMenu() {
+    startLevelMenu() {
         this.scene.start(keys.WELCOME)
+    }
+
+    startCreditsMenu() {
+        this.scene.start(keys.CREDITS_MENU)
     }
 }
