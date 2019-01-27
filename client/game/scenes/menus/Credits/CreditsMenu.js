@@ -18,7 +18,7 @@ export default class CreditsMenu extends Menu() {
         .setFlipX(true)
         .setOrigin(0,0);
 
-        this.add.button(15,540,{ text:"<Back>", onClick:this.back.bind(this) });
+        this.add.button(25,540,{ text:"<Back>", onClick:this.back.bind(this) });
     }
 
     back(){
