@@ -1,8 +1,9 @@
 export { default as Boot } from './Boot';
 export { default as Load } from './Load';
-export { MainMenu, TextConsole } from './Menus';
-export { Demo, Welcome } from './Levels';
 export { default as Error } from './Error';
 export { default as Alert } from './Alert';
 export { default as Jumbotron } from './Jumbotron';
+export { MainMenu } from './menus';
+export { Demo, Welcome } from './levels';
+export { Background, TextConsole } from './etc';
 export { default as keys } from './keys';

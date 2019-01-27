@@ -1,27 +1,26 @@
+import Phaser from 'phaser';
+
 export default function ConsoleTextStream(inputLines, outputLines) {
     return {
         [Symbol.iterator]: function *() {
             const inputArray = inputLines.slice();
             const outputArray = outputLines.slice();
-            let cursor = 0;
-
+            
             while(true) {
+                const cursor = Phaser.Math.RND.between(0, inputArray.length - 1);
                 const inputLine = inputArray[cursor];
                 const outputLine = outputArray[cursor] || "";
                 let resultLine = "> ";
-                if(!inputLine) return;
 
-                yield resultLine;
+                yield resultLine + "\u25ae";
 
                 for( const char of inputLine ) {
                     resultLine += char;
                     if(char === "\n") resultLine += "... "
-                    yield resultLine;
+                    yield resultLine + "\u25ae";
                 }
 
                 yield resultLine + "\n" + outputLine
-                
-                cursor++;
             }
 
         }

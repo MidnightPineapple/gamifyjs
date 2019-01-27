@@ -2,14 +2,14 @@ import Phaser from 'phaser';
 
 const defaultTextStyles = {
     fontFamily:"Consolas",
-    fontSize:"16px",
+    fontSize:"24px",
     align:'left',
     color:"#e3e3e3",
 }
 
 const defaultGraphicsStyles = {
     paddingHorizontal: 10,
-    paddingVertical: 10,
+    paddingVertical: 20,
 }
 
 export default class Row extends Phaser.GameObjects.Text {
@@ -19,8 +19,8 @@ export default class Row extends Phaser.GameObjects.Text {
             ...defaultTextStyles,
             ...rowConfig.textStyle
         })
-        this.paddingHorizontal = rowConfig.paddingHorizontal || defaultTextStyles.paddingHorizontal
-        this.paddingVertical = rowConfig.paddingVertical || defaultTextStyles.paddingVertical
+        this.paddingHorizontal = rowConfig.paddingHorizontal || defaultGraphicsStyles.paddingHorizontal
+        this.paddingVertical = rowConfig.paddingVertical || defaultGraphicsStyles.paddingVertical
         this.setOrigin(0,0)
         this.setPosition(x,y);
     }
@@ -33,7 +33,7 @@ export default class Row extends Phaser.GameObjects.Text {
     }
 
     positionBelowRow(row) {
-        this.setPosition(this.x, row.y+row.height);
+        this.setPosition(this.x - this.paddingHorizontal, row.y+row.height);
     }
 
 }

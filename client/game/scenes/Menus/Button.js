@@ -48,7 +48,7 @@ export default class Button extends Phaser.GameObjects.Text {
             btnConfig.fillAlpha || defaultGraphicsStyles.fillAlpha
         ).fillRect(0, 0, boxWidth, boxHeight)
         .setVisible(false);
-                
+
         const { x:centerX, y:centerY } = this.getCenter();
         const boxX = centerX - boxWidth / 2;
         const boxY = centerY - boxHeight / 2;
@@ -79,5 +79,7 @@ export default class Button extends Phaser.GameObjects.Text {
         });
 
     }
+
+
 
 }

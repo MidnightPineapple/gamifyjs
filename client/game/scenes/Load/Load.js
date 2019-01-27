@@ -11,6 +11,7 @@ export default class LoadScene extends compose(ImportsAssets)(Scene) {
         tilesets: require.context("../../assets/tilesets", false, /\.(png|jpe?g)$/),
         spritesheets: require.context("../../assets/spritesheets", false, /\.(png|jpe?g)$/),
         functionData: require.context("../../assets/function-data", false, /\.json$/),
+        json: require.context("../../assets/json", false, /\.json$/),
     }
 
     constructor(params) {
@@ -27,8 +28,8 @@ export default class LoadScene extends compose(ImportsAssets)(Scene) {
         
         this.cameras.main.setBackgroundColor("#1d212d")
         
-        const logo = this.add.image(400,300, 'logo')
-        .setOrigin(.5, 1);
+        const logo = this.add.image(400,250, 'logo')
+        .setOrigin();
         
         const loadingBox = this.add.image(225,450,"loading-box")
         .setOrigin(0,.5)
@@ -55,7 +56,7 @@ export default class LoadScene extends compose(ImportsAssets)(Scene) {
             this.tweens.add({
                 targets:logo,
                 ease:"Sine.easeInOut",
-                y:350,
+                y:300,
                 duration:800,
                 delay:100
             })

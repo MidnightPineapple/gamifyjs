@@ -1,8 +1,6 @@
 import Menu from '../Menu';
 import keys from '../../keys';
 
-const inputLines = ["RegExr","was","created","by","gskinner","com","and","is","proudly","hosted","by","Media","Temple","Edit","the","Expression","Text","to","see","matches","Roll","over","matches","or","the","expression","for","details","PCRE","Javascript","flavors","of","RegEx","are","supported","The","side","bar","includes","a","Cheatsheet","full","Reference","and","Help","You","can","also","Save","Share","with","the","Community","and","view","patterns","you","create","or","favorite","in","My","Patterns","Explore","results","with","the","Tools","below","Replace","List","output","custom","results","Details","lists","capture","groups","Explain","describes","your","expression","in","plain","English"]
-
 export default class MainMenu extends Menu() {
 
     constructor(params) {
@@ -10,19 +8,27 @@ export default class MainMenu extends Menu() {
     }
 
     create() {
-        this.cameras.main.setBackgroundColor("#1d212d");
+        const logo = this.add.image(400,300, 'logo').setOrigin();
 
-        const start = this.add.bitmapText(100, 200, "BitPotion", "Start", 100)
-        .setInteractive()
-        .on("pointerup", this.startGame.bind(this))
+        const {height,width} = this.sys.game.canvas;
+        this.cameras.main.setViewport(0,0, width, height)
 
-        const load = this.add.bitmapText(100, 300, "BitPotion", "Levels", 100)
-        .setInteractive()
-        .on("pointerup", this.openLevelMenu.bind(this));
+        const { input: inputWtf, output: outputWtf } = this.cache.json.get('wtfjs');
+        this.scene.launch(keys.BACKGROUND, { parent:this, color:"#1d212d"} );
+        this.scene.launch(keys.TEXT_CONSOLE, { parent:this, inputLines:inputWtf, outputLines:outputWtf });
+        this.scene.moveAbove(keys.TEXT_CONSOLE);
 
-        this.scene.launch(keys.TEXT_CONSOLE, { inputLines, outputLines: inputLines })
+        let cont = this.add.button(80,540, {text: "<Continue>", onClick: this.startGame.bind(this) });
+        let start = this.add.button(280,540, {text: "<Start Game>", onClick: this.startGame.bind(this) });
+        let levels = this.add.button(510,540, {text: "<Select Level>", onClick: this.startGame.bind(this) });
 
-        this.add.button(100,100, {text: "<Hello World>", onClick: () => console.log("CLICKED BUTTON")})
+        this.tweens.add({
+            targets: logo,
+            scaleX: 1.5,
+            scaleY: 1.5,
+            ease: 'Power3',
+            duration: 300
+        })
     }
 
     startGame() {
@@ -32,5 +38,4 @@ export default class MainMenu extends Menu() {
     openLevelMenu() {
         this.scene.start(keys.WELCOME)
     }
-
 }
