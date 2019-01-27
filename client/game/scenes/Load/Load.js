@@ -36,7 +36,11 @@ export default class LoadScene extends compose(ImportsAssets)(Scene) {
         .setScale(.7,.5);     
 
         // TODO: I should swap out bitpotion and just use the Consolas web font....
-        const loadingText = this.add.bitmapText(400,350, 'BitPotion', 'Loading: 0%', 50)
+        const loadingText = this.add.text(400,350, 'Loading: 0%', {
+            fontFamily:"Consolas",
+            fontSize:"36px",
+            fontStyle:"bold",
+        })
         .setOrigin(.5,0);
 
         const loadingBar = this.add.image(237,450,"loading-bar")
