@@ -1,5 +1,6 @@
 import { compose } from 'ramda';
 import { UsesCustomObjects, EmitsEvents, UsesPlayerFunctions, DisplaysModals, UsesCommonKeyboardKeys } from '../mixins'
+import keys from '../keys';
 import Scene from '../Scene';
 
 const LevelFactory = ({ customObjects }) => {
@@ -55,6 +56,13 @@ const LevelFactory = ({ customObjects }) => {
                 })
 
             }
+
+            this.input.keyboard.on("keyup_ESC", () => {
+                this.scene.run(keys.PAUSE_MENU, { parent: this })
+            })
+            this.input.keyboard.on("keyup_P", () => {
+                this.scene.run(keys.PAUSE_MENU, { parent: this })
+            })
 
         }
 

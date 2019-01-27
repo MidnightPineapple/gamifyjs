@@ -1,4 +1,3 @@
-import { compose } from 'ramda'
 import Level from '../Level';
 import keys from '../../keys';
 import customObjects from "./customObjects";
