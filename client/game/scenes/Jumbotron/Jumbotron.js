@@ -2,7 +2,7 @@ import Scene from '../Scene';
 import keys from '../keys';
 
 const textStyles = {
-    fontFamily:"Courier New",
+    fontFamily:"Consolas",
     fontSize:"72px",
     fontStyle:"bold",
     align:'center',
@@ -21,6 +21,7 @@ export default class Jumbotron extends Scene {
         this.title = title;
         this.subtitle = subtitle;
         this.parent = parent;
+        this.parent.scene.moveBelow(keys.JUMBOTRON);
         onDismiss && (this.onDismiss = onDismiss);
     }
 
@@ -30,7 +31,7 @@ export default class Jumbotron extends Scene {
         const { width, height } = this.sys.game.canvas;
 
         this.bg = this.add.graphics();
-        this.bg.fillStyle(0x00052d, 0.7);
+        this.bg.fillStyle(0x090b0f, 0.7);
         this.bg.fillRect(100, 100, width-200, height-200);
         
         this.titleBox = this.add.text(width/2, height/2,this.title, textStyles).setOrigin();
