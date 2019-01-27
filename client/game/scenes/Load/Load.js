@@ -35,6 +35,7 @@ export default class LoadScene extends compose(ImportsAssets)(Scene) {
         .setOrigin(0,.5)
         .setScale(.7,.5);     
 
+        // TODO: I should swap out bitpotion and just use the Consolas web font....
         const loadingText = this.add.bitmapText(400,350, 'BitPotion', 'Loading: 0%', 50)
         .setOrigin(.5,0);
 
@@ -56,7 +57,7 @@ export default class LoadScene extends compose(ImportsAssets)(Scene) {
             this.tweens.add({
                 targets:logo,
                 ease:"Sine.easeInOut",
-                y:300,
+                y:280,
                 duration:800,
                 delay:100
             })
@@ -70,7 +71,7 @@ export default class LoadScene extends compose(ImportsAssets)(Scene) {
     update() {
         if(this.loaded === 3) {
             // * Start Menu Scene Here
-            this.scene.start(keys.MENU)
+            this.scene.start(keys.MAIN_MENU)
             this.loaded = true; 
         }
     }

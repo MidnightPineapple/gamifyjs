@@ -5,9 +5,17 @@ export default function ConsoleTextStream(inputLines, outputLines) {
         [Symbol.iterator]: function *() {
             const inputArray = inputLines.slice();
             const outputArray = outputLines.slice();
-            
+            let cursor;
+
             while(true) {
-                const cursor = Phaser.Math.RND.between(0, inputArray.length - 1);
+                while(true) {
+                    // make sure new cursor isn't equal to the old one
+                    const rn = Phaser.Math.RND.between(0, inputArray.length - 1);
+                    if( cursor !== rn ) {
+                        cursor = rn;
+                        break;
+                    }
+                }
                 const inputLine = inputArray[cursor];
                 const outputLine = outputArray[cursor] || "";
                 let resultLine = "> ";
