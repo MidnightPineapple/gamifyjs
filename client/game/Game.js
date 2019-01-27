@@ -1,4 +1,4 @@
-import Phaser from 'phaser';
+import { Phaser } from './lib';
 import * as Scenes from './scenes';
 import * as Plugins from './plugins';
 
