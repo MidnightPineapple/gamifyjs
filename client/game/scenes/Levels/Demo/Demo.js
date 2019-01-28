@@ -53,6 +53,8 @@ export default class Demo extends Level({customObjects}) {
         const demoFunction1 = this.getFunc("demo-function")
         // this.demoFunction2 = this.makeFunc("demo-function", "demolevel2")
 
+        this.add.keyA(100, 100)
+
         // ! FOR DEBUG
         
         this.player.setOnDieCallback( ()=> {
