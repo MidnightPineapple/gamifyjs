@@ -5,6 +5,7 @@ export default {
     PAUSE_MENU: "pause-menu",
     MAIN_MENU: "main-menu",
     CREDITS_MENU: "credits-menu",
+    LEVEL_SELECT_MENU: "level-select-menu",
     DEMO: "demo",
     WELCOME: "welcome",
     ERROR: "error",

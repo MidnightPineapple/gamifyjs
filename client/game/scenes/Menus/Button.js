@@ -31,14 +31,16 @@ export default class Button extends Phaser.GameObjects.Text {
 
         // add stroke & fill boxes
         const { width, height } = this;
-        const boxWidth = width + 2 * (btnConfig.paddingHorizontal || defaultGraphicsStyles.paddingHorizontal);
-        const boxHeight = height + 2 * (btnConfig.paddingVertical || defaultGraphicsStyles.paddingVertical);
+        this.paddingHorizontal = btnConfig.paddingHorizontal || defaultGraphicsStyles.paddingHorizontal;
+        this.paddingVertical = btnConfig.paddingVertical || defaultGraphicsStyles.paddingVertical;
+        this.boxWidth = width + 2 * this.paddingHorizontal;
+        this.boxHeight = height + 2 * this.paddingVertical;
 
         this.stroke = this.scene.add.graphics().lineStyle(
             btnConfig.lineWidth || defaultGraphicsStyles.lineWidth,
             btnConfig.lineColor || defaultGraphicsStyles.lineColor,
             btnConfig.lineAlpha || defaultGraphicsStyles.lineAlpha,
-        ).strokeRect(0, 0, boxWidth, boxHeight);
+        ).strokeRect(0, 0, this.boxWidth, this.boxHeight);
 
         this.fill = this.scene.add.graphics().fillGradientStyle(
             btnConfig.fillGradientTopLeft || defaultGraphicsStyles.fillGradientTopLeft,
@@ -46,12 +48,12 @@ export default class Button extends Phaser.GameObjects.Text {
             btnConfig.fillGradientBottomLeft || defaultGraphicsStyles.fillGradientBottomLeft,
             btnConfig.fillGradientBottomRight || defaultGraphicsStyles.fillGradientBottomRight,
             btnConfig.fillAlpha || defaultGraphicsStyles.fillAlpha
-        ).fillRect(0, 0, boxWidth, boxHeight)
+        ).fillRect(0, 0, this.boxWidth, this.boxHeight)
         .setVisible(false);
 
         const { x:centerX, y:centerY } = this.getCenter();
-        const boxX = centerX - boxWidth / 2;
-        const boxY = centerY - boxHeight / 2;
+        const boxX = centerX - this.boxWidth / 2;
+        const boxY = centerY - this.boxHeight / 2;
 
         this.stroke.setPosition(boxX, boxY);
         this.fill.setPosition(boxX, boxY);
@@ -79,6 +81,14 @@ export default class Button extends Phaser.GameObjects.Text {
         });
 
     }
+
+    // set x(x) {
+    //     this.x = x + this.paddingHorizontal
+    // }
+
+    // set y(y) {
+
+    // }
 
 
 

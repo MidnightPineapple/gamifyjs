@@ -43,7 +43,7 @@ export default class MainMenu extends Menu() {
     }
 
     startLevelMenu() {
-        this.scene.start(keys.WELCOME)
+        this.scene.start(keys.LEVEL_SELECT_MENU)
     }
 
     startCreditsMenu() {
