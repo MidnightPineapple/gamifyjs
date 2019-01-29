@@ -1,7 +1,5 @@
 export default {
     SPRITESHEET_KEY:"player",
-    ACCELERATION_X:50,
-    VELOCITY_Y:-100,
     ANIMS:{
         IDLE:"player-idle",
         HITTING:"player-hitting",

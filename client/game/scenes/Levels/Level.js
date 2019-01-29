@@ -1,5 +1,5 @@
 import { compose } from 'ramda';
-import { UsesCustomObjects, EmitsEvents, UsesPlayerFunctions, DisplaysModals, UsesCommonKeyboardKeys } from '../mixins'
+import { UsesCustomObjects, ChecksForCollisions, UsesPlayerFunctions, DisplaysModals, UsesCommonKeyboardKeys } from '../mixins'
 import keys from '../keys';
 import Scene from '../Scene';
 
@@ -8,7 +8,7 @@ const LevelFactory = ({ customObjects }) => {
     const traits = [
         DisplaysModals, 
         UsesPlayerFunctions,
-        EmitsEvents,
+        ChecksForCollisions,
         UsesCustomObjects(customObjects),
         UsesCommonKeyboardKeys,
     ]
@@ -70,7 +70,8 @@ const LevelFactory = ({ customObjects }) => {
 }
 
 LevelFactory.UsesCustomObjects = UsesCustomObjects;
-LevelFactory.EmitsEvents = EmitsEvents;
+LevelFactory.EmitsEvents = ChecksForCollisions;
+LevelFactory.ChecksForCollisions = ChecksForCollisions;
 LevelFactory.UsesPlayerFunctions = UsesPlayerFunctions;
 
 

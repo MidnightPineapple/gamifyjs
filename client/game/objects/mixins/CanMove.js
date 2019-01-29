@@ -63,14 +63,16 @@ const CanMoveFactory = superclass => class CanMove extends superclass {
 
 const CONSTANTS = {
     DEFAULT_ACCELERATION_X:50,
-    DEFAULT_VELOCITY_Y:-100,
+    DEFAULT_VELOCITY_Y:-85,
     DEFAULT_JUMP_DAMPENER: 0.01,
-    DEFAULT_MAX_VELOCITY_X: 100,
+    DEFAULT_MAX_VELOCITY_X: 40,
     DEFAULT_MAX_VELOCITY_Y: 100,
     DEFAULT_BOUNCE_X: .1,
     DEFAULT_BOUNCE_Y: .1,
     DEFAULT_DRAG_X: 500,
 } 
+
+// these defaults allow jumping just over 2 blocks high and just under 5 blocks across
 
 Object.assign(CanMoveFactory, { CONSTANTS });
 

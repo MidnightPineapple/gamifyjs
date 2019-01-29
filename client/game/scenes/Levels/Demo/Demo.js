@@ -30,22 +30,21 @@ export default class Demo extends Level({customObjects}) {
         this.savePoint.setCheckpointCallback(() => {
             this.stateManager.sendCheckpointReached(this.scene.key, 1)
         })
-        this.physics.add.collider(this.player, platforms)
         
-
+        
         
         this.robot = this.add.robot(actionZone.x, actionZone.y)
         this.robot2 = this.add.robot2(actionZone.x-50, actionZone.y);
-        this.physics.add.collider(this.robot, platforms)
-        this.physics.add.collider(this.robot2, platforms)
         this.robot.idle()
 
+        this.allEmitCollideOne(platforms, [ this.player, this.robot, this.robot2 ]);
+        
         this.input.keyboard.on("keydown_H", () => this.robot.run("left"))
         this.input.keyboard.on("keydown_U", () => this.robot.jump())
         this.input.keyboard.on("keyup_H", () => this.robot.idle())
         this.input.keyboard.on("keydown_K", () => this.player.jump())
 
-        this.emitCollide([ [this.player, this.robot], [ this.robot2, this.robot ], [ this.player, this.robot2 ] ])
+        this.emitCollideAll([ this.player, this.robot, this.robot2 ])
         this.player.overlapZone(this.player.ZONES.HACK, this.robot2);
         this.player.overlapZone(this.player.ZONES.HACK, this.robot);
 
