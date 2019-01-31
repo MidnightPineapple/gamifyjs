@@ -54,7 +54,6 @@ const LevelFactory = ({ customObjects }) => {
                     })
                     this.stateManager.sendFunctionChanged(this.scene.key, funcMeta.functionId, JSON.stringify(funcsConfigs))
                 })
-
             }
 
             this.input.keyboard.on("keyup_ESC", () => {

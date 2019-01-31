@@ -57,7 +57,7 @@ const OverlapsZonesFactory = superclass => {
                 for( let obj of zone.overlapping.keys() ) {
                     const { state: overlapping, eventSuffix } = zone.overlapping.get(obj);
                     if(overlapping === 1) {
-                        this.emit(OverlapsZonesFactory.CONSTANTS.OVERLAP_END + eventSuffix, this, obj)
+                        this.emit(OverlapsZonesFactory.CONSTANTS.OVERLAP_END + eventSuffix, obj)
                     }
                     if(overlapping > 0) {
                         zone.overlapping.set(obj, { state: overlapping - 1, eventSuffix });

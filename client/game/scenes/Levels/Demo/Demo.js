@@ -8,7 +8,10 @@ export default class Demo extends Level({customObjects}) {
         super({ ...params, key: keys.DEMO })
     }
 
-    playerFunctionMetas = [ { functionId:"demo-function2", template:"demo-function" } ]
+    playerFunctionMetas = [ 
+        { functionId:"demo-function", template:"demo-function" }, 
+        { functionId:"demo-function2", template:"demo-function" } 
+    ]
 
     create() {
         this.cameras.main.setBackgroundColor("#1d212d");        
@@ -31,25 +34,25 @@ export default class Demo extends Level({customObjects}) {
             this.stateManager.sendCheckpointReached(this.scene.key, 1)
         })
         
-        
-        
         this.robot = this.add.robot(actionZone.x, actionZone.y)
-        this.robot2 = this.add.robot2(actionZone.x-50, actionZone.y);
+        // this.robot2 = this.add.robot2(actionZone.x-50, actionZone.y);
         this.robot.idle()
 
-        this.allEmitCollideOne(platforms, [ this.player, this.robot, this.robot2 ]);
+        this.allEmitCollideOne(platforms, [ this.player, this.robot /*, this.robot2 */]);
         
         this.input.keyboard.on("keydown_H", () => this.robot.run("left"))
         this.input.keyboard.on("keydown_U", () => this.robot.jump())
         this.input.keyboard.on("keyup_H", () => this.robot.idle())
-        this.input.keyboard.on("keydown_K", () => this.player.jump())
+        this.input.keyboard.on("keydown_K", () => this.robot.run("right"))
 
-        this.emitCollideAll([ this.player, this.robot, this.robot2 ])
-        this.player.overlapZone(this.player.ZONES.HACK, this.robot2);
-        this.player.overlapZone(this.player.ZONES.HACK, this.robot);
+        this.emitCollideAll([ this.player, this.robot /*, this.robot2 */ ])
+        // this.player.overlapZone(this.player.ZONES.HACK, this.robot2);
+        // this.player.overlapZone(this.player.ZONES.HACK, this.robot);
 
-        const demoFunction = this.getFunc("demo-function2")
-        const demoFunction1 = this.getFunc("demo-function")
+        const demoFunction = this.getFunc("demo-function")
+
+        this.robot.bindHackFunctionToClick(demoFunction, this.player)
+
         // this.demoFunction2 = this.makeFunc("demo-function", "demolevel2")
 
         this.add.keyA(100, 100)
@@ -60,13 +63,20 @@ export default class Demo extends Level({customObjects}) {
             this.modal.jumbotron("You Died!", "Try Again! (space)")
             .setOnDismiss( () => this.scene.restart() )
         });
-        this.player.on([this.player.constants.OverlapsZones.OVERLAP_START,this.player.ZONES.HACK].join("_"), function(foreignObj) {
-            demoFunction.messenger.send();
-            this.robot2.die();
-        }, this)
-        this.player.on([this.player.constants.OverlapsZones.OVERLAP_END,this.player.ZONES.HACK].join("_"), function() {
-            demoFunction.messenger.revoke();
-        }, this)
+        // this.player.on([this.player.constants.OverlapsZones.OVERLAP_START,this.player.ZONES.HACK].join("_"), function(foreignObj) {
+        //     demoFunction.messenger.send(); // TODO: object mixin that binds a function to an object by setting onclick to sending the function... but only if its overlapping? which can be checked by player.isOverlapping
+        //     demoFunction.messenger.setPermissionCheckCallback(() => {
+        //         if(this.player.isOverlapping(this.player.ZONES.HACK, foreignObj)) {
+        //             return { allowed: true }
+        //         } else {
+        //             return { allowed: false, error: "You must be in hacking range to hack an object!"}
+        //         }
+        //     })
+        //     this.robot2.die();
+        // }, this)
+        // this.player.on([this.player.constants.OverlapsZones.OVERLAP_END,this.player.ZONES.HACK].join("_"), function() {
+        //     demoFunction.messenger.revoke();
+        // }, this)
         // this.player.on(this.player.constants.OverlapsZones.OVERLAP_EVENT + "_hackable-range", function() {
         //     // demoFunction.execute();
         //     console.log("overlapping")
@@ -84,7 +94,7 @@ export default class Demo extends Level({customObjects}) {
     update(...args) {
         if(typeof super.update === "function") super.update(...args)
 
-        if(this.robot2.isAlive) this.robot2.moveToward(this.player);
+        // if(this.robot2.isAlive) this.robot2.moveToward(this.player);
         //this.robot.patrol();
     }
 

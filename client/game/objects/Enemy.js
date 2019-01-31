@@ -1,6 +1,6 @@
 import Phaser from 'phaser';
 import ArcadeSprite from './ArcadeSprite';
-import { CanMove, IsAnimated, KillsOnTouch, IsMortal } from './mixins';
+import { CanMove, IsAnimated, KillsOnTouch, IsMortal, IsHackable } from './mixins';
 import { compose } from 'ramda';
 
 export default ({ anims }) => {
@@ -9,7 +9,8 @@ export default ({ anims }) => {
         CanMove,
         IsAnimated(anims),
         KillsOnTouch,
-        IsMortal
+        IsMortal,
+        IsHackable
     ]
 
     let tieBreaker = () => Math.pow(-1, Phaser.Math.RND.integerInRange(0,1)) > 0 ? "left" : "right";

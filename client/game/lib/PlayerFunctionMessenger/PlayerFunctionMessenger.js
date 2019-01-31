@@ -22,21 +22,46 @@ export default class PlayerFunctionMessenger {
 
         this.frame.events.on(CONSTANTS.EDITOR_INSERT, ({ functionId, text, start: { row, col } }) => {
             if(functionId !== this.functionId) return;
-            let error;
+            this.handleAddText(functionId, row, col, text);
+        });
+
+        this.frame.events.on(CONSTANTS.EDITOR_REMOVE, ({ functionId, start, end }) => {
+            if(functionId !== this.functionId) return;
+            this.handleRemoveText(functionId, start, end);
+        });
+    }
+
+    handleAddText(functionId, row, col, text) {
+        let error;
             try {
+                this.verifyPermission();
                 this.playerFunction.lines.addText(row, col, text)
             } catch(e) { error = e; }
             sendEditResponse(functionId, this.playerFunction.lines.toString(), this.frame, error);
-        });
+    }
 
-        this.frame.events.on(CONSTANTS.EDITOR_REMOVE, ({ functionId, text, start, end }) => {
-            if(functionId !== this.functionId) return;
-            let error;
+    handleRemoveText(functionId, start, end) {
+        let error;
             try {
+                this.verifyPermission();
                 this.playerFunction.lines.removeText(start.row, start.col, end.row, end.col);
             } catch(e) { error = e; }
             sendEditResponse(functionId, this.playerFunction.lines.toString(), this.frame, error);
-        });
+    }
+
+    verifyPermission() {
+        if(typeof this.checkPermission === "function") {
+            const permission = this.checkPermission();
+            if(permission.allowed !== true) {
+                throw new Error(permission.error)
+            }
+        } else return {
+            allowed:true, 
+        };
+    }
+
+    setPermissionCheckCallback(fn) {
+        this.checkPermission = fn;
     }
 
     setPlayerFunction(pF) {
