@@ -56,7 +56,10 @@ const CanMoveFactory = superclass => class CanMove extends superclass {
     }
 
     onGround() {
-        return this.body.blocked.down
+        return this.body.blocked.down || this.body.touching.down
+
+        // ? I could actually make it so u can't jump if in a hack zone...
+        // ? also just make the hack zone elliptical
     }
 
 }

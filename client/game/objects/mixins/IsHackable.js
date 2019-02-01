@@ -1,9 +1,12 @@
 export default superclass => class Ishackable extends superclass {
 
     bindHackFunctionToClick(playerFunction, player) {
+        let clicked;
+
         this.setInteractive();
         this.on('pointerup', () => {
             if(!player.isOverlapping(player.ZONES.HACK, this)) return;
+            clicked = true;
             playerFunction.messenger.send();
             playerFunction.messenger.setPermissionCheckCallback(() => {
                 if(!player.isOverlapping(player.ZONES.HACK, this)) return {
@@ -18,6 +21,7 @@ export default superclass => class Ishackable extends superclass {
         player.on(player.constants.OverlapsZones.OVERLAP_START + "_" + player.ZONES.HACK, (foreignObj) => {
             if(foreignObj !== this) return;
             this.hackSign = this.scene.add.sprite(this.x, this.y-32, "attention", 0);
+            if(clicked) playerFunction.messenger.send();
         })
 
         player.on(player.constants.OverlapsZones.OVERLAP_END + "_" + player.ZONES.HACK, (foreignObj) => {

@@ -36,26 +36,46 @@ export default class Demo extends Level({customObjects}) {
         
         this.robot = this.add.robot(actionZone.x, actionZone.y)
         // this.robot2 = this.add.robot2(actionZone.x-50, actionZone.y);
+        this.box = this.add.box(500,550, { player:this.player })
+        
         this.robot.idle()
-
-        this.allEmitCollideOne(platforms, [ this.player, this.robot /*, this.robot2 */]);
+        
+        this.allEmitCollideOne(platforms, [ this.player, this.robot, this.box /*, this.robot2 */]);
         
         this.input.keyboard.on("keydown_H", () => this.robot.run("left"))
         this.input.keyboard.on("keydown_U", () => this.robot.jump())
         this.input.keyboard.on("keyup_H", () => this.robot.idle())
         this.input.keyboard.on("keydown_K", () => this.robot.run("right"))
-
-        this.emitCollideAll([ this.player, this.robot /*, this.robot2 */ ])
+        
+        
+        this.emitCollideAll([ this.player, this.robot, this.box /*, this.robot2 */ ])
         // this.player.overlapZone(this.player.ZONES.HACK, this.robot2);
         // this.player.overlapZone(this.player.ZONES.HACK, this.robot);
-
+        
+        this.box.blue();
         const demoFunction = this.getFunc("demo-function")
 
-        this.robot.bindHackFunctionToClick(demoFunction, this.player)
+        // this.robot.bindHackFunctionToClick(demoFunction, this.player)
+
+        this.box.bindHackFunctionToClick(demoFunction, this.player)
+        
+        demoFunction.attachOnEditFinishedListener( () => {
+            const funcRes = demoFunction.execute();
+
+            if(funcRes === "green") {
+                this.box.green();
+            } else if(funcRes === "blue") {
+                this.box.blue();
+            } else if(funcRes === "red") {
+                this.box.red();
+            }
+        })
+
 
         // this.demoFunction2 = this.makeFunc("demo-function", "demolevel2")
 
         this.add.keyA(100, 100)
+
 
         // ! FOR DEBUG
         
@@ -84,9 +104,6 @@ export default class Demo extends Level({customObjects}) {
 
         // how to run a function right after it finishes being edited
         // demoFunction.messenger.send();
-        demoFunction.attachOnEditFinishedListener( () => {
-            demoFunction.execute();
-        })
 
         this.cursor = this.input.keyboard.createCursorKeys()
     }

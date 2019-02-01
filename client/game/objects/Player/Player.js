@@ -18,7 +18,7 @@ export default class Player extends compose(...traits)(ArcadeSprite) {
 
         Object.assign(this, constants);
 
-        this.addZone(constants.ZONES.HACK, 100, 100)
+        this.addZone(constants.ZONES.HACK, 100, 32)
         .setOrigin();
 
         this.addZone(constants.ZONES.INTERACT, 50, 50)
