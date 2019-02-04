@@ -1,5 +1,6 @@
 {
     "displayName": "test",
+    "functionId":"demo-function",
     "description": "A function to test the loader and execution in the browser", 
     "parameters": [],
     "lines": [

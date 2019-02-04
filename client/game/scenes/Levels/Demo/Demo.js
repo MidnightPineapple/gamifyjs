@@ -61,14 +61,7 @@ export default class Demo extends Level({customObjects}) {
         
         demoFunction.attachOnEditFinishedListener( () => {
             const funcRes = demoFunction.execute();
-
-            if(funcRes === "green") {
-                this.box.green();
-            } else if(funcRes === "blue") {
-                this.box.blue();
-            } else if(funcRes === "red") {
-                this.box.red();
-            }
+            this.box.changeColor(funcRes)
         })
 
 

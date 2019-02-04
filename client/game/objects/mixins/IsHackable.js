@@ -27,7 +27,6 @@ export default superclass => class Ishackable extends superclass {
         player.on(player.constants.OverlapsZones.OVERLAP_END + "_" + player.ZONES.HACK, (foreignObj) => {
             if(foreignObj !== this) return;
             this.hackSign.destroy();
-            playerFunction.messenger.revoke();
         })
     }
 

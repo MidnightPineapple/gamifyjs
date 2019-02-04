@@ -41,9 +41,22 @@ export default class Box extends compose(IsHackable)(Sprite) {
         // undefined?
     }
 
+    changeColor(color) {
+        switch(color) {
+            case "red": 
+                this.red();
+                break;
+            case "green":
+                this.green();
+                break;
+            case "blue":
+                this.blue();
+                break;
+        }
+    }
+
     playerCollider() {
         return this.colliders.get(this.player);
-
     }
 
 }
