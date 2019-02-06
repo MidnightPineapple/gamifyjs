@@ -16,9 +16,11 @@ export default class Alert extends Scene {
         super({ key: keys.ALERT, ...params });
     }
 
-    init({ messages, parent }) {
-        this.messages = messages instanceof Array ? messages : [ messages ];
+    init({ messages, parent, onDismiss }) {
+        this.messages = messages instanceof Array ? messages.slice() : [ messages ];
         this.parent = parent;
+        this.scene.bringToTop();
+        this.onDismiss = onDismiss
     }
 
     create() {
@@ -48,6 +50,7 @@ export default class Alert extends Scene {
     dismiss() {
         this.parent.scene.resume();
         this.scene.stop();
+        if(typeof this.onDismiss === "function") this.onDismiss();
     }
 
     nextMessage() {

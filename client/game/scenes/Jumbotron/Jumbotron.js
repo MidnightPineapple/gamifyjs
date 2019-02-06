@@ -21,7 +21,7 @@ export default class Jumbotron extends Scene {
         this.title = title;
         this.subtitle = subtitle;
         this.parent = parent;
-        this.parent.scene.moveBelow(keys.JUMBOTRON);
+        this.scene.bringToTop();
         onDismiss && (this.onDismiss = onDismiss);
     }
 

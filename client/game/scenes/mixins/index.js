@@ -6,3 +6,5 @@ export { default as HandlesErrors } from './HandlesErrors';
 export { default as UsesPlayerFunctions } from './UsesPlayerFunctions';
 export { default as DisplaysModals } from './DisplaysModals';
 export { default as UsesCommonKeyboardKeys } from './UsesCommonKeyboardKeys';
+export { default as UsesSaveData } from './UsesSaveData';
+export { default as UsesTiledMap } from './UsesTiledMap';

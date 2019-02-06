@@ -1,14 +1,16 @@
 import { compose } from 'ramda';
-import { UsesCustomObjects, ChecksForCollisions, UsesPlayerFunctions, DisplaysModals, UsesCommonKeyboardKeys } from '../mixins'
+import { UsesCustomObjects, ChecksForCollisions, UsesPlayerFunctions, DisplaysModals, UsesCommonKeyboardKeys, UsesSaveData, UsesTiledMap } from '../mixins'
 import keys from '../keys';
 import Scene from '../Scene';
 
-const LevelFactory = ({ customObjects }) => {
+const LevelFactory = ({ customObjects, playerFunctionMetas, tilemapData }) => {
 
     const traits = [
         DisplaysModals, 
-        UsesPlayerFunctions,
+        UsesSaveData,
+        UsesPlayerFunctions(playerFunctionMetas),
         ChecksForCollisions,
+        UsesTiledMap(tilemapData),
         UsesCustomObjects(customObjects),
         UsesCommonKeyboardKeys,
     ]
@@ -17,42 +19,28 @@ const LevelFactory = ({ customObjects }) => {
 
         constructor(...args) {
             super(...args);
-            this.checkpoint = 0;
         }
 
-        playerFunctionMetas = [];
+        isLevel = true;
 
         init(data) {
+            this.cameras.main.setBackgroundColor("#1d212d");        
+
             if(typeof super.init === "function") super.init(data);
-            const saveData = this.registry.get(this.scene.key);
 
-            if(saveData) {
-                this.checkpoint = saveData.lastCheckpoint
-                for( const funcId in saveData.functions ) {
-                    this.loadFunc(funcId, saveData.functions[funcId]);
-                }
-            } else {
-                this.checkpoint = 0;
-                for( const funcMeta of this.playerFunctionMetas ) {
-                    this.makeFunc(funcMeta.template, funcMeta.functionId);
-                }
-            }
 
-            for( const funcMeta of this.playerFunctionMetas ) {
-                let func = this.getFunc(funcMeta.functionId)
-                if(!func) {
-                    func = this.makeFunc(funcMeta.template, funcMeta.functionId);
-                }
+            for( const functionId of this.getFuncIds() ) {
+                let func = this.getFunc(functionId)
 
                 func.attachOnEditFinishedListener(() => {
-                    const funcsConfigs = this.playerFunctionMetas.map( fm => {
-                        let func = this.getFunc(fm.functionId);
+                    const funcsConfigs = this.getFuncIds().reduce( (ag,id) => {
+                        let func = this.getFunc(id);
                         return {
-                            ...fm,
-                            ...func.getData(),
+                            ...ag,
+                            [id]: func.getData(),
                         }
-                    })
-                    this.stateManager.sendFunctionChanged(this.scene.key, funcMeta.functionId, JSON.stringify(funcsConfigs))
+                    }, {})
+                    this.stateManager.sendFunctionChanged(this.levelId, functionId, JSON.stringify(funcsConfigs))
                 })
             }
 
@@ -63,6 +51,14 @@ const LevelFactory = ({ customObjects }) => {
                 this.scene.run(keys.PAUSE_MENU, { parent: this })
             })
 
+        }
+
+        registerPlayer(player) {
+            this.keydown_left = function () { player.run("left") }
+            this.keyup_left = function () { player.idle(); }
+            this.keydown_right = function () { player.run("right"); }
+            this.keyup_right = function () { player.idle(); }
+            this.keydown_up = function () { player.jump(); }
         }
 
     }

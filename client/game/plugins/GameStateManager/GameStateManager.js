@@ -62,6 +62,7 @@ export default class GameStateManager extends Phaser.Plugins.BasePlugin {
             newState.functions = Object.assign({}, newState.functions);
             newState.functions[functionId] = json;
             registry.set(levelId, newState);
+            if(typeof cb === "function") cb(newState);
         })
     }
 

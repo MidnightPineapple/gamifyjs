@@ -7,12 +7,12 @@ export default superclass => class DisplaysModals extends superclass {
     }
 
     modal = {
-        alert: (messages) => {
-            this.scene.run(keys.ALERT, { messages, parent: this });
+        alert: (messages, onDismiss) => {
+            this.scene.run(keys.ALERT, { messages, parent: this, onDismiss });
             return this.scene.get(keys.ALERT);
         },
-        jumbotron: (title, subtitle="") => {
-            this.scene.run(keys.JUMBOTRON, { title, subtitle, parent: this });
+        jumbotron: (title, subtitle="", onDismiss) => {
+            this.scene.run(keys.JUMBOTRON, { title, subtitle, parent: this, onDismiss });
             return this.scene.get(keys.JUMBOTRON);
         }
     }

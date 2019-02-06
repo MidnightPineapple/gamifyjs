@@ -5,3 +5,4 @@ export { default as Slime } from './Slime';
 export { default as Torch } from './Torch';
 export { default as Keyboard } from './Keyboard';
 export { default as Box } from './Box';
+export { default as InteractionZone } from './InteractionZone';

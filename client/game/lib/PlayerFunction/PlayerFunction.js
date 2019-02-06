@@ -78,7 +78,10 @@ export default class PlayerFunction {
 
         this.lines.setOnEditFinishedCallback( () => {
             for( const cb of this.onEditFinishedListeners ) {
-                cb();
+                if(typeof cb === "function") {
+                    cb();
+                    if(!this.active) console.warn("Inactive function shouldn't have listeners anymore")
+                }
             }
         } )
 
@@ -90,6 +93,8 @@ export default class PlayerFunction {
         if(messenger) {
             this.setMessenger(messenger);
         }
+
+        this.active = true;
     }
 
     isPlayerFunction = true;
@@ -100,7 +105,15 @@ export default class PlayerFunction {
         this.onEditFinishedListeners.push(cb);
     }
 
+    destroy() {
+        this.errorHandler = undefined;
+        this.onEditFinishedListeners.forEach( (cb,k) => delete this.onEditFinishedListeners[k] );
+        this.cache = undefined;
+        this.active = false;
+    }
+
     execute(...paramValues) {
+        if(this.active !== true) return
         let fun;
         if(typeof this.cache === "function") {
             fun = this.cache.fun;

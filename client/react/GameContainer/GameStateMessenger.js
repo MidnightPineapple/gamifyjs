@@ -16,8 +16,8 @@ export default class GameStateMessenger {
         return {
             levels: [
                 {
-                    levelId:"demo",
-                    lastCheckpoint:0,
+                    levelId:"levelone",
+                    lastCheckpoint:5,
                     functions: {
                         "demo-function":`{
                             "displayName": "test",

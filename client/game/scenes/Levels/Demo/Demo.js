@@ -2,31 +2,26 @@ import Level from '../Level';
 import keys from '../../keys';
 import customObjects from "./customObjects";
 
-export default class Demo extends Level({customObjects}) {
+const playerFunctionMetas = [ 
+    { functionId:"demo-function", template:"demo-function" }, 
+    { functionId:"demo-function2", template:"demo-function" } 
+]
+
+export default class Demo extends Level({customObjects, playerFunctionMetas, tilemapData: {
+    tilemapKey: 'demomap',
+    layerKeys: [ "behind-player", "platforms", "above-player" ]
+}}) {
 
     constructor(params) {
         super({ ...params, key: keys.DEMO })
     }
 
-    playerFunctionMetas = [ 
-        { functionId:"demo-function", template:"demo-function" }, 
-        { functionId:"demo-function2", template:"demo-function" } 
-    ]
-
     create() {
-        this.cameras.main.setBackgroundColor("#1d212d");        
 
-        this.map = this.add.tilemap("demomap", 32, 32);
-        const tileset = this.map.addTilesetImage("Industrial", "industrial-tileset")
+        // BUG: i won't be able to put the above player layer above as it is right now
 
-        this.map.createStaticLayer("behind-player", tileset, 0, 0)
-        const platforms = this.map.createStaticLayer("platforms", tileset, 0, 0)
-        .setCollisionByProperty({ collides: true })
-        this.map.createStaticLayer("above-player", tileset, 0, 0)
-        .setDepth(10)
-        
-        const spawnPoint = this.checkpoint === 0 ? this.map.findObject("objects", o => o.name === "spawn") : {x:500,y:500}
-        const actionZone = this.map.findObject("objects", o => o.name === "action")
+        const spawnPoint = this.checkpoint === 0 ? this.getMapObjectByName("objects", "spawn") : {x:500,y:500}
+        const actionZone = this.getMapObjectByName("objects", "action")
 
         this.player = this.add.player(spawnPoint.x, spawnPoint.y - 20)
         this.savePoint = this.add.torch(spawnPoint.x + 300, spawnPoint.y - 20, { player: this.player })
@@ -40,7 +35,7 @@ export default class Demo extends Level({customObjects}) {
         
         this.robot.idle()
         
-        this.allEmitCollideOne(platforms, [ this.player, this.robot, this.box /*, this.robot2 */]);
+        this.allEmitCollideOne(this.getMapLayer("platforms"), [ this.player, this.robot, this.box /*, this.robot2 */]);
         
         this.input.keyboard.on("keydown_H", () => this.robot.run("left"))
         this.input.keyboard.on("keydown_U", () => this.robot.jump())

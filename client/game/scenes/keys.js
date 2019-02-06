@@ -8,6 +8,7 @@ export default {
     LEVEL_SELECT_MENU: "level-select-menu",
     DEMO: "demo",
     WELCOME: "welcome",
+    LEVEL_ONE:'levelone',
     ERROR: "error",
     ALERT:"alert",
     JUMBOTRON:"jumbotron",

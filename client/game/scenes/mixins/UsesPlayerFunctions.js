@@ -1,13 +1,23 @@
-import Phaser from 'phaser';
-import { compose } from 'ramda';
+import { compose, curry } from 'ramda';
 import HandlesErrors from './HandlesErrors';
 import { PlayerFunctionMessenger, PlayerFunction } from '../../lib';
 
-export default superclass => {
+const UsesPlayerFunctionsFactory = (playerFunctionMetas, superclass) => {
 
     const functions = {}
     
     return class UsesPlayerFunctions extends compose(HandlesErrors)(superclass) {
+
+        init(data) {
+            if(typeof super.init === "function") super.init(data);
+            for( const { functionId, template } of playerFunctionMetas ) {
+                if(this.getFunc(functionId)) continue;
+                this.makeFunc(template, functionId);
+            }
+            this.events.on("shutdown", () => this.discardFuncs())
+        }
+
+        usesPlayerFunctions = true;
 
         makeFunc(templateKey, functionId) { 
             const PlayerFunction = this.cache.json.get(templateKey);
@@ -29,6 +39,16 @@ export default superclass => {
             return functions[functionId];
         }
 
-    }
+        getFuncIds() {
+            return Object.keys(functions);
+        }
 
+        discardFuncs() {
+            Object.values(functions).forEach( f => f.destroy() )
+            Object.keys(functions).forEach( k => delete functions[k] )
+        }
+
+    }
 }
+
+export default curry(UsesPlayerFunctionsFactory)

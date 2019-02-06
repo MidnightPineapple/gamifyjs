@@ -32,13 +32,19 @@ export default class PauseMenu extends Menu() {
         .strokePath()
 
         this.add.button(350,100,{ text: "<Resume>", onClick: this.resume.bind(this)});
-        this.add.button(350,200,{ text: "<Change Level>", onClick: this.resume.bind(this)});
-        this.add.button(350,300,{ text: "<Quit To Main Menu>", onClick: this.quitToMain.bind(this)});
+        this.add.button(350,200,{ text: "<Restart>", onClick: this.resume.bind(this)}); // ! access state manager for this?
+        this.add.button(350,300,{ text: "<Change Level>", onClick: this.changeLevel.bind(this)});
+        this.add.button(350,400,{ text: "<Quit To Main Menu>", onClick: this.quitToMain.bind(this)});
     }
 
     resume() {
         this.parent.scene.resume();
         this.scene.stop();
+    }
+
+    changeLevel() {
+        this.parent.scene.stop();
+        this.scene.start(keys.LEVEL_SELECT_MENU)
     }
 
     quitToMain() {

@@ -44,7 +44,9 @@ const CanMoveFactory = superclass => class CanMove extends superclass {
             const dampener = velocity * -1 * ( this.JUMP_DAMPENER || CONSTANTS.DEFAULT_JUMP_DAMPENER )
             this.setVelocityY( vY - dampener );
         }
-
+        if(this.body.velocity.x !== 0 && !this.isTouching().right && !this.isTouching().left ) {
+            this.body.velocity.normalize().scale( this.MAX_VELOCITY_X || CONSTANTS.DEFAULT_MAX_VELOCITY_X )
+        }
     }
 
     idle() {
@@ -57,9 +59,13 @@ const CanMoveFactory = superclass => class CanMove extends superclass {
 
     onGround() {
         return this.body.blocked.down || this.body.touching.down
+    }
 
-        // ? I could actually make it so u can't jump if in a hack zone...
-        // ? also just make the hack zone elliptical
+    isTouching() {
+        return {
+            left: this.body.blocked.left || this.body.touching.left,
+            right: this.body.blocked.right || this.body.touching.right,
+        }
     }
 
 }
@@ -68,7 +74,7 @@ const CONSTANTS = {
     DEFAULT_ACCELERATION_X:50,
     DEFAULT_VELOCITY_Y:-85,
     DEFAULT_JUMP_DAMPENER: 0.01,
-    DEFAULT_MAX_VELOCITY_X: 40,
+    DEFAULT_MAX_VELOCITY_X: 50,
     DEFAULT_MAX_VELOCITY_Y: 100,
     DEFAULT_BOUNCE_X: .1,
     DEFAULT_BOUNCE_Y: .1,

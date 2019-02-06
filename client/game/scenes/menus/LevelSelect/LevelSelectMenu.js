@@ -11,7 +11,7 @@ export default class LevelSelectMenu extends Menu() {
         this.cameras.main.setBackgroundColor("#1d212d");
 
         this.add.button(100,100,{ text: "Demo", onClick: () => this.scene.start( keys.DEMO )})
-        this.add.button(200,100,{ text: "Level 1", onClick: () => this.scene.start( keys.WELCOME )})
+        this.add.button(200,100,{ text: "Level 1", onClick: () => this.scene.start( keys.LEVEL_ONE )})
     }
 
 }

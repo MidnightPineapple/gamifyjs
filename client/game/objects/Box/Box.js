@@ -10,6 +10,7 @@ export default class Box extends compose(IsHackable)(Sprite) {
         this.body.setDragX(constants.DRAG_X)
         this.body.setDragY(constants.DRAG_Y)
         this.player = player
+
     }
 
     blue() { // true
@@ -17,11 +18,14 @@ export default class Box extends compose(IsHackable)(Sprite) {
         this.playerCollider().active = true;
         this.body.setAllowGravity(false);
         this.body.setImmovable(true);
+        return this;
     }
     
     red() { // string
         this.setTint(0xff0000);
+        this.body.setAllowGravity(false);
         this.playerCollider().active = false;
+        return this;
         // set tint & set player collider to overlap
         // if I used the collision events scene mixin, its in this.colliders[this.player] ?
     }
@@ -31,6 +35,7 @@ export default class Box extends compose(IsHackable)(Sprite) {
         this.playerCollider().active = true;
         this.body.setAllowGravity(true);
         this.body.setImmovable(false);
+        return this;
     }
 
     yellow() {
@@ -53,6 +58,7 @@ export default class Box extends compose(IsHackable)(Sprite) {
                 this.blue();
                 break;
         }
+        return this;
     }
 
     playerCollider() {

@@ -1,0 +1,21 @@
+{
+    "templateId":"empty-box-1",
+    "displayName":"insideTheBox",
+    "description":"What's returned from here will be inside the box!",
+    "parameters":[],
+    "lines":[
+        {
+            "text":" // The value that appears after the return will be \"stored\" in this box.",
+            "config": {"restricted":true}
+        },{
+            "text":" // In this game, boxes will have different properties depending on ",
+            "config":{"restricted":true}
+        },{
+            "text":" // what's inside.",
+            "config":{"restricted":true}
+        },{
+            "text":" return undefined",
+            "config":{"restricted":true}
+        }
+    ]
+}

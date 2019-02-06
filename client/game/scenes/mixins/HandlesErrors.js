@@ -64,7 +64,10 @@ export default superclass => {
             if(typeof super.init === "function") super.init(args);
             errorScene = errorScene.bind(this);
             this.events.on("error", appendError);
-            this.events.on("shutdown", () => errorSceneIsActive(this) && errorScene().stop())
+            this.events.on("shutdown", () => {
+                this.events.off("error", appendError);
+                errorSceneIsActive(this) && errorScene().stop()
+            })
         }
 
         emitError(error) {

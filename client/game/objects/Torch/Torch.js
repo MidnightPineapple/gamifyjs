@@ -11,7 +11,6 @@ class Torch extends compose(OverlapsZones)(Sprite) {
         this.checkpointId = checkpointId;
         
         
-        this.body.setEnable(false);
         this.saveCheckpoint = this.addZone(constants.ZONES.SAVE_CHECKPOINT, width, height);
         
         this.overlapZone(constants.ZONES.SAVE_CHECKPOINT, player)
@@ -27,6 +26,7 @@ class Torch extends compose(OverlapsZones)(Sprite) {
 
     setCheckpointCallback(fn) {
         this.checkpointCallback = fn
+        return this;
     }
 
 }
