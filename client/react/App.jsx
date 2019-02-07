@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
+import { BrowserRouter } from 'react-router-dom';
 import styles from './App.css'
-import GameContainer from './GameContainer';
+import Router from './Router';
 
 export default class App extends Component {
 
-    render() {
+    render() { 
         return (
             <div className={styles.App} >
-                <p>Hello from React!</p>
-                <GameContainer />
+                <Router />
             </div>
         )
     }

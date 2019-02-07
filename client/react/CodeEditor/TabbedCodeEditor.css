@@ -17,6 +17,8 @@
     background-color:#232323;
     display:flex;
     height:3em;
+    overflow-x:auto;
+    overflow-y:hidden;
 }
 
 .Tab {
