@@ -27,7 +27,15 @@ const UsesPlayerFunctionsFactory = (playerFunctionMetas, superclass) => {
             return fun; 
         }
 
-        loadFunc(functionId, json) {
+        loadFunc(functionId, config) {
+            const fun = (new PlayerFunction(config))
+            .setMessenger(new PlayerFunctionMessenger(functionId, this.frame))
+            .setErrorHandler(this.emitError.bind(this));
+            functions[functionId] = fun;
+            return fun;
+        }
+
+        loadFuncFromJson(functionId, json) {
             const fun = PlayerFunction.fromJson(json)
             .setMessenger(new PlayerFunctionMessenger(functionId, this.frame))
             .setErrorHandler(this.emitError.bind(this));

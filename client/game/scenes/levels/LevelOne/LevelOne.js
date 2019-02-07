@@ -62,16 +62,16 @@ export default class LevelOne extends Level({ customObjects, playerFunctionMetas
                         break;
                 }
             })
-
-            switch(type) {
-                case "mobile": 
+            let res = func.execute()
+            switch(typeof res) {
+                case "string":
+                    o.red();
+                    break;
+                case "number":
                     o.green();
                     break;
-                case "solid":
+                case "boolean":
                     o.blue();
-                    break;
-                case "ghost":
-                    o.red();
                     break;
             }
         })

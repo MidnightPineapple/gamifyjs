@@ -53,14 +53,14 @@ export default class GameStateManager extends Phaser.Plugins.BasePlugin {
 
     }
 
-    sendFunctionChanged(levelId, functionId, json, cb) {
+    sendFunctionChanged(levelId, functionId, funcInfo, allFuncInfo) {
         const { registry } = this.game;
 
-        this.messenger.sendFunctionChanged(levelId, functionId, json, () => {
+        this.messenger.sendFunctionChanged(levelId, functionId, allFuncInfo, () => {
             const prevState = registry.get(levelId);
             const newState = Object.assign({}, prevState);
-            newState.functions = Object.assign({}, newState.functions);
-            newState.functions[functionId] = json;
+            newState.functions = Object.assign({}, prevState.functions);
+            newState.functions[functionId] = funcInfo;
             registry.set(levelId, newState);
             if(typeof cb === "function") cb(newState);
         })

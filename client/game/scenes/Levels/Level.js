@@ -1,5 +1,5 @@
 import { compose } from 'ramda';
-import { UsesCustomObjects, ChecksForCollisions, UsesPlayerFunctions, DisplaysModals, UsesCommonKeyboardKeys, UsesSaveData, UsesTiledMap } from '../mixins'
+import { UsesCustomObjects, ChecksForCollisions, UsesPlayerFunctions, DisplaysModals, UsesSaveData, UsesTiledMap } from '../mixins'
 import keys from '../keys';
 import Scene from '../Scene';
 
@@ -12,7 +12,6 @@ const LevelFactory = ({ customObjects, playerFunctionMetas, tilemapData }) => {
         ChecksForCollisions,
         UsesTiledMap(tilemapData),
         UsesCustomObjects(customObjects),
-        UsesCommonKeyboardKeys,
     ]
 
     return class Level extends compose(...traits)(Scene) {
@@ -40,7 +39,7 @@ const LevelFactory = ({ customObjects, playerFunctionMetas, tilemapData }) => {
                             [id]: func.getData(),
                         }
                     }, {})
-                    this.stateManager.sendFunctionChanged(this.levelId, functionId, JSON.stringify(funcsConfigs))
+                    this.stateManager.sendFunctionChanged(this.levelId, functionId, funcsConfigs[functionId], funcsConfigs)
                 })
             }
 
@@ -51,14 +50,24 @@ const LevelFactory = ({ customObjects, playerFunctionMetas, tilemapData }) => {
                 this.scene.run(keys.PAUSE_MENU, { parent: this })
             })
 
+            this.cursorKeys = this.input.keyboard.addKeys("W,A,D,UP,LEFT,RIGHT")
+
+        }
+
+        update(time, delta) {
+            if(typeof super.update === "function") super.update(time, delta);
+
+            if(this.player) {
+                const { W, A, D, UP, LEFT, RIGHT } = this.cursorKeys;
+                if(W.isDown || UP.isDown) this.player.jump();
+                if(A.isDown || LEFT.isDown) this.player.run("left");
+                if(D.isDown || RIGHT.isDown) this.player.run("right");
+                if(![W,A,D,UP,LEFT,RIGHT].find(x=>x.isDown === true)) this.player.idle();
+            }
         }
 
         registerPlayer(player) {
-            this.keydown_left = function () { player.run("left") }
-            this.keyup_left = function () { player.idle(); }
-            this.keydown_right = function () { player.run("right"); }
-            this.keyup_right = function () { player.idle(); }
-            this.keydown_up = function () { player.jump(); }
+            this.player = player
         }
 
     }
