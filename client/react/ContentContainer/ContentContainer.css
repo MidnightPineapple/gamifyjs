@@ -1,0 +1,11 @@
+.contentContainer {
+    align-self: center;
+    width: 1300px;
+    min-height: 100%;
+}
+
+@media only screen and (max-width: 1300px) {
+    .contentContainer {
+        width: 800px; 
+    }
+}
