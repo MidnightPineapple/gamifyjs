@@ -5,8 +5,10 @@ export default class NotFoundScene extends Component {
 
     render() {
         return(
-            <div>
-                Oops we couldn't find the page you're looking for. 
+            <div style={styles.content}>
+                <i class="fas fa-heart-broken"></i>
+
+                <h1>Oops we couldn't find the page you're looking for.</h1>
                 <Link to="/">Back To Homepage</Link>                
             </div>
         )
