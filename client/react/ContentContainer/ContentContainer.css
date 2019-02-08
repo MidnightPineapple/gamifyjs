@@ -2,6 +2,10 @@
     align-self: center;
     width: 1300px;
     min-height: 100%;
+
+    font-family: 'Exo 2', sans-serif;
+    color: #F4FAFF;
+    text-align:center;
 }
 
 @media only screen and (max-width: 1300px) {

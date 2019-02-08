@@ -1,0 +1,18 @@
+.title {
+    font-size: 5em;
+    font-weight: 800;
+}
+
+.icon {
+    font-size: 15em;
+}
+
+.link {
+    font-size: 3em;
+    font-weight: 500;
+    border-radius: .2em;
+    border: .2em solid #f4faff;
+    color:inherit;
+    text-decoration-line: none;
+    display:block;
+}
