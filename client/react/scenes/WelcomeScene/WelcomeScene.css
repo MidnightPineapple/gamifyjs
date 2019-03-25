@@ -1,9 +1,14 @@
 .title {
-    font-size: 5em;
-    font-weight: 800;
+    font-size: 10em;
 }
 
 .subtitle {
     font-size: 3em;
     font-weight: 800;
+}
+
+.loginOptions {
+    display:flex;
+    flex-direction:row;
+    justify-content:center;
 }
