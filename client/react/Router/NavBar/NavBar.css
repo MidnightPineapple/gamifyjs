@@ -1,23 +1,30 @@
 .navBar {
     height:3em;
-    border-bottom: .3rem solid #eaeaea;
-    display:flex;
-    flex-direction:row;
-    justify-content:space-between;
+    background-color: #32373f;
+    padding:0 10px;
+    box-sizing:border-box;
+    margin-bottom: 1em;
 }
 
 .navLink {
-    color:#eaeaea;
+    color:#c2c2c2;
     padding:.3em;
-    
+    text-decoration:none;
+    margin: .5em;
 }
 
 .navLinkActive {
-    color:#222222;
-    background-color:#eaeaea;
+    color:#f95e8e;
+    background-color:#4c515a;
 }
 
 .navOptions {
     height:100%;
+}
+
+.navLinkContainer {
     display:flex;
+    flex-direction:row;
+    justify-content:space-between;
+    align-items:center;
 }
