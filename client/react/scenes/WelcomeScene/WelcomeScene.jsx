@@ -1,8 +1,9 @@
 import React, { Component, Fragment } from 'react'
 import styles from './WelcomeScene.css'
 import Button from './LoginButton'
+import contain from '../../ContentContainer'
 
-export default class WelcomeScene extends Component {
+class WelcomeScene extends Component {
     
     render() {
         return(
@@ -19,3 +20,12 @@ export default class WelcomeScene extends Component {
     }
 
 }
+
+const containerStyle = {
+    display:'flex',
+    flexDirection:"column",
+    justifyContent:"center",
+    overflow:"hidden"
+}
+
+export default contain(WelcomeScene, containerStyle)

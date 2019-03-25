@@ -1,0 +1,23 @@
+.navBar {
+    height:3em;
+    border-bottom: .3rem solid #eaeaea;
+    display:flex;
+    flex-direction:row;
+    justify-content:space-between;
+}
+
+.navLink {
+    color:#eaeaea;
+    padding:.3em;
+    
+}
+
+.navLinkActive {
+    color:#222222;
+    background-color:#eaeaea;
+}
+
+.navOptions {
+    height:100%;
+    display:flex;
+}
