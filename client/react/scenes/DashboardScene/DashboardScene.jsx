@@ -14,9 +14,11 @@ const sampleData = [
 const DashboardScene = ({ history }) => (
     <Fragment>
         <Chart data={sampleData} />
-        <PlayGameButton onClick={() => history.push('/game')} />
-        <div>Table of recent due dates</div>
+        <div >
+            <PlayGameButton onClick={() => history.push('/game')} />
+            <div>Table of recent due dates</div>
+        </div>
     </Fragment>
 )
 
-export default contain(DashboardScene)
+export default contain(DashboardScene, { background:"#ddd", color:"#222" })

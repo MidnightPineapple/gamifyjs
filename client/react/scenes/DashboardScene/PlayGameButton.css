@@ -1,3 +1,21 @@
 .container {
+    font:inherit;
     cursor: pointer;
+    font-size:3em;
+    border:.1em solid #f95e8e;
+    border-radius:10%;
+    background:none;
+    box-sizing: border-box;
+    height: 2em;
 }
+
+.container:hover {
+    background: linear-gradient(to bottom right, #ea7992, #ed4e7e );
+    color:#e2e2e2;
+    border:0;
+}
+
+/* fillGradientTopLeft:0xea7992,
+fillGradientTopRight:0xf95e8e,
+fillGradientBottomLeft:0xf95e8e,
+fillGradientBottomRight:0xed4e7e, */
