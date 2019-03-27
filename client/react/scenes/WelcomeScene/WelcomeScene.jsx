@@ -12,8 +12,8 @@ class WelcomeScene extends Component {
                     <h1 className={styles.title}>GamifyJS</h1>
                 </header>
                 <div className={styles.loginOptions}>
-                    <Button onClick = {() => alert("click")} type="primary">Login</Button>
-                    <Button onClick = {() => alert("click")} type="info">New User</Button>
+                    <Button onClick = {() => window.location.replace("/login")} type="primary">Login</Button>
+                    <Button onClick = {() => window.location.replace("/users/create")} type="info">New User</Button>
                 </div>
             </Fragment>
         )

@@ -1,6 +1,22 @@
-import React from 'react'
+import React, { Fragment } from 'react'
+import Chart from './Chart';
+import PlayGameButton from './PlayGameButton'
 import contain from '../../ContentContainer'
 
-const DashboardScene = () => <div>Dashboard Page</div>
+const sampleData = [
+    { x:1, y:2 }, 
+    { x:2, y:3 }, 
+    { x:3, y:5 }, 
+    { x:4, y:6 }, 
+    { x:5, y:20 }, 
+]
+
+const DashboardScene = ({ history }) => (
+    <Fragment>
+        <Chart data={sampleData} />
+        <PlayGameButton onClick={() => history.push('/game')} />
+        <div>Table of recent due dates</div>
+    </Fragment>
+)
 
 export default contain(DashboardScene)
