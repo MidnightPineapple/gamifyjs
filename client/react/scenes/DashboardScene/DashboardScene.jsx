@@ -4,6 +4,7 @@ import PlayGameButton from './PlayGameButton'
 import AssignmentTable from './AssignmentTable'
 import contain from '../../ContentContainer'
 import styles from './DashboardScene.css'
+import { addDays } from 'date-fns'
 
 const sampleData = [
     { x:1, y:2 }, 
@@ -14,8 +15,8 @@ const sampleData = [
 ]
 
 const assignmentData = [
-    { name: "Level 1", due: new Date() },
-    { name: "Level 2", due: new Date() }
+    { name: "Level 1", due: addDays(new Date(), 5) },
+    { name: "Level 2", due: addDays(new Date(), 3) }
 ]
 
 const DashboardScene = ({ history }) => (

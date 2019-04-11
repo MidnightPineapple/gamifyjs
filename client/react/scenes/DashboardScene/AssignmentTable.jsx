@@ -1,4 +1,5 @@
 import React from 'react'
+import { distanceInWordsToNow } from 'date-fns'
 import styles from './AssignmentTable.css'
 
 export default ({ assignments = [] }) => (
@@ -10,7 +11,7 @@ export default ({ assignments = [] }) => (
             <thead>
                 <tr>
                     <th>Assignment</th>
-                    <th>Due</th>
+                    <th>Due in</th>
                 </tr>
             </thead>
             <tbody>
@@ -18,7 +19,7 @@ export default ({ assignments = [] }) => (
                     assignments.map((a,k) => (
                         <tr key={k}>
                             <td>{ a.name }</td>
-                            <td>{ a.due.getMonth() } { a.due.getDay() }</td>
+                            <td>{ distanceInWordsToNow(a.due) }</td>
                         </tr>
                     ))
                 }

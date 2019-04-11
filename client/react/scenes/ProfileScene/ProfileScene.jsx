@@ -1,6 +1,10 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 import contain from '../../ContentContainer'
 
-const ProfileScene = () => <div>Profile Scene</div>
+const ProfileScene = () => (
+    <Fragment>
+        <h3>Welcome User!</h3>
+    </Fragment>
+)
 
-export default contain(ProfileScene)
+export default contain(ProfileScene, { background:"#ddd", color:"#222" })
