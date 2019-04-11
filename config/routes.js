@@ -10,13 +10,15 @@
 
 module.exports.routes = {
 
-    // Add OAuth routes somewhere here
+    // TODO: Add OAuth routes somewhere here
 
-    'GET /login': { view: 'login' },
+    'GET /login': 'AuthController.show',
+
     'POST /login': 'AuthController.login',
-    '/logout': 'AuthController.logout',
 
-    'GET /register': { view: 'register' },
+    'POST /logout': 'AuthController.logout',
+
+    'GET /user/create': 'UserController.create',
 
     'GET /*': {
         skipAssets:true,

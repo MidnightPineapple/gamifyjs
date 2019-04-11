@@ -13,7 +13,7 @@ class WelcomeScene extends Component {
                 </header>
                 <div className={styles.loginOptions}>
                     <Button onClick = {() => window.location.replace("/login")} type="primary">Login</Button>
-                    <Button onClick = {() => window.location.replace("/users/create")} type="info">New User</Button>
+                    <Button onClick = {() => window.location.replace("/user/create")} type="info">New User</Button>
                 </div>
             </Fragment>
         )
