@@ -1,7 +1,9 @@
 import React, { Fragment } from 'react'
 import Chart from './Chart';
 import PlayGameButton from './PlayGameButton'
+import AssignmentTable from './AssignmentTable'
 import contain from '../../ContentContainer'
+import styles from './DashboardScene.css'
 
 const sampleData = [
     { x:1, y:2 }, 
@@ -11,12 +13,17 @@ const sampleData = [
     { x:5, y:20 }, 
 ]
 
+const assignmentData = [
+    { name: "Level 1", due: new Date() },
+    { name: "Level 2", due: new Date() }
+]
+
 const DashboardScene = ({ history }) => (
     <Fragment>
         <Chart data={sampleData} />
-        <div >
+        <div className={styles.segment}>
+            <AssignmentTable assignments={assignmentData} />
             <PlayGameButton onClick={() => history.push('/game')} />
-            <div>Table of recent due dates</div>
         </div>
     </Fragment>
 )
