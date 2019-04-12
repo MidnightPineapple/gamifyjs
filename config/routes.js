@@ -17,14 +17,13 @@ module.exports.routes = {
     'POST /logout': 'AuthController.logout',
     'POST /user/create': 'UserController.store',
     'GET /user': "UserController.index",
-    'GET /user/:id': 'UserController.show',
-    'PATCH /user/:id': 'UserController.update', 
-    'DELETE /user/:id': 'UserController.destroy',
+    'GET r|/user/(\\d+)|id': 'UserController.show',
+    'PATCH r|/user/(\\d+)|id': 'UserController.update', 
+    'DELETE r|/user/(\\d+)|id': 'UserController.destroy',
  
     'GET /*': {
         skipAssets:true,
         action:"react",
     }
-
 
 };

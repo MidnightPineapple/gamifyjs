@@ -26,7 +26,7 @@ module.exports = {
   },
 
   show: function(req, res) {
-    return res.view("login")
+    return res.view("pages/login")
   }
 
 };
