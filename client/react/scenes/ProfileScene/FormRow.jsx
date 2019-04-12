@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import styles from './FormRow.css'
 
-export default ({ value, label, onChange, onSubmit }) =>{
+export default ({ value, label, onSubmit }) =>{
 
     const [ editing, setEditing ] = useState(false)
     const [ input, setInput ] = useState("")

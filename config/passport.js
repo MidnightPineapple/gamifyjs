@@ -1,6 +1,7 @@
 const passport = require('passport'),
       LocalStrategy = require('passport-local').Strategy,
-      bcrypt = require('bcrypt-nodejs');
+      bcrypt = require('bcrypt');
+
 passport.serializeUser(function(user, cb) {
   cb(null, user.id);
 });
@@ -13,7 +14,7 @@ passport.use(new LocalStrategy({
   usernameField: 'username',
   passportField: 'password'
 }, function(username, password, cb){
-User.findOne({username: username}, function(err, user){
+User.findOne({username}, function(err, user){
     if(err) return cb(err);
     if(!user) return cb(null, false, {message: 'Username not found'});
 bcrypt.compare(password, user.password, function(err, res){

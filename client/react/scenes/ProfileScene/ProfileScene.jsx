@@ -6,6 +6,7 @@ import styles from './ProfileScene'
 const user = {
     firstName: "John",
     lastName: "Smith",
+    username: "averageguy",
     email: "user@example.com",
 }
 
@@ -17,25 +18,26 @@ class ProfileScene extends Component {
             form: {
                 firstName: {
                     value: user.firstName,
-                    editing: false,
                     label: "First Name",
                     slug:'first-name'
                 },
                 lastName: {
                     value: user.lastName,
-                    editing:false,
                     label: "Last Name",
                     slug: "last-name"
                 },
+                username: {
+                    value: user.username,
+                    label: "User Name",
+                    slug: 'username'
+                },
                 email: {
                     value: user.email,
-                    editing: false,
                     label: "Email",
                     slug: 'email'
                 },
                 password: {
                     value: "",
-                    editing: false,
                     label: "Change Password",
                     slug: 'password'
                 }
@@ -62,7 +64,7 @@ class ProfileScene extends Component {
 
         return (
             <Fragment>
-                <h3>User Profile: John Smith</h3>
+                <h3 className={styles.header}>User Profile: John Smith</h3>
                 {
                     Object.keys(form).map( (v,k) => (
                         <FormRow 

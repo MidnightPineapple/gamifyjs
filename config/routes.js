@@ -13,13 +13,14 @@ module.exports.routes = {
     // TODO: Add OAuth routes somewhere here
 
     'GET /login': 'AuthController.show',
-
     'POST /login': 'AuthController.login',
-
     'POST /logout': 'AuthController.logout',
-
-    'GET /user/create': 'UserController.create',
-
+    'POST /user/create': 'UserController.store',
+    'GET /user': "UserController.index",
+    'GET /user/:id': 'UserController.show',
+    'PATCH /user/:id': 'UserController.update', 
+    'DELETE /user/:id': 'UserController.destroy',
+ 
     'GET /*': {
         skipAssets:true,
         action:"react",
