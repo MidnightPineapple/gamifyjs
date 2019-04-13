@@ -1,5 +1,6 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
+import { withRouter } from 'react-router'
 import styles from './NavBar.css'
 import PropTypes from 'prop-types'
 
@@ -14,7 +15,7 @@ Link.propTypes = {
     to: PropTypes.string.isRequired,
 }
 
-const NavBar = () =>
+const NavBar = ({ location, except = [] }) => except.find( p => p === location.pathname ) ? null :
     <nav className={[styles.navBar, styles.navLinkContainer].join(" ")}>
         <Link exact to="/">GamifyJS</Link>
 
@@ -25,4 +26,4 @@ const NavBar = () =>
         </div>
     </nav>
 
-export default NavBar
+export default withRouter(NavBar)

@@ -6,6 +6,9 @@ import contain from '../../ContentContainer'
 class WelcomeScene extends Component {
     
     render() {
+
+        const { history } = this.props
+
         return(
             <Fragment>
                 <header className={styles.header}>
@@ -13,7 +16,7 @@ class WelcomeScene extends Component {
                 </header>
                 <div className={styles.loginOptions}>
                     <Button onClick = {() => window.location.replace("/login")} type="primary">Login</Button>
-                    <Button onClick = {() => window.location.replace("/user/create")} type="info">New User</Button>
+                    <Button onClick = {() => history.push("signup")} type="info">New User</Button>
                 </div>
             </Fragment>
         )

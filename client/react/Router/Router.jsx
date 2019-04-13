@@ -9,7 +9,7 @@ export default class Router extends Component {
         return(
             <BrowserRouter>
                 <Fragment>
-                    <Route path="/:route+" component={NavBar}/>
+                    <NavBar except={[ "/signup", "/" ]} />
                     <Routes />
                 </Fragment>
             </BrowserRouter>
