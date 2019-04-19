@@ -10,7 +10,7 @@ export default ({ value, label, onSubmit }) =>{
         <div className={styles.container}>
             { editing 
                 ? <form onSubmit={(e) => { onSubmit(e); setEditing(false) }}>
-                    <label>{label} </label>
+                    <label >{label} </label>
                     <input type="text" value={input || value} onChange={e => setInput(e.target.value)} />
                 </form>
                 : <div onClick={() => setEditing(true)}>{label}: {value}</div>

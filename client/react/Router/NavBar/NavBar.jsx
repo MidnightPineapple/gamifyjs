@@ -15,7 +15,9 @@ Link.propTypes = {
     to: PropTypes.string.isRequired,
 }
 
-const NavBar = ({ location, except = [] }) => except.find( p => p === location.pathname ) ? null :
+const NavBar = ({ location, except = [] }) => except.find( p => p === location.pathname ) 
+? null 
+: (
     <nav className={[styles.navBar, styles.navLinkContainer].join(" ")}>
         <Link exact to="/">GamifyJS</Link>
 
@@ -25,5 +27,11 @@ const NavBar = ({ location, except = [] }) => except.find( p => p === location.p
             <Link to="/profile">My Profile</Link>
         </div>
     </nav>
+)
+
+NavBar.propTypes = {
+    except: PropTypes.arrayOf(PropTypes.string),
+    location: PropTypes.object.isRequired,
+}
 
 export default withRouter(NavBar)
