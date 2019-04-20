@@ -1,5 +1,5 @@
 /**
- * Level.js
+ * Progress.js
  *
  * @description :: A model definition represents a database table/collection.
  * @docs        :: https://sailsjs.com/docs/concepts/models-and-orm/models
@@ -9,27 +9,37 @@ module.exports = {
 
   attributes: {
 
-    name: {
+    grade: {
+      type:'number',
+      allowNull: true,
+    }, 
+
+    code: {
       type: 'string',
       required: true,
     },
 
-    slug: {
-      type: 'string',
+    state: {
+      type: 'json',
       required: true,
     },
 
-    description: {
+    feedback: {
       type: 'string',
-      required: true,
+      allowNull: true,
+    },
+    
+    user: {
+      model: "user"
     },
 
-    problems: {
-      collection: 'problem', 
-      via: 'level'
+    problem: {
+      model: 'problem'
     }
 
   },
+
+  // TODO: custom validation rule: userXproblem must be unique
 
 };
 
